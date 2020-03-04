@@ -1,0 +1,1973 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Controller &mdash; pysics 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> pysics
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Controller</a></li>
+<li><a class="reference internal" href="#module-body">Body</a></li>
+<li><a class="reference internal" href="#module-space">Space</a></li>
+<li><a class="reference internal" href="#module-shape">Shape</a></li>
+<li><a class="reference internal" href="#module-vector">Vector</a></li>
+<li><a class="reference internal" href="#module-collider">Collider</a></li>
+<li><a class="reference internal" href="#module-spatialhash">Spatialhash</a></li>
+<li><a class="reference internal" href="#module-index">Index</a></li>
+<li><a class="reference internal" href="#module-clock">Clock</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">pysics</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Controller</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="toctree-wrapper compound">
+</div>
+<div class="section" id="module-controller">
+<span id="controller"></span><h1>Controller<a class="headerlink" href="#module-controller" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="controller.Controller">
+<em class="property">class </em><code class="sig-prename descclassname">controller.</code><code class="sig-name descname">Controller</code><span class="sig-paren">(</span><em class="sig-param">size</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>size</strong> (<em>int</em>) – Size of the collision areas</p>
+</dd>
+</dl>
+<p>High-level manager of the physics system.</p>
+<dl class="attribute">
+<dt id="controller.Controller.index">
+<code class="sig-name descname">index</code><a class="headerlink" href="#controller.Controller.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Index, Indexing system used to track body ids.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="controller.Controller.factory">
+<code class="sig-name descname">factory</code><a class="headerlink" href="#controller.Controller.factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>dict, stores uninstanced classes for production.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="controller.Controller.list">
+<code class="sig-name descname">list</code><a class="headerlink" href="#controller.Controller.list" title="Permalink to this definition">¶</a></dt>
+<dd><p>dict, stores AbsBody by their int id.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="controller.Controller.actives">
+<code class="sig-name descname">actives</code><a class="headerlink" href="#controller.Controller.actives" title="Permalink to this definition">¶</a></dt>
+<dd><p>list, stores Body for processing.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="controller.Controller.space">
+<code class="sig-name descname">space</code><a class="headerlink" href="#controller.Controller.space" title="Permalink to this definition">¶</a></dt>
+<dd><p>Space partionining system.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="controller.Controller.pointer">
+<code class="sig-name descname">pointer</code><a class="headerlink" href="#controller.Controller.pointer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rect, shape for testing collisions. Unsure if this should be here or somewhere else.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="controller.Controller.pos">
+<code class="sig-name descname">pos</code><a class="headerlink" href="#controller.Controller.pos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector, position for testing collisions. Unsure if this should be here or somewhere else.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.make">
+<code class="sig-name descname">make</code><span class="sig-paren">(</span><em class="sig-param">kind</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">id=None</em>, <em class="sig-param">dx=0</em>, <em class="sig-param">dy=0</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.make" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kind</strong> (<em>Uninstanced AbsBody</em>) – Class to be created</p></li>
+<li><p><strong>x</strong> (<em>int</em>) – Position in space to create the body on the horizontal plane</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Position in space to create the body on the vertical plane</p></li>
+<li><p><strong>id</strong> (<em>int</em>) – Unique identifer to assign to the body, generated by Index if None</p></li>
+<li><p><strong>dx</strong> (<em>int</em>) – Directional facing of the body</p></li>
+<li><p><strong>dy</strong> (<em>int</em>) – Directional facing of the body</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Newly created body</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>kind</p>
+</dd>
+</dl>
+<p>Produces a body of kind and adds it to the system
+Triggers on_make(body) and on_add(body) callbacks</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.make_key">
+<code class="sig-name descname">make_key</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">id=None</em>, <em class="sig-param">dx=0</em>, <em class="sig-param">dy=0</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.make_key" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>int</em>) – self.factory key of the body to be created</p></li>
+<li><p><strong>x</strong> (<em>int</em>) – Position in space to create the body on the horizontal plane</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Position in space to create the body on the vertical plane</p></li>
+<li><p><strong>id</strong> (<em>int</em>) – Unique identifer to assign to the body, generated by Index if None</p></li>
+<li><p><strong>dx</strong> (<em>int</em>) – Directional facing of the body</p></li>
+<li><p><strong>dy</strong> (<em>int</em>) – Directional facing of the body</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Newly created body</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#body.AbsBody" title="body.AbsBody">AbsBody</a></p>
+</dd>
+</dl>
+<p>Produces a body from a key and adds it to the system
+Triggers on_make(body) and on_add(body) callbacks</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.on_make">
+<code class="sig-name descname">on_make</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.on_make" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body that was made by the system</p>
+</dd>
+</dl>
+<p>Callback when bodies are made by the system. Override this when extending your Controller</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.add" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body to be added to the system</p>
+</dd>
+</dl>
+<p>Adds a body to the system and space.</p>
+<p>Triggers on_add(body) callback</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.on_add">
+<code class="sig-name descname">on_add</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.on_add" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body that was added to the system</p>
+</dd>
+</dl>
+<p>Callback when bodies are added to the system. Override this when extending your Controller</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.delete" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body to be removed from the system</p>
+</dd>
+</dl>
+<p>Removes a body from the system.
+Triggers on_delete(body) callback</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.delete_id">
+<code class="sig-name descname">delete_id</code><span class="sig-paren">(</span><em class="sig-param">id</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.delete_id" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>int</em>) – id of the body to be removed from the system</p>
+</dd>
+</dl>
+<p>Removes a body from the system by id.
+Triggers on_delete(body) callback</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.on_delete">
+<code class="sig-name descname">on_delete</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.on_delete" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body removed from the system</p>
+</dd>
+</dl>
+<p>Callback when bodies are deleted by the system. Override this when extending your Controller</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.update_area">
+<code class="sig-name descname">update_area</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.update_area" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body to have its area updated</p>
+</dd>
+</dl>
+<p>Checks if a body has changed collision areas and if so, updates which collision area a body is in
+Don’t like the way this is handled, it shouldn’t be tested here I think. Probably going to change
+Triggers on_area(body, start) callback</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.on_area">
+<code class="sig-name descname">on_area</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">start</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.on_area" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body that had its area updated</p></li>
+<li><p><strong>start</strong> (<em>Tuple</em><em>(</em><em>int</em><em>, </em><em>int</em><em>)</em>) – Collision area the body was moved from</p></li>
+</ul>
+</dd>
+</dl>
+<p>Callback when bodies change collision areas. Override this when extending your Controller</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.move">
+<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.move" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body to be moved by the system</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – Units of time to move the body</p></li>
+</ul>
+</dd>
+</dl>
+<p>Move a body by it’s speed and direction for delta.
+Use this instead of body.move(delta) to keep track of collision area
+Triggers the on_move(body, distance) and on_motion(body) callbacks</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.move_to">
+<code class="sig-name descname">move_to</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.move_to" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body to be moved by the system</p></li>
+<li><p><strong>x</strong> (<em>int</em>) – Direction to move the body in on the horitzontal plane</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Direction to move the body in on the vertical plane</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – Units of time to advance the simulation by</p></li>
+</ul>
+</dd>
+</dl>
+<p>Move a body by it’s speed in the direction of x, y for delta.
+Use this instead of body.move(x, y, delta) to keep track of collision area
+Triggers the on_move(body, distance) and on_motion(body) callbacks</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.on_move">
+<code class="sig-name descname">on_move</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">distance</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.on_move" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body that was moved by the system</p></li>
+<li><p><strong>distance</strong> (<em>tuple</em><em>(</em><em>int</em><em>, </em><em>int</em><em>)</em>) – The distance moved by the body</p></li>
+</ul>
+</dd>
+</dl>
+<p>Callback when bodies are moved by the system. Override this when extending your Controller</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.push">
+<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.push" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body to be pushed by the system</p></li>
+<li><p><strong>x</strong> (<em>int</em>) – Direction to push the body in on the horitzontal plane</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Direction to push the body in on the vertical plane</p></li>
+</ul>
+</dd>
+</dl>
+<p>Pushes a body in the direction of x, y.
+Triggers callbacks for on_push(body, x, y) and on_motion(body)
+Use this instead of body.push(x, y) to keep track of collision area</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.on_push">
+<code class="sig-name descname">on_push</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.on_push" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body that was pushed in space by the system</p></li>
+<li><p><strong>x</strong> (<em>int</em>) – Direction the body was pushed in on the horitzontal plane</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Direction the body was pushed in on the vertical plane</p></li>
+</ul>
+</dd>
+</dl>
+<p>Callback when bodies are pushed by the system. Override this when extending your Controller</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.place">
+<code class="sig-name descname">place</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.place" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body to be placed in space by the system</p></li>
+<li><p><strong>x</strong> (<em>int</em>) – Position to place the body in on horitzontal plane</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Position to place the body in on the vertical plane</p></li>
+</ul>
+</dd>
+</dl>
+<p>Directly place a body at x, y
+Triggers the callbacks on_place(body, start) and on_motion(body)
+Use this instead of body.place(x, y) to keep track of collision area</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.on_place">
+<code class="sig-name descname">on_place</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">start</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.on_place" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body that was placed by the system</p></li>
+<li><p><strong>start</strong> (<em>Tuple</em><em>(</em><em>Int</em><em>, </em><em>Int</em><em>)</em>) – The location of the body before being placed</p></li>
+</ul>
+</dd>
+</dl>
+<p>Callback triggered when bodies are placed by the system. Override this when extending your Controller</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.on_motion">
+<code class="sig-name descname">on_motion</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.on_motion" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body that had its position changed by the system.</p>
+</dd>
+</dl>
+<p>Callback when bodies change positions. This is triggered by both move and place. Override this when extending your Controller</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.turn">
+<code class="sig-name descname">turn</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.turn" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a><em>(</em><em>)</em>) – Body to be rotated from the system</p></li>
+<li><p><strong>x</strong> (<em>int</em>) – Direction to move to in the horitzontal plane</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Direction to move to in the vertical plane</p></li>
+</ul>
+</dd>
+</dl>
+<p>Change the direction of a body</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.on_turn">
+<code class="sig-name descname">on_turn</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.on_turn" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a><em>(</em><em>)</em>) – Body that was turned</p>
+</dd>
+</dl>
+<p>Callback when a body is turned by the system. Override this when extending your Controller</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.start">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.start" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a><em>(</em><em>)</em>) – Body to active for movement during processing by the system</p>
+</dd>
+</dl>
+<p>Tells a body to move when the system is processed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.on_start">
+<code class="sig-name descname">on_start</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.on_start" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a><em>(</em><em>)</em>) – Body that was actived for movement</p>
+</dd>
+</dl>
+<p>Callback when bodies are told to move by the system. Override this when extending your Controller</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.stop">
+<code class="sig-name descname">stop</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.stop" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a><em>(</em><em>)</em>) – Body to deactived system movement processing for</p>
+</dd>
+</dl>
+<p>Tells a body to not move when the system is proccessed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.on_stop">
+<code class="sig-name descname">on_stop</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.on_stop" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a><em>(</em><em>)</em>) – Body that was deactived for movement</p>
+</dd>
+</dl>
+<p>Callback when bodies are told to stop by the system. Override this when extending your Controller</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">id</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.get" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>int</em>) – id of the body to get</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>AbsBody or None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#body.AbsBody" title="body.AbsBody">AbsBody</a> or None</p>
+</dd>
+</dl>
+<p>Gets an body by its id.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.find">
+<code class="sig-name descname">find</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.find" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – Position to seach for on in the horitzontal plane</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Position to seach for on in the vertical plane</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of bodies located at x, y</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List(<a class="reference internal" href="#body.AbsBody" title="body.AbsBody">AbsBody</a>)</p>
+</dd>
+</dl>
+<p>Finds all of the bodies at x, y.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.step">
+<code class="sig-name descname">step</code><span class="sig-paren">(</span><em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.step" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>delta</strong> (<em>float</em>) – Units of time to advance the simulation</p>
+</dd>
+</dl>
+<p>Process the system for delta steps.
+Triggers the on_step_start(delta), on_step(body, delta), on_collision(body, collisions), and on_step_end(delta) callbacks</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.on_step_start">
+<code class="sig-name descname">on_step_start</code><span class="sig-paren">(</span><em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.on_step_start" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>delta</strong> (<em>float</em>) – Units of time to advance the simulation</p>
+</dd>
+</dl>
+<p>Callback before the simulation takes a step. Override this when extending your Controller</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.on_step">
+<code class="sig-name descname">on_step</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.on_step" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body being processed by the step</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – Units of time to advance the simulation</p></li>
+</ul>
+</dd>
+</dl>
+<p>Callback when the simulation takes a step over a body. Override this when extending your Controller</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.on_collision">
+<code class="sig-name descname">on_collision</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">collisions</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.on_collision" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body involved in a collision</p></li>
+<li><p><strong>collision</strong> – List of bodies colliding with body</p></li>
+</ul>
+</dd>
+</dl>
+<p>Callback when bodies collide with another body. Override this when extending your Controller</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="controller.Controller.on_step_end">
+<code class="sig-name descname">on_step_end</code><span class="sig-paren">(</span><em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#controller.Controller.on_step_end" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>delta</strong> (<em>float</em>) – Units of time to advance the simulation</p>
+</dd>
+</dl>
+<p>Callback after the simulation takes a step. Override this when extending your Controller</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-body">
+<span id="body"></span><h1>Body<a class="headerlink" href="#module-body" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="body.AbsBody">
+<em class="property">class </em><code class="sig-prename descclassname">body.</code><code class="sig-name descname">AbsBody</code><span class="sig-paren">(</span><em class="sig-param">id</em>, <em class="sig-param">position</em>, <em class="sig-param">shape</em><span class="sig-paren">)</span><a class="headerlink" href="#body.AbsBody" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>int</em>) – Identifer of the body, should be unique to an Index</p></li>
+<li><p><strong>position</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a>) – Position in space</p></li>
+<li><p><strong>shape</strong> (<a class="reference internal" href="#shape.Shape" title="shape.Shape"><em>Shape</em></a>) – Shape of the body</p></li>
+</ul>
+</dd>
+</dl>
+<p>The abstract base class for all bodies. Bodies are physical entities that can interact with other bodies in space.</p>
+<dl class="attribute">
+<dt id="body.AbsBody.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#body.AbsBody.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identifer of the body, should be unique</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="body.AbsBody.shape">
+<code class="sig-name descname">shape</code><a class="headerlink" href="#body.AbsBody.shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shape, Physical shape of the body. Note that bodies can share the same shape.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="body.AbsBody.position">
+<code class="sig-name descname">position</code><a class="headerlink" href="#body.AbsBody.position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector, holds the position in space a body occupies</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="body.AbsBody.direction">
+<code class="sig-name descname">direction</code><a class="headerlink" href="#body.AbsBody.direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector, holds the direction the body moves in</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="body.AbsBody.area">
+<code class="sig-name descname">area</code><a class="headerlink" href="#body.AbsBody.area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tuple(int, int), the collision area the body is located in</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="body.AbsBody.speed">
+<code class="sig-name descname">speed</code><a class="headerlink" href="#body.AbsBody.speed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number, how fast the body moves</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="body.AbsBody.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#body.AbsBody.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>string, used to communicate body type in a reader friendly way</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="body.AbsBody.key">
+<code class="sig-name descname">key</code><a class="headerlink" href="#body.AbsBody.key" title="Permalink to this definition">¶</a></dt>
+<dd><p>int, used to communicate body type across network</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="body.AbsBody.moving">
+<code class="sig-name descname">moving</code><a class="headerlink" href="#body.AbsBody.moving" title="Permalink to this definition">¶</a></dt>
+<dd><p>bool, If the body should be moved during processing</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="body.AbsBody.state">
+<code class="sig-name descname">state</code><a class="headerlink" href="#body.AbsBody.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>string, Internal FSM state of the body.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="body.AbsBody.move">
+<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#body.AbsBody.move" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>delta</strong> (<em>float</em>) – Amount of time to move for</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Distance moved</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple(int, int)</p>
+</dd>
+</dl>
+<p>Advances a body by its speed in its directions for delta units of time</p>
+<p>Using this directly only updates the body and not any associated space systems.
+It’s reccomended to use Controller.move(body, delta) instead to manage collision areas.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="body.AbsBody.move_to">
+<code class="sig-name descname">move_to</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#body.AbsBody.move_to" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – Direction to move in on horizontal plane</p></li>
+<li><p><strong>y</strong> (<em>iny</em>) – Direction to move in on the vertical plane</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – Amount of time to move for</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Distance moved</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple(int, int)</p>
+</dd>
+</dl>
+<p>Advances a body by its speed in the direction x, y of delta units of time</p>
+<p>Using this directly only updates the body and not any associated space systems.
+It’s reccomended to use Controller.move_to(body, x, y) instead to manage collision areas.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="body.AbsBody.push">
+<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#body.AbsBody.push" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – Direction on the horizontal plane to push the body</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Direction on the vertical plane to push the body</p></li>
+</ul>
+</dd>
+</dl>
+<p>Pushes a body in the direction of x, y</p>
+<p>Using this directly only updates the body and not any associated space systems.
+It’s reccomended to use Controller.push(body, x, y) instead to manage collision areas.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="body.AbsBody.place">
+<code class="sig-name descname">place</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#body.AbsBody.place" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – The position in space to place the body on the horizontal plane</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – The position in space to place the body on the vertical plane</p></li>
+</ul>
+</dd>
+</dl>
+<p>Directly places a body at x, y</p>
+<p>Using this directly only updates the body and not any associated space systems.
+It’s reccomended to use Controller.push(body, x, y) instead to manage collision areas.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="body.Body">
+<em class="property">class </em><code class="sig-prename descclassname">body.</code><code class="sig-name descname">Body</code><span class="sig-paren">(</span><em class="sig-param">id</em>, <em class="sig-param">position</em>, <em class="sig-param">shape</em><span class="sig-paren">)</span><a class="headerlink" href="#body.Body" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>int</em>) – Identifer of the body, should be unique</p></li>
+<li><p><strong>position</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a>) – Position in space occupied by the body</p></li>
+<li><p><strong>shape</strong> (<a class="reference internal" href="#shape.Shape" title="shape.Shape"><em>Shape</em></a>) – Physical Shape of the body</p></li>
+</ul>
+</dd>
+</dl>
+<p>An active body. Extend Body for entities that move or think.</p>
+<dl class="method">
+<dt id="body.Body.move">
+<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#body.Body.move" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>delta</strong> (<em>float</em>) – Amount of time to move for</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Distance moved</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple(int, int)</p>
+</dd>
+</dl>
+<p>Advances a body by its speed in its directions for delta units of time</p>
+<p>Using this directly only updates the body and not any associated space systems.
+It’s reccomended to use Controller.move(body, delta) instead to manage collision areas.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="body.Body.move_to">
+<code class="sig-name descname">move_to</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#body.Body.move_to" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – Direction to move in on horizontal plane</p></li>
+<li><p><strong>y</strong> (<em>iny</em>) – Direction to move in on the vertical plane</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – Amount of time to move for</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Distance moved</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple(int, int)</p>
+</dd>
+</dl>
+<p>Advances a body by its speed in the direction x, y of delta units of time</p>
+<p>Using this directly only updates the body and not any associated space systems.
+It’s reccomended to use Controller.move_to(body, x, y) instead to manage collision areas.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="body.Body.place">
+<code class="sig-name descname">place</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#body.Body.place" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – The position in space to place the body on the horizontal plane</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – The position in space to place the body on the vertical plane</p></li>
+</ul>
+</dd>
+</dl>
+<p>Directly places a body at x, y</p>
+<p>Using this directly only updates the body and not any associated space systems.
+It’s reccomended to use Controller.push(body, x, y) instead to manage collision areas.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="body.Body.push">
+<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#body.Body.push" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – Direction on the horizontal plane to push the body</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Direction on the vertical plane to push the body</p></li>
+</ul>
+</dd>
+</dl>
+<p>Pushes a body in the direction of x, y</p>
+<p>Using this directly only updates the body and not any associated space systems.
+It’s reccomended to use Controller.push(body, x, y) instead to manage collision areas.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="body.StaticBody">
+<em class="property">class </em><code class="sig-prename descclassname">body.</code><code class="sig-name descname">StaticBody</code><span class="sig-paren">(</span><em class="sig-param">id</em>, <em class="sig-param">position</em>, <em class="sig-param">shape</em><span class="sig-paren">)</span><a class="headerlink" href="#body.StaticBody" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>int</em>) – Identifer of the body, should be unique</p></li>
+<li><p><strong>position</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a>) – Position in space occupied by the body</p></li>
+<li><p><strong>shape</strong> (<a class="reference internal" href="#shape.Shape" title="shape.Shape"><em>Shape</em></a>) – Physical Shape of the body</p></li>
+</ul>
+</dd>
+</dl>
+<p>A passive body. Extend StaticBody for entities that do not move or think.</p>
+<dl class="method">
+<dt id="body.StaticBody.move">
+<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#body.StaticBody.move" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>delta</strong> (<em>float</em>) – Amount of time to move for</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Distance moved</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple(int, int)</p>
+</dd>
+</dl>
+<p>Advances a body by its speed in its directions for delta units of time</p>
+<p>Using this directly only updates the body and not any associated space systems.
+It’s reccomended to use Controller.move(body, delta) instead to manage collision areas.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="body.StaticBody.move_to">
+<code class="sig-name descname">move_to</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#body.StaticBody.move_to" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – Direction to move in on horizontal plane</p></li>
+<li><p><strong>y</strong> (<em>iny</em>) – Direction to move in on the vertical plane</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – Amount of time to move for</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Distance moved</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple(int, int)</p>
+</dd>
+</dl>
+<p>Advances a body by its speed in the direction x, y of delta units of time</p>
+<p>Using this directly only updates the body and not any associated space systems.
+It’s reccomended to use Controller.move_to(body, x, y) instead to manage collision areas.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="body.StaticBody.place">
+<code class="sig-name descname">place</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#body.StaticBody.place" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – The position in space to place the body on the horizontal plane</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – The position in space to place the body on the vertical plane</p></li>
+</ul>
+</dd>
+</dl>
+<p>Directly places a body at x, y</p>
+<p>Using this directly only updates the body and not any associated space systems.
+It’s reccomended to use Controller.push(body, x, y) instead to manage collision areas.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="body.StaticBody.push">
+<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#body.StaticBody.push" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – Direction on the horizontal plane to push the body</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Direction on the vertical plane to push the body</p></li>
+</ul>
+</dd>
+</dl>
+<p>Pushes a body in the direction of x, y</p>
+<p>Using this directly only updates the body and not any associated space systems.
+It’s reccomended to use Controller.push(body, x, y) instead to manage collision areas.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-space">
+<span id="space"></span><h1>Space<a class="headerlink" href="#module-space" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="space.Space">
+<em class="property">class </em><code class="sig-prename descclassname">space.</code><code class="sig-name descname">Space</code><span class="sig-paren">(</span><em class="sig-param">size</em><span class="sig-paren">)</span><a class="headerlink" href="#space.Space" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>size</strong> (<em>int</em>) – Size pf the collision areas</p>
+</dd>
+</dl>
+<p>Space handles the interactions between the SpatialHash and the Collider.
+You can change the values here to work with different spatial partioning system and collision systems.</p>
+<dl class="attribute">
+<dt id="space.Space.grid">
+<code class="sig-name descname">grid</code><a class="headerlink" href="#space.Space.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>SpatialHash, spatial partitioning system. Think about combining these into one class</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="space.Space.collider">
+<code class="sig-name descname">collider</code><a class="headerlink" href="#space.Space.collider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Collider, collision detection system</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="space.Space.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">area=None</em><span class="sig-paren">)</span><a class="headerlink" href="#space.Space.add" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body to add to the space</p></li>
+<li><p><strong>area</strong> (<em>tuple</em><em>(</em><em>int</em><em>, </em><em>int</em><em>) or </em><em>None</em>) – Area of the space to add the body to. Calculate from body.position if None</p></li>
+</ul>
+</dd>
+</dl>
+<p>Adds a body to the space.
+Bodies are added to their collision area as well as the 8 nearest neighboring cells to handle overlap and fast moving obejcts.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="space.Space.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">area=None</em><span class="sig-paren">)</span><a class="headerlink" href="#space.Space.delete" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body to removed from the space</p></li>
+<li><p><strong>area</strong> (<em>tuple</em><em>(</em><em>int</em><em>, </em><em>int</em><em>) or </em><em>None</em>) – Area of the space to remove the body from. Calculate from body.position if None</p></li>
+</ul>
+</dd>
+</dl>
+<p>Removes a body from the space.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="space.Space.has">
+<code class="sig-name descname">has</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#space.Space.has" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body to check for</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the space contains the body, False if not</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p>Checks if a space has a body in that body’s area
+Note that the body’s must be set correctly or errors can occur</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="space.Space.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">position</em>, <em class="sig-param">shape</em><span class="sig-paren">)</span><a class="headerlink" href="#space.Space.get" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>position</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a>) – Position to search</p></li>
+<li><p><strong>shape</strong> (<a class="reference internal" href="#shape.Shape" title="shape.Shape"><em>Shape</em></a>) – Shape to use for collision detection</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of bodies colliding at the position</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list(<a class="reference internal" href="#body.AbsBody" title="body.AbsBody">AbsBody</a>)</p>
+</dd>
+</dl>
+<p>Gets a list of all bodies colliding with shape at position</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="space.Space.get_body">
+<code class="sig-name descname">get_body</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#space.Space.get_body" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body to find collisions for</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of bodies colliding at the position</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list(<a class="reference internal" href="#body.AbsBody" title="body.AbsBody">AbsBody</a>)</p>
+</dd>
+</dl>
+<p>Get a list of all bodies colliding with body</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="space.Space.check_two">
+<code class="sig-name descname">check_two</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#space.Space.check_two" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – First body to check for collision</p></li>
+<li><p><strong>other</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Second body to check for a collision</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the two bodies are colliding, False if not</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p>Check to see if two bodies are colliding with each other in abstract. Does not use the space.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="space.Space.check">
+<code class="sig-name descname">check</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#space.Space.check" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body to check for collisions</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the body is colliding with anything in space, False if not</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p>Check to see if something is colliding with body in the space.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="space.Space.move">
+<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">dir</em><span class="sig-paren">)</span><a class="headerlink" href="#space.Space.move" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body to add to the space</p></li>
+<li><p><strong>dir</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a>) – Direction to move the body in</p></li>
+</ul>
+</dd>
+</dl>
+<p>Moves a body. This will be more efficent than place
+TODO Not implemented yet. Use place(body, area) instead</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="space.Space.place">
+<code class="sig-name descname">place</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">area</em><span class="sig-paren">)</span><a class="headerlink" href="#space.Space.place" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference internal" href="#body.AbsBody" title="body.AbsBody"><em>AbsBody</em></a>) – Body to be moved from the space</p></li>
+<li><p><strong>area</strong> (<em>tuple</em><em>(</em><em>int</em><em>, </em><em>int</em><em>)</em>) – Area of the space to move the body to</p></li>
+</ul>
+</dd>
+</dl>
+<p>Moves a body from one collision area to another</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-shape">
+<span id="shape"></span><h1>Shape<a class="headerlink" href="#module-shape" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="shape.Shape">
+<em class="property">class </em><code class="sig-prename descclassname">shape.</code><code class="sig-name descname">Shape</code><a class="headerlink" href="#shape.Shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract Base Shape that other shapes extend from. 
+Shapes are simple data structures that describe the physical properties of an body to a Collider.
+Note that shapes do not have a position, thus all bodies with the same shape can use the same Shape instance</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="shape.Rect">
+<em class="property">class </em><code class="sig-prename descclassname">shape.</code><code class="sig-name descname">Rect</code><span class="sig-paren">(</span><em class="sig-param">w</em>, <em class="sig-param">h</em><span class="sig-paren">)</span><a class="headerlink" href="#shape.Rect" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>w</strong> (<em>int</em>) – Width</p></li>
+<li><p><strong>h</strong> (<em>int</em>) – Height</p></li>
+</ul>
+</dd>
+</dl>
+<p>A Rectangle
+Treated as Axis-Aligned Bounding Boxes by the Collider.</p>
+<dl class="attribute">
+<dt id="shape.Rect.w">
+<code class="sig-name descname">w</code><a class="headerlink" href="#shape.Rect.w" title="Permalink to this definition">¶</a></dt>
+<dd><p>int, Width, extending up</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="shape.Rect.h">
+<code class="sig-name descname">h</code><a class="headerlink" href="#shape.Rect.h" title="Permalink to this definition">¶</a></dt>
+<dd><p>int, Height, extending to the right</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shape.Circle">
+<em class="property">class </em><code class="sig-prename descclassname">shape.</code><code class="sig-name descname">Circle</code><span class="sig-paren">(</span><em class="sig-param">r</em><span class="sig-paren">)</span><a class="headerlink" href="#shape.Circle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>r</strong> (<em>int</em>) – Radius</p>
+</dd>
+</dl>
+<p>A Circle</p>
+<dl class="attribute">
+<dt id="shape.Circle.r">
+<code class="sig-name descname">r</code><a class="headerlink" href="#shape.Circle.r" title="Permalink to this definition">¶</a></dt>
+<dd><p>int, Radius, extending from the center.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vector">
+<span id="vector"></span><h1>Vector<a class="headerlink" href="#module-vector" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="vector.Vector">
+<em class="property">class </em><code class="sig-prename descclassname">vector.</code><code class="sig-name descname">Vector</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#vector.Vector" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – A position in space on the horizontal plane</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – A position in space on the vertical plane</p></li>
+</ul>
+</dd>
+</dl>
+<p>A typical Vector datatype</p>
+<dl class="method">
+<dt id="vector.Vector.dot">
+<code class="sig-name descname">dot</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#vector.Vector.dot" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>other</strong> – A second vector</p></li>
+<li><p><strong>type</strong> – Vector()</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dot product of two vectors</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p>Dot product of two vectors.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vector.Vector.cross">
+<code class="sig-name descname">cross</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#vector.Vector.cross" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>other</strong> – A second vector</p></li>
+<li><p><strong>type</strong> – Vector()</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Cross product of two vectors</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p>Cross product of two vectors.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vector.Vector.mag_square">
+<code class="sig-name descname">mag_square</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vector.Vector.mag_square" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Square magnitude of the vector.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+<p>Square magnitude of the vector.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vector.Vector.mag">
+<code class="sig-name descname">mag</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vector.Vector.mag" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Magnitude of the vector.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+<p>Magnitude of the vector.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vector.Vector.angle_self">
+<code class="sig-name descname">angle_self</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vector.Vector.angle_self" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Angle of the vector.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+<p>Angle of the vector.
+returns a number.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vector.Vector.normal">
+<code class="sig-name descname">normal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vector.Vector.normal" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Normal of the vector.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+<p>Normal of the vector.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vector.Vector.dist_square">
+<code class="sig-name descname">dist_square</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#vector.Vector.dist_square" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – A position in space</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – A position in space</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Distance squared from x, y.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p>Distance squared from x, y. Faster than dist() for relative distance comparisons</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vector.Vector.dist">
+<code class="sig-name descname">dist</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#vector.Vector.dist" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – A position in space</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – A position in space</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Distance squared from x, y.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p>Distance from x, y</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vector.Vector.angle_rads">
+<code class="sig-name descname">angle_rads</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#vector.Vector.angle_rads" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a><em>(</em><em>)</em>) – Second vector to find the angle to</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Angle to the second vector in radians</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p>Angle to a vector in radians</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vector.Vector.angle">
+<code class="sig-name descname">angle</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#vector.Vector.angle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a><em>(</em><em>)</em>) – Second vector to find the angle to</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Angle to the second vector in degrees</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p>Angle to a vector in degrees</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vector.Vector.angle_point">
+<code class="sig-name descname">angle_point</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#vector.Vector.angle_point" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a><em>(</em><em>)</em>) – Second vector to find the angle to</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Angle point to the second vector</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p>Angle point to a vector</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vector.Vector.abs">
+<code class="sig-name descname">abs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vector.Vector.abs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absolute value.
+Sets x and y to positive values.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vector.Vector.project">
+<code class="sig-name descname">project</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#vector.Vector.project" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a><em>(</em><em>)</em>) – Second vector to project from</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Value of the projection</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p>Projection from another vector</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vector.Vector.clamp">
+<code class="sig-name descname">clamp</code><span class="sig-paren">(</span><em class="sig-param">min</em>, <em class="sig-param">max</em><span class="sig-paren">)</span><a class="headerlink" href="#vector.Vector.clamp" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min</strong> (<em>int</em>) – Minimum value of x and y</p></li>
+<li><p><strong>max</strong> (<em>int</em>) – Maximum values of x and y</p></li>
+</ul>
+</dd>
+</dl>
+<p>Sets the vector to a minimum and maximum value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vector.Vector.move">
+<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#vector.Vector.move" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>other</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a><em>(</em><em>)</em>) – Direction to move in</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – Units of time to move in</p></li>
+</ul>
+</dd>
+</dl>
+<p>Move in the direction of other by delta units</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-collider">
+<span id="collider"></span><h1>Collider<a class="headerlink" href="#module-collider" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="collider.Collider">
+<em class="property">class </em><code class="sig-prename descclassname">collider.</code><code class="sig-name descname">Collider</code><a class="headerlink" href="#collider.Collider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Collider handles collisions between two shapes at two given positions. Positions are Vectors
+Note that the collider is abstract and low-level, dealing with any set of shapes and positions rather than bodies in space.</p>
+<dl class="method">
+<dt id="collider.Collider.dist">
+<code class="sig-name descname">dist</code><span class="sig-paren">(</span><em class="sig-param">shape</em>, <em class="sig-param">pos</em>, <em class="sig-param">shape_other</em>, <em class="sig-param">pos_other</em><span class="sig-paren">)</span><a class="headerlink" href="#collider.Collider.dist" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape</strong> (<a class="reference internal" href="#shape.Shape" title="shape.Shape"><em>Shape</em></a>) – Shape of the first body</p></li>
+<li><p><strong>pos</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a>) – Position of the first body</p></li>
+<li><p><strong>shape_other</strong> (<a class="reference internal" href="#shape.Shape" title="shape.Shape"><em>Shape</em></a>) – Shape of the second body</p></li>
+<li><p><strong>pos_other</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a>) – Position of the second body</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>x and y distance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple(float, float)</p>
+</dd>
+</dl>
+<p>Distance between two shapes from edge to edge IIRC.</p>
+<p>TODO This might not be working correctly. Probably don’t use it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="collider.Collider.check">
+<code class="sig-name descname">check</code><span class="sig-paren">(</span><em class="sig-param">shape</em>, <em class="sig-param">pos</em>, <em class="sig-param">shape_other</em>, <em class="sig-param">pos_other</em><span class="sig-paren">)</span><a class="headerlink" href="#collider.Collider.check" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape</strong> (<a class="reference internal" href="#shape.Shape" title="shape.Shape"><em>Shape</em></a>) – Shape of the first body</p></li>
+<li><p><strong>pos</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a>) – Position of the first body</p></li>
+<li><p><strong>shape_other</strong> (<a class="reference internal" href="#shape.Shape" title="shape.Shape"><em>Shape</em></a>) – Shape of the second body</p></li>
+<li><p><strong>pos_other</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a>) – Position of the second body</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if there is a collision, False is not</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p>Checks for a collision between any two shapes at two positions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="collider.Collider.rect_rect">
+<code class="sig-name descname">rect_rect</code><span class="sig-paren">(</span><em class="sig-param">shape</em>, <em class="sig-param">pos</em>, <em class="sig-param">shape_other</em>, <em class="sig-param">pos_other</em><span class="sig-paren">)</span><a class="headerlink" href="#collider.Collider.rect_rect" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape</strong> (<a class="reference internal" href="#shape.Rect" title="shape.Rect"><em>Rect</em></a>) – Shape of the first body</p></li>
+<li><p><strong>pos</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a>) – Position of the first body</p></li>
+<li><p><strong>shape_other</strong> (<a class="reference internal" href="#shape.Rect" title="shape.Rect"><em>Rect</em></a>) – Shape of the second body</p></li>
+<li><p><strong>pos_other</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a>) – Position of the second body</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if there is a collision, False is not</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p>Checks for a collision between two rects at two positions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="collider.Collider.rect_circle">
+<code class="sig-name descname">rect_circle</code><span class="sig-paren">(</span><em class="sig-param">shape</em>, <em class="sig-param">pos</em>, <em class="sig-param">shape_other</em>, <em class="sig-param">pos_other</em><span class="sig-paren">)</span><a class="headerlink" href="#collider.Collider.rect_circle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape</strong> (<a class="reference internal" href="#shape.Rect" title="shape.Rect"><em>Rect</em></a>) – Shape of the first body</p></li>
+<li><p><strong>pos</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a>) – Position of the first body</p></li>
+<li><p><strong>shape_other</strong> (<a class="reference internal" href="#shape.Circle" title="shape.Circle"><em>Circle</em></a>) – Shape of the second body</p></li>
+<li><p><strong>pos_other</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a>) – Position of the second body</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if there is a collision, False is not</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p>Checks for a collision between a rect and a circle at two positions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="collider.Collider.circle_rect">
+<code class="sig-name descname">circle_rect</code><span class="sig-paren">(</span><em class="sig-param">shape</em>, <em class="sig-param">pos</em>, <em class="sig-param">shape_other</em>, <em class="sig-param">pos_other</em><span class="sig-paren">)</span><a class="headerlink" href="#collider.Collider.circle_rect" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape</strong> (<a class="reference internal" href="#shape.Circle" title="shape.Circle"><em>Circle</em></a>) – Shape of the first body</p></li>
+<li><p><strong>pos</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a>) – Position of the first body</p></li>
+<li><p><strong>shape_other</strong> (<a class="reference internal" href="#shape.Rect" title="shape.Rect"><em>Rect</em></a>) – Shape of the second body</p></li>
+<li><p><strong>pos_other</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a>) – Position of the second body</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if there is a collision, False is not</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p>Checks for a collision between a circle and a rect at two positions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="collider.Collider.circle_circle">
+<code class="sig-name descname">circle_circle</code><span class="sig-paren">(</span><em class="sig-param">shape</em>, <em class="sig-param">pos</em>, <em class="sig-param">shape_other</em>, <em class="sig-param">pos_other</em><span class="sig-paren">)</span><a class="headerlink" href="#collider.Collider.circle_circle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape</strong> (<a class="reference internal" href="#shape.Circle" title="shape.Circle"><em>Circle</em></a>) – Shape of the first body</p></li>
+<li><p><strong>pos</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a>) – Position of the first body</p></li>
+<li><p><strong>shape_other</strong> (<a class="reference internal" href="#shape.Circle" title="shape.Circle"><em>Circle</em></a>) – Shape of the second body</p></li>
+<li><p><strong>pos_other</strong> (<a class="reference internal" href="#vector.Vector" title="vector.Vector"><em>Vector</em></a>) – Position of the second body</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if there is a collision, False is not</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p>Checks for a collision between a two circles at two positions.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-spatialhash">
+<span id="spatialhash"></span><h1>Spatialhash<a class="headerlink" href="#module-spatialhash" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="spatialhash.SpatialHash">
+<em class="property">class </em><code class="sig-prename descclassname">spatialhash.</code><code class="sig-name descname">SpatialHash</code><span class="sig-paren">(</span><em class="sig-param">size</em><span class="sig-paren">)</span><a class="headerlink" href="#spatialhash.SpatialHash" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>size</strong> (<em>int</em>) – Size of each grid cell</p>
+</dd>
+</dl>
+<p>A generic spatialhash
+Keeps a bucket of objects at a given scaled position</p>
+<dl class="attribute">
+<dt id="spatialhash.SpatialHash.grid">
+<code class="sig-name descname">grid</code><a class="headerlink" href="#spatialhash.SpatialHash.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>dict, Grid of buckets</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="spatialhash.SpatialHash.size">
+<code class="sig-name descname">size</code><a class="headerlink" href="#spatialhash.SpatialHash.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>int, Size of each grid cell</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spatialhash.SpatialHash.scale">
+<code class="sig-name descname">scale</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#spatialhash.SpatialHash.scale" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – A position in to be scaled on the horizontal plane</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – A position in to be scaled on the horizontal plane</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Grid cell key for the position at x, y</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple(int, int)</p>
+</dd>
+</dl>
+<p>Scales an x, y value to a grid cell position</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spatialhash.SpatialHash.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">item</em>, <em class="sig-param">area</em><span class="sig-paren">)</span><a class="headerlink" href="#spatialhash.SpatialHash.add" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>item</strong> (<em>Object</em>) – Item to be added to the grid</p></li>
+<li><p><strong>area</strong> (<em>tuple</em><em>(</em><em>int</em><em>, </em><em>int</em><em>)</em>) – Area to add the item to</p></li>
+</ul>
+</dd>
+</dl>
+<p>Add an item to the grid at an area</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spatialhash.SpatialHash.add_pos">
+<code class="sig-name descname">add_pos</code><span class="sig-paren">(</span><em class="sig-param">item</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#spatialhash.SpatialHash.add_pos" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>item</strong> (<em>Object</em>) – Item to be added to the grid</p></li>
+<li><p><strong>x</strong> (<em>int</em>) – Area position</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Area position</p></li>
+</ul>
+</dd>
+</dl>
+<p>Add an item to the grid at x, y</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spatialhash.SpatialHash.has">
+<code class="sig-name descname">has</code><span class="sig-paren">(</span><em class="sig-param">item</em>, <em class="sig-param">area=None</em><span class="sig-paren">)</span><a class="headerlink" href="#spatialhash.SpatialHash.has" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>item</strong> (<em>Object</em>) – Item to be added to the grid</p></li>
+<li><p><strong>area</strong> (<em>tuple</em><em>(</em><em>int</em><em>, </em><em>int</em><em>) or </em><em>None</em>) – Area to check, checks all if None</p></li>
+</ul>
+</dd>
+</dl>
+<p>Checks to see if an item is in the grid</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spatialhash.SpatialHash.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">area</em><span class="sig-paren">)</span><a class="headerlink" href="#spatialhash.SpatialHash.get" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>area</strong> (<em>tuple</em><em>(</em><em>int</em><em>, </em><em>int</em><em>)</em>) – Grid area</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of objects at position at x, y</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list(Object)</p>
+</dd>
+</dl>
+<p>Get a bucket at area from the grid</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spatialhash.SpatialHash.get_pos">
+<code class="sig-name descname">get_pos</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#spatialhash.SpatialHash.get_pos" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – Area position</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Area position</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of objects at position at x, y</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list(Object)</p>
+</dd>
+</dl>
+<p>Get a bucket at x, y from the grid</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spatialhash.SpatialHash.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param">item</em>, <em class="sig-param">area</em><span class="sig-paren">)</span><a class="headerlink" href="#spatialhash.SpatialHash.delete" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>item</strong> (<em>Object</em>) – Item to be removed to the grid</p></li>
+<li><p><strong>area</strong> (<em>tuple</em><em>(</em><em>int</em><em>, </em><em>int</em><em>)</em>) – Area to remove the item from</p></li>
+</ul>
+</dd>
+</dl>
+<p>Remove an item from the grid at an area</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spatialhash.SpatialHash.delete_pos">
+<code class="sig-name descname">delete_pos</code><span class="sig-paren">(</span><em class="sig-param">item</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#spatialhash.SpatialHash.delete_pos" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>item</strong> (<em>Object</em>) – Item to be removed to the grid</p></li>
+<li><p><strong>x</strong> (<em>int</em>) – Area position</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Area position</p></li>
+</ul>
+</dd>
+</dl>
+<p>Remove an item to the grid at x, y</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-index">
+<span id="index"></span><h1>Index<a class="headerlink" href="#module-index" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="index.Index">
+<em class="property">class </em><code class="sig-prename descclassname">index.</code><code class="sig-name descname">Index</code><a class="headerlink" href="#index.Index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indexing system for assigning unique IDs to bodies.</p>
+<p>Index keeps track what number to assign to new entities.</p>
+<p>TODO move object list keeping and retrival here? Probably</p>
+<dl class="attribute">
+<dt id="index.Index.count">
+<code class="sig-name descname">count</code><a class="headerlink" href="#index.Index.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ID to be used for the next new body</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="index.Index.free">
+<code class="sig-name descname">free</code><a class="headerlink" href="#index.Index.free" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of free IDs for reuse</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="index.Index.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#index.Index.get" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A unique id</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+<p>Gets a unique identifer for this index. Freed ids are assigned first, in first-in-last-out order.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="index.Index.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param">id</em><span class="sig-paren">)</span><a class="headerlink" href="#index.Index.delete" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>int</em>) – Previously assigned id to be returned to the system</p>
+</dd>
+</dl>
+<p>Frees an identifer to be reused.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-clock">
+<span id="clock"></span><h1>Clock<a class="headerlink" href="#module-clock" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="clock.Clock">
+<em class="property">class </em><code class="sig-prename descclassname">clock.</code><code class="sig-name descname">Clock</code><span class="sig-paren">(</span><em class="sig-param">rate</em><span class="sig-paren">)</span><a class="headerlink" href="#clock.Clock" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rate</strong> (<em>float</em>) – Minimum amount of time before the next tick can occur</p>
+</dd>
+</dl>
+<p>Keeps track of time through polling tick</p>
+<dl class="attribute">
+<dt id="clock.Clock.rate">
+<code class="sig-name descname">rate</code><a class="headerlink" href="#clock.Clock.rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>float, Minimum amount of time before the next tick can occur</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="clock.Clock.time">
+<code class="sig-name descname">time</code><a class="headerlink" href="#clock.Clock.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>ctypes.c_ulong, Number of ticks. Using ctypes for free rollover</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="clock.Clock.last">
+<code class="sig-name descname">last</code><a class="headerlink" href="#clock.Clock.last" title="Permalink to this definition">¶</a></dt>
+<dd><p>time.time, Time of the last tick</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="clock.Clock.get_time">
+<code class="sig-name descname">get_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#clock.Clock.get_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of ticks that have elapsed
+:return: Number of ticks that have elapsed
+:rtype: int</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="clock.Clock.tick">
+<code class="sig-name descname">tick</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#clock.Clock.tick" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>delta or None</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float or None</p>
+</dd>
+</dl>
+<p>Attemps to advance the system clock. 
+Delta is the ratio of time that has passed since the tick. 
+For example if your tick rate is 100ms, and your tick happens 150ms after your last tick, your delta will be 1.5
+You probably are going to want to use this one for timing in games</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="clock.Clock.tick_time">
+<code class="sig-name descname">tick_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#clock.Clock.tick_time" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Current time</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+<p>Attemps to advance the system clock.
+Always returns the time.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="clock.Clock.tick_check">
+<code class="sig-name descname">tick_check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#clock.Clock.tick_check" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if rate time has elapsed since the last tick, False if not</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+<p>Attemps to advance the system clock.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="clock.SyncClock">
+<em class="property">class </em><code class="sig-prename descclassname">clock.</code><code class="sig-name descname">SyncClock</code><a class="headerlink" href="#clock.SyncClock" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Clock for syncing values from a master Clock.</p>
+<dl class="method">
+<dt id="clock.SyncClock.get_time">
+<code class="sig-name descname">get_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#clock.SyncClock.get_time" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The current time</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+<p>Gets the current time</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, solid.smoke.software
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
