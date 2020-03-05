@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "percs"
+version = "0.011"
+description = "Pythonic Entity Collision Resolution System"
+readme = "README.md"
+homepage = "https://github.com/solidsmokesoftware/pecrs-py"
+authors = ["Solid Smoke Software <solid.smoke.software@gmail.com>"]
+license = "LGPL-3.0"
+packages = [{include = "pecrs"}]
+include = ["pecrs/*.txt"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
