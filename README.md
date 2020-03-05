@@ -12,17 +12,6 @@ Via pip
 
 `python -m pip install pecrs`
 
-# Structual Overview
-
-The base functionality of pecrs is provided by Vector, Shape, SpatialHash, and Index. Vector and Shape are datatypes for describing a Body. SpatialHash keeps track of a collection of objects based on position, while Index keeps track of indentification numbers for Bodies.
-
-At the core level of operations are Bodies and the Collider. A Body consists of a Shape, a position(Vector), and an id(Provided by Index) and is the key unit of simulation. The Collider works with Shapes and Vectors to detect intersections.
-
-Above that exists the Space. The Space manages Bodies in a SpatialHash and detects collisions within via the Collider.
-
-At the highest level exists the Controller. The Controller creates Bodies in a Space and handles their interactions, as well as the physics simulation itself. The Controller is follows Object-Oriented design principles and provides callbacks into all of its functionality that can be easily extended. 
-
-
 # Quickstart
 ```python
 
@@ -50,9 +39,17 @@ space.add(other)
 space.check(body)
 ```
 
+# Structual Overview
 
+The base functionality of pecrs is provided by Vector, Shape, SpatialHash, and Index. Vector and Shape are datatypes for describing a Body. SpatialHash keeps track of a collection of objects based on position, while Index keeps track of indentification numbers for Bodies.
 
-# In-depth Usage
+At the core level of operations are Bodies and the Collider. A Body consists of a Shape, a position(Vector), and an id(Provided by Index) and is the key unit of simulation. The Collider works with Shapes and Vectors to detect intersections.
+
+Above that exists the Space. The Space manages Bodies in a SpatialHash and detects collisions within via the Collider.
+
+At the highest level exists the Controller. The Controller creates Bodies in a Space and handles their interactions, as well as the physics simulation itself. The Controller is follows Object-Oriented design principles and provides callbacks into all of its functionality that can be easily extended. 
+
+# Real-world Usage
 ```python
 
 
