@@ -6,6 +6,12 @@ Pure Python makes pecrs portable and easy to modify to suit your own needs.
 
 Focused use-case makes pecrs simple to learn and use.
 
+# Installation
+
+Via pip
+
+`python -m pip install pecrs`
+
 # Structual Overview
 
 The base functionality of pecrs is provided by Vector, Shape, SpatialHash, and Index. Vector and Shape are datatypes for describing a Body. SpatialHash keeps track of a collection of objects based on position, while Index keeps track of indentification numbers for Bodies.
