@@ -1,5 +1,5 @@
 
-from shape import *
+from pecrs.shape import *
 
 
 class Collider:

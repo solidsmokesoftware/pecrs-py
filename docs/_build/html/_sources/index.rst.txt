@@ -6,55 +6,55 @@
 
 Controller
 ===================
-.. automodule:: controller
+.. automodule:: pecrs.controller
    :members:   
 
 
 Body
 ===================
-.. automodule:: body
+.. automodule:: pecrs.body
    :members:
    :inherited-members:
 
 Space
 ===================
-.. automodule:: space
+.. automodule:: pecrs.space
    :members:
 
 
 Shape
 ===================
-.. automodule:: shape
+.. automodule:: pecrs.shape
    :members:
 
 
 Vector
 ===================
-.. automodule:: vector
+.. automodule:: pecrs.vector
    :members:
 
 
 Collider
 ===================
-.. automodule:: collider
+.. automodule:: pecrs.collider
    :members:
 
 
 Spatialhash
 ===================
-.. automodule:: spatialhash
+.. automodule:: pecrs.spatialhash
    :members:
 
 
 Index 
 ===================
-.. automodule:: index
+.. automodule:: pecrs.index
    :members:
 
 
 Clock
 ===================
-.. automodule:: clock
+.. automodule:: pecrs.clock
    :members:
 
 

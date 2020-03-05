@@ -1,6 +1,6 @@
 
-from shape import Shape
-from vector import Vector
+from pecrs.shape import Shape
+from pecrs.vector import Vector
 
 
 class AbsBody:

@@ -1,14 +1,14 @@
-# pysics
-pysics is a pure Python 2D physics system with a focus on simplicity. 
+# Pythonic Entity Collision Resolution System
 
-Being pure Python makes pysics portable and easy to install/distribute.
+pecrs is a pure Python 2D physics system with a focus on top-down games and simple platformers. 
 
-Simple. pysics handles collisions, positioning, and entity management making it perfect for top-down games and SNES-style platformers.
+Pure Python makes pecrs portable and easy to modify to suit your own needs.
 
+Focused use-case makes pecrs simple to learn and use.
 
 # Structual Overview
 
-The base functionality of pysics is provided by Vector, Shape, SpatialHash, and Index. Vector and Shape are datatypes for describing a Body. SpatialHash keeps track of a collection of objects based on position, while Index keeps track of indentification numbers for Bodies.
+The base functionality of pecrs is provided by Vector, Shape, SpatialHash, and Index. Vector and Shape are datatypes for describing a Body. SpatialHash keeps track of a collection of objects based on position, while Index keeps track of indentification numbers for Bodies.
 
 At the core level of operations are Bodies and the Collider. A Body consists of a Shape, a position(Vector), and an id(Provided by Index) and is the key unit of simulation. The Collider works with Shapes and Vectors to detect intersections.
 
@@ -20,10 +20,10 @@ At the highest level exists the Controller. The Controller creates Bodies in a S
 # Quickstart
 ```python
 
-from vector import Vector
-from shape import Rect
-from body import Body
-from space import Space
+from pecrs.vector import Vector
+from pecrs.shape import Rect
+from pecrs.body import Body
+from pecrs.space import Space
 
 
 id = 0
@@ -50,9 +50,9 @@ space.check(body)
 ```python
 
 
-from controller import Controller
-from body import Body
-from shape import Rect
+from pecrs.controller import Controller
+from pecrs.body import Body
+from pecrs.shape import Rect
 
 
 class Player(Body):
@@ -116,7 +116,7 @@ for i in range(10):
 
 # Documentation
 
-https://solidsmokesoftware.github.io/pysics/
+https://solidsmokesoftware.github.io/pecrs/
 
 # Demonstration
 

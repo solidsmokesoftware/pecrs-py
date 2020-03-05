@@ -1,9 +1,9 @@
 
-from index import Index
-from vector import Vector
-from space import Space
-from body import *
-from shape import *
+from pecrs.index import Index
+from pecrs.vector import Vector
+from pecrs.space import Space
+from pecrs.body import *
+from pecrs.shape import *
 
 
 class Controller:

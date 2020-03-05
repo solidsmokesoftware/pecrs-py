@@ -1,7 +1,7 @@
 
-from controller import Controller
-from body import Body
-from shape import Rect
+from pecrs.controller import Controller
+from pecrs.body import Body
+from pecrs.shape import Rect
 
 
 class Player(Body):

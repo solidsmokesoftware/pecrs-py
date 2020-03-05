@@ -1,14 +1,5 @@
 
-from body import *
-from clock import Clock
-from clock import SyncClock
-from collider import Collider
-from controller import Controller
-from spatialhash import SpatialHash
-from index import Index
-from shape import *
-from space import Space
-from vector import Vector
+from pecrs import *
 
 
 def test_body():

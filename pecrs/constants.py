@@ -1,4 +1,6 @@
-from vector import Vector
+
+
+from pecrs.vector import Vector
 
 """
 These are some common constants useful to the system

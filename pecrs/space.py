@@ -1,6 +1,6 @@
 
-from spatialhash import SpatialHash
-from collider import Collider
+from pecrs.spatialhash import SpatialHash
+from pecrs.collider import Collider
 
 
 class Space:
