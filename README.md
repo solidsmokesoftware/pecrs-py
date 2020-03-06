@@ -1,3 +1,5 @@
+![logo](https://raw.githubusercontent.com/solidsmokesoftware/pecrs-py/master/logo.png)
+
 # Pythonic Entity Collision Resolution System
 
 pecrs is a pure Python 2D physics system with a focus on top-down games and simple platformers. 
