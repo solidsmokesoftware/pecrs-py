@@ -1,4 +1,17 @@
 
+#######
+0.012 - 3/6/2020
+#######
+
+Index now keeps track of entities instead of Controller.
+Index.get() now retrives an entity instead of an id
+Index.next() now retrives a unique id for an entity.
+Update test.py to validate new Index.
+Small changes to readme.
+Some extra print statements removed and version requirements updates, thanks to Slavfox for pointing those out.
+
+
+
 
 #######
 0.011 - 3/5/2020

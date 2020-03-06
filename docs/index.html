@@ -170,19 +170,13 @@
 <dl class="attribute">
 <dt id="pecrs.controller.Controller.index">
 <code class="sig-name descname">index</code><a class="headerlink" href="#pecrs.controller.Controller.index" title="Permalink to this definition">¶</a></dt>
-<dd><p>Index, Indexing system used to track body ids.</p>
+<dd><p>Index, Indexing system used to track bodies.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pecrs.controller.Controller.factory">
 <code class="sig-name descname">factory</code><a class="headerlink" href="#pecrs.controller.Controller.factory" title="Permalink to this definition">¶</a></dt>
 <dd><p>dict, stores uninstanced classes for production.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="pecrs.controller.Controller.list">
-<code class="sig-name descname">list</code><a class="headerlink" href="#pecrs.controller.Controller.list" title="Permalink to this definition">¶</a></dt>
-<dd><p>dict, stores AbsBody by their int id.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -1774,7 +1768,7 @@ Keeps a bucket of objects at a given scaled position</p>
 <em class="property">class </em><code class="sig-prename descclassname">pecrs.index.</code><code class="sig-name descname">Index</code><a class="headerlink" href="#pecrs.index.Index" title="Permalink to this definition">¶</a></dt>
 <dd><p>Indexing system for assigning unique IDs to bodies.</p>
 <p>Index keeps track what number to assign to new entities.</p>
-<p>TODO move object list keeping and retrival here? Probably</p>
+<p>TODO move object list keeping and retrival; update docs</p>
 <dl class="attribute">
 <dt id="pecrs.index.Index.count">
 <code class="sig-name descname">count</code><a class="headerlink" href="#pecrs.index.Index.count" title="Permalink to this definition">¶</a></dt>
@@ -1787,9 +1781,15 @@ Keeps a bucket of objects at a given scaled position</p>
 <dd><p>A list of free IDs for reuse</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="pecrs.index.Index.list">
+<code class="sig-name descname">list</code><a class="headerlink" href="#pecrs.index.Index.list" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of objects by thier id</p>
+</dd></dl>
+
 <dl class="method">
-<dt id="pecrs.index.Index.get">
-<code class="sig-name descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.index.Index.get" title="Permalink to this definition">¶</a></dt>
+<dt id="pecrs.index.Index.next">
+<code class="sig-name descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.index.Index.next" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>A unique id</p>

@@ -1,6 +1,4 @@
-
-
-from pecrs.vector import Vector
+from client.source.pysics.vector import Vector
 
 """
 These are some common constants useful to the system

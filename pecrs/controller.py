@@ -14,9 +14,8 @@ class Controller:
    High-level manager of the physics system.
    """
    def __init__(self, size):
-      self.index = Index() #: Index, Indexing system used to track body ids.
+      self.index = Index() #: Index, Indexing system used to track bodies.
       self.factory = {} #: dict, stores uninstanced classes for production.
-      self.list = {} #: dict, stores AbsBody by their int id.
       self.actives = [] #: list, stores Body for processing.
       self.space = Space(size) #: Space partionining system.
 
@@ -44,10 +43,8 @@ class Controller:
       Triggers on_make(body) and on_add(body) callbacks
       """
       if not id:
-         id = self.index.get()
+         id = self.index.next()
       position = Vector(x, y)
-      print(kind)
-      print(type(kind))
       body = kind(id, position)
       body.direction.x = dx
       body.direction.y = dy
@@ -76,7 +73,7 @@ class Controller:
       Triggers on_make(body) and on_add(body) callbacks
       """
       if not id:
-         id = self.index.get()
+         id = self.index.next()
       position = Vector(x, y)
       body = self.factory[key](id, position)
       body.direction.x = dx
@@ -103,7 +100,7 @@ class Controller:
 
       Triggers on_add(body) callback
       """
-      self.list[body.id] = body
+      self.index.add(body, body.id)
       body.area = self.space.grid.scale(body.position.x, body.position.y)
       self.space.add(body, body.area)
       
@@ -129,7 +126,7 @@ class Controller:
       Removes a body from the system.
       Triggers on_delete(body) callback
       """
-      del self.list[body.id]
+      self.index.delete(body.id)
       self.space.delete(body, body.area)
       if isinstance(body, Body):
          self.actives.remove(body)
@@ -143,7 +140,7 @@ class Controller:
       Removes a body from the system by id.
       Triggers on_delete(body) callback
       """
-      body = self.list[id]
+      body = self.index.list[id]
       self.delete(body)
 
    def on_delete(self, body):
@@ -370,11 +367,11 @@ class Controller:
 
       Gets an body by its id.
       """
-      if id in self.list:
-         return self.list[id]
+      if id in self.index.list:
+         return self.index.list[id]
       else:
          return None
-
+         
    def find(self, x, y):
       """
       :param x: Position to seach for on in the horitzontal plane

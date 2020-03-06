@@ -51,29 +51,32 @@ def test_index():
 
   index = Index()
 
-  a = index.get()
-  print(f"Index test: get() expecting 0, actual {a}")
+  a = index.next()
+  print(f"Index test: next() expecting 0, actual {a}")
   if a != 0:
     print("Fail")
     passing = False
 
-  b = index.get()
-  print(f"Index test: get() expecting 1, actual {b}")
+  b = index.next()
+  print(f"Index test: next() expecting 1, actual {b}")
   if b != 1:
     print("Fail")
     passing = False
 
-  c = index.get()
-  print(f"Index test: get() expecting 2, actual {c}")
-  if c != 2:
-    print("Fail")
-    passing = False
+  print(f"Index test: add({a}, {a})")
+  index.add(a, a)
+
+  print(f"Index test: add({b}, {b})")
+  index.add(b, b)
+
+  print(f"Index test: add({2})")
+  index.add(2)
 
   index.delete(a)
   print(f"Index test: delete({a})")
 
-  d = index.get()
-  print(f"Index test: get() expecting 0, actual {d}")
+  d = index.next()
+  print(f"Index test: next() expecting 0, actual {d}")
   if d != 0:
     print("Fail")
     passing = False
@@ -81,24 +84,21 @@ def test_index():
   index.delete(b)
   print(f"Index test: delete({b})")
 
-  index.delete(c)
-  print(f"Index test: delete({c})")
-
-  e = index.get()
-  print(f"Index test: get() expecting 2, actual {e}")
-  if e != 2:
+  e = index.next()
+  print(f"Index test: next() expecting 1, actual {e}")
+  if e != 1:
     print("Fail")
     passing = False
 
-  f = index.get()
-  print(f"Index test: get() expecting 1, actual {f}")
-  if f != 1:
+  f = index.next()
+  print(f"Index test: next() expecting 3, actual {f}")
+  if f != 3:
     print("Fail")
     passing = False
 
-  g = index.get()
-  print(f"Index test: get() expecting 3, actual {g}")
-  if g != 3:
+  g = index.next()
+  print(f"Index test: next() expecting 4, actual {g}")
+  if g != 4:
     print("Fail")
     passing = False
 

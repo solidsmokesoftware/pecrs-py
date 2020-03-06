@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "percs"
-version = "0.011"
+version = "0.012"
 description = "Pythonic Entity Collision Resolution System"
 readme = "README.md"
 homepage = "https://github.com/solidsmokesoftware/pecrs-py"
@@ -10,7 +10,7 @@ packages = [{include = "pecrs"}]
 include = ["pecrs/*.txt"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.6"
 
 [tool.poetry.dev-dependencies]
 

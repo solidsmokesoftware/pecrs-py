@@ -29,8 +29,8 @@ class Objects(Controller):
 
 objects = Objects(64)
 
-playerA = objects.make(Player, 0, 0)
-playerB = objects.make_key("player", 10, 0)
+playerA = objects.make(Player, 0, 0) # Bodies can be made with thier class
+playerB = objects.make_key("player", 10, 0) # Or with a key that can be communicated easily over networks
 
 collision = objects.space.check_two(playerA, playerB)
 if collision:

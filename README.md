@@ -52,7 +52,6 @@ At the highest level exists the Controller. The Controller creates Bodies in a S
 # Real-world Usage
 ```python
 
-
 from pecrs.controller import Controller
 from pecrs.body import Body
 from pecrs.shape import Rect
@@ -83,8 +82,8 @@ class Objects(Controller):
 
 objects = Objects(64)
 
-playerA = objects.make(Player, 0, 0)
-playerB = objects.make_key("player", 10, 0)
+playerA = objects.make(Player, 0, 0) # Bodies can be made with thier class
+playerB = objects.make_key("player", 10, 0) # Or with a key that can be communicated easily over networks
 
 collision = objects.space.check_two(playerA, playerB)
 if collision:
@@ -114,7 +113,7 @@ if collisions:
 
 for i in range(10):
    objects.step(0.1)
-   
+
 ```
 
 # Documentation
@@ -129,4 +128,4 @@ https://github.com/solidsmokesoftware/solconomy
 
 # Requirements
 
-Tested with Python3.8
+Tested with Python3.6.9

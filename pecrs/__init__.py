@@ -17,3 +17,4 @@ from .vector import Vector
 from .controller import Controller
 
 __all__ = ["Shape", "Rect", "Circle", "Clock", "SyncClock", "AbsBody", "Body", "StaticBody", "Index", "SpatialHash", "Collider", "Space", "Vector", "Controller"]
+version = 0.012
