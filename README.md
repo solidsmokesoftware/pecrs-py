@@ -17,10 +17,7 @@ Via pip
 # Quickstart
 ```python
 
-from pecrs.vector import Vector
-from pecrs.shape import Rect
-from pecrs.body import Body
-from pecrs.space import Space
+from pecrs import *
 
 
 id = 0
@@ -38,7 +35,8 @@ space = Space(spatial_hash_size)
 space.add(body)
 space.add(other)
 
-space.check(body)
+collision = space.check(body)
+print(f"Are 0 and 1 colliding? {collision}")
 ```
 
 # Structual Overview
