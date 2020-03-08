@@ -101,7 +101,7 @@ game = Game()
 
 # Documentation
 
-https://solidsmokesoftware.github.io/pecrs/
+https://solidsmokesoftware.github.io/pecrs-py/
 
 # Demonstration
 
