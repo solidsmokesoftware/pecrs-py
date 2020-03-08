@@ -1,4 +1,4 @@
-
+import pecrs
 from pecrs import *
 
 
@@ -443,8 +443,8 @@ def test_space():
     print("Fail")
     passing = False
 
-  value = space.get(positionA, rect)
-  print(f"Space test: get(positionA, rect) expecting [{repr(bodyA)}, {repr(bodyB)}], actual {value}")
+  value = space.colliding_at(positionA, rect)
+  print(f"Space test: colliding_at(positionA, rect) expecting [{repr(bodyA)}, {repr(bodyB)}], actual {value}")
   for v in value:
     if v.id == bodyA.id or v.id == bodyB.id:
       pass
@@ -452,22 +452,22 @@ def test_space():
       print(f"Fail {v.id}")
       passing = False
 
-  value = space.get(positionC, rect)
-  print(f"Space test: get(positionC, rect) expecting [{repr(bodyC)}], actual {value}")
+  value = space.colliding_at(positionC, rect)
+  print(f"Space test: colliding_at(positionC, rect) expecting [{repr(bodyC)}], actual {value}")
   for v in value:
     if v.id != bodyC.id:
       print("Fail")
       passing = False
 
-  value = space.get_body(bodyA)
-  print(f"Space test: get_body(bodyA) expecting [{repr(bodyB)}], actual {value}")
+  value = space.colliding_with(bodyA)
+  print(f"Space test: colliding_with(bodyA) expecting [{repr(bodyB)}], actual {value}")
   for v in value:
     if v.id != bodyB.id:
       print("Fail")
       passing = False
 
-  value = space.get_body(bodyD)
-  print(f"Space test: get_body(bodyD) expecting [], actual {value}")
+  value = space.colliding_with(bodyD)
+  print(f"Space test: colliding_with(bodyD) expecting [], actual {value}")
   if value != []:
     print("Fail")
     passing = False
@@ -500,8 +500,8 @@ def test_space():
   space.place(bodyD, (0, 0))
   print("Space test: place(bodyD, (0, 0))")
 
-  value = space.get_body(bodyA)
-  print(f"Space test: get_body(bodyA) expecting [{repr(bodyB)}, {repr(bodyD)}], actual {value}")
+  value = space.colliding_with(bodyA)
+  print(f"Space test: colliding_with(bodyA) expecting [{repr(bodyB)}, {repr(bodyD)}], actual {value}")
   for v in value:
     if v.id == bodyB.id or v.id == bodyD.id:
       pass
@@ -512,8 +512,8 @@ def test_space():
   space.delete(bodyA)
   print("Space test: delete(bodyA)")
 
-  value = space.get_body(bodyB)
-  print(f"Space test: get_body(bodyB) expecting [{repr(bodyD)}], actual {value}")
+  value = space.colliding_with(bodyB)
+  print(f"Space test: colliding_with(bodyB) expecting [{repr(bodyD)}], actual {value}")
   for v in value:
     if v.id != bodyD.id:
       print("Fail")
@@ -529,15 +529,15 @@ def test_space():
 def test_controller():
   passing = True
 
+  #TODO test controller.remake_space()
+
   class Entity(Body):
-    def __init__(self, id, position):
-      shape = Rect(32, 32)
+    def __init__(self, id, position, shape):
       super().__init__(id, position, shape)
 
   class Objects(Controller):
-    def __init__(self, size):
-      super().__init__(size)
-      self.factory[0] = Entity
+    def __init__(self):
+      super().__init__()
 
     def on_add(self, body):
       print(f"on_add callback {body.id}")
@@ -580,28 +580,29 @@ def test_controller():
     def on_step_end(self, delta):
       print("on_step_end callback")
 
-  objects = Objects(64)
+  objects = Objects()
+  shape = Rect(32, 32)
 
-  bodyA = objects.make(Entity, 0, 0)
-  print(f"Controller test: make(Entity, 0, 0) expecting id 0, actual {bodyA.id}")
+  bodyA = objects.make(Entity, 0, 0, shape)
+  print(f"Controller test: make(Entity, 0, 0, shape) expecting id 0, actual {bodyA.id}")
   if bodyA.id != 0:
     print("Fail")
     passing = False
 
-  bodyB = objects.make(Entity, 0, 0, dx=1)
-  print(f"Controller test: make(Entity, 0, 0, dx=1) expecting id 1, actual {bodyB.id}")
+  bodyB = objects.make(Entity, 0, 0, shape, dx=1)
+  print(f"Controller test: make(Entity, 0, 0, shape, dx=1) expecting id 1, actual {bodyB.id}")
   if bodyB.id != 1:
     print("Fail")
     passing = False
 
-  bodyC = objects.make_key(0, 0, 0, dy=1)
-  print(f"Controller test: make_key(0, 0, 0, dy=1) expecting id 2, actual {bodyC.id}")
+  bodyC = objects.make(Entity, 0, 0, shape, dy=1)
+  print(f"Controller test: make(Entity, 0, 0, shape, dy=1) expecting id 2, actual {bodyC.id}")
   if bodyC.id != 2:
     print("Fail")
     passing = False
 
-  bodyD = objects.make_key(0, 0, 0)
-  print(f"Controller test: make_key(Entity, 0, 0) expecting id 3, actual {bodyD.id}")
+  bodyD = objects.make(Entity, 0, 0, shape)
+  print(f"Controller test: make(Entity, 0, 0, shape) expecting id 3, actual {bodyD.id}")
   if bodyD.id != 3:
     print("Fail")
     passing = False
@@ -647,9 +648,9 @@ def test():
     passing = False
 
   if passing:
-    print("pysics test: Complete, all tests passed")
+    print(f"pecrs version {pecrs.version} test: Complete, all tests passed")
   else:
-    print("pysics test: Incomplete, some tests failed")
+    print(f"pecrs version {pecrs.version} test: Incomplete, some tests failed")
 
 test()
 

@@ -1,19 +1,18 @@
 from pecrs import *
 
-id = 0
-position = Vector(100, 500)
-shape = Rect(10, 10)
-body = Body(id, position, shape)
+controller = Controller()
+shape = Rect(32, 32)
+bodyA = controller.make(Body, 0, 0, shape)
+bodyB = controller.make(Body, 10, 0, shape)
 
-id = 1
-position_other = Vector(100, 495)
-other = Body(id, position_other, shape)
+collision = controller.space.check(bodyA)
+#print(f"Is something colliding with bodyA? {collision}")
 
-spatial_hash_size = 128
-space = Space(spatial_hash_size)
+collisions = controller.space.colliding_with(bodyB)
+#print(f"Who is colliding with bodyB? {collisions}")
 
-space.add(body)
-space.add(other)
+controller.place(bodyB, 100, 0)
 
-collision = space.check(body)
-print(f"Are 0 and 1 colliding? {collision}")
+collision = controller.space.check_two(bodyA, bodyB)
+#print(f"Are bodyA and bodyB colliding? {collision}")
+print(1)

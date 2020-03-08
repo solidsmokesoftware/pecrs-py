@@ -22,10 +22,8 @@ class AbsBody:
       self.area = (0, 0) #: Tuple(int, int), the collision area the body is located in
       self.speed = 0 #: Number, how fast the body moves
       self.name = "absbody" #: string, used to communicate body type in a reader friendly way
-      self.key = -1 #: int, used to communicate body type across network
       
       self.moving = False #: bool, If the body should be moved during processing
-      self.state = "spawn" #: string, Internal FSM state of the body.
 
    def move(self, delta):
       """

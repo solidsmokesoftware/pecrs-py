@@ -304,5 +304,5 @@ class Vector:
       
       String representation of a vector
       """
-      return f"{int(self.x)}:{int(self.y)}"
+      return "{int(self.x)}:{int(self.y)}"
 

@@ -5,8 +5,7 @@ from pecrs.shape import Rect
 
 
 class Player(Body):
-   def __init__(self, id, position):
-      shape = Rect(32, 32)
+   def __init__(self, id, position, shape):
       super().__init__(id, position, shape)
       self.name = "player"
       self.speed = 100
@@ -14,9 +13,8 @@ class Player(Body):
 
 
 class Objects(Controller):
-   def __init__(self, collision_area_size):
-      super().__init__(collision_area_size)
-      self.factory["player"] = Player
+   def __init__(self):
+      super().__init__()
       
    def on_make(self, body):
       print(f"Objects made {body.name} {body.id} at {body.position.x}:{body.position.y}")
@@ -27,10 +25,11 @@ class Objects(Controller):
    def on_collision(self, body, collisions):
       print(f"{body.name} is colliding with {len(collisions)} others")
 
-objects = Objects(64)
+objects = Objects()
 
-playerA = objects.make(Player, 0, 0) # Bodies can be made with thier class
-playerB = objects.make_key("player", 10, 0) # Or with a key that can be communicated easily over networks
+shape = Rect(32, 32)
+playerA = objects.make(Player, 0, 0, shape) # Bodies can be made with thier class
+playerB = objects.make(Player, 10, 0, shape)
 
 collision = objects.space.check_two(playerA, playerB)
 if collision:
@@ -49,12 +48,12 @@ if collision:
 objects.delete(playerA)
 objects.delete(playerB)
 
-playerC = objects.make(Player, 0, 0, dx=1)
-playerD = objects.make(Player, 0, 0, dx=-1)
-playerE = objects.make(Player, 0, 0, dy =1)
-playerF = objects.make(Player, 0, 0, dy =-1)
+playerC = objects.make(Player, 0, 0, shape, dx=1)
+playerD = objects.make(Player, 0, 0, shape, dx=-1)
+playerE = objects.make(Player, 0, 0, shape, dy =1)
+playerF = objects.make(Player, 0, 0, shape, dy =-1)
 
-collisions = objects.space.get_body(playerC)
+collisions = objects.space.colliding_with(playerC)
 if collisions:
    print(f"Body C is colliding with {len(collisions)} others")
 

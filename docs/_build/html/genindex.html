@@ -153,7 +153,6 @@
  | <a href="#G"><strong>G</strong></a>
  | <a href="#H"><strong>H</strong></a>
  | <a href="#I"><strong>I</strong></a>
- | <a href="#K"><strong>K</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#N"><strong>N</strong></a>
@@ -187,6 +186,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="index.html#pecrs.spatialhash.SpatialHash.add_pos">add_pos() (pecrs.spatialhash.SpatialHash method)</a>
+</li>
+      <li><a href="index.html#pecrs.controller.Controller.add_space">add_space() (pecrs.controller.Controller method)</a>
 </li>
       <li><a href="index.html#pecrs.vector.Vector.angle">angle() (pecrs.vector.Vector method)</a>
 </li>
@@ -226,15 +227,19 @@
 </li>
       <li><a href="index.html#pecrs.collider.Collider.circle_rect">circle_rect() (pecrs.collider.Collider method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="index.html#pecrs.vector.Vector.clamp">clamp() (pecrs.vector.Vector method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="index.html#pecrs.clock.Clock">Clock (class in pecrs.clock)</a>
 </li>
       <li><a href="index.html#pecrs.collider.Collider">Collider (class in pecrs.collider)</a>
 </li>
       <li><a href="index.html#pecrs.space.Space.collider">collider (pecrs.space.Space attribute)</a>
+</li>
+      <li><a href="index.html#pecrs.space.Space.colliding_at">colliding_at() (pecrs.space.Space method)</a>
+</li>
+      <li><a href="index.html#pecrs.space.Space.colliding_with">colliding_with() (pecrs.space.Space method)</a>
 </li>
       <li><a href="index.html#pecrs.controller.Controller">Controller (class in pecrs.controller)</a>
 </li>
@@ -282,12 +287,10 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#pecrs.controller.Controller.factory">factory (pecrs.controller.Controller attribute)</a>
+      <li><a href="index.html#pecrs.controller.Controller.find">find() (pecrs.controller.Controller method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#pecrs.controller.Controller.find">find() (pecrs.controller.Controller method)</a>
-</li>
       <li><a href="index.html#pecrs.index.Index.free">free (pecrs.index.Index attribute)</a>
 </li>
   </ul></td>
@@ -299,17 +302,13 @@
       <li><a href="index.html#pecrs.controller.Controller.get">get() (pecrs.controller.Controller method)</a>
 
       <ul>
-        <li><a href="index.html#pecrs.space.Space.get">(pecrs.space.Space method)</a>
-</li>
         <li><a href="index.html#pecrs.spatialhash.SpatialHash.get">(pecrs.spatialhash.SpatialHash method)</a>
 </li>
       </ul></li>
-      <li><a href="index.html#pecrs.space.Space.get_body">get_body() (pecrs.space.Space method)</a>
+      <li><a href="index.html#pecrs.spatialhash.SpatialHash.get_pos">get_pos() (pecrs.spatialhash.SpatialHash method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#pecrs.spatialhash.SpatialHash.get_pos">get_pos() (pecrs.spatialhash.SpatialHash method)</a>
-</li>
       <li><a href="index.html#pecrs.clock.Clock.get_time">get_time() (pecrs.clock.Clock method)</a>
 
       <ul>
@@ -355,14 +354,6 @@
   </ul></td>
 </tr></table>
 
-<h2 id="K">K</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#pecrs.body.AbsBody.key">key (pecrs.body.AbsBody attribute)</a>
-</li>
-  </ul></td>
-</tr></table>
-
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -383,8 +374,6 @@
       <li><a href="index.html#pecrs.vector.Vector.mag_square">mag_square() (pecrs.vector.Vector method)</a>
 </li>
       <li><a href="index.html#pecrs.controller.Controller.make">make() (pecrs.controller.Controller method)</a>
-</li>
-      <li><a href="index.html#pecrs.controller.Controller.make_key">make_key() (pecrs.controller.Controller method)</a>
 </li>
       <li><a href="index.html#pecrs.body.AbsBody.move">move() (pecrs.body.AbsBody method)</a>
 
@@ -532,13 +521,15 @@
 </li>
       <li><a href="index.html#pecrs.clock.Clock.rate">rate (pecrs.clock.Clock attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="index.html#pecrs.shape.Rect">Rect (class in pecrs.shape)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="index.html#pecrs.collider.Collider.rect_circle">rect_circle() (pecrs.collider.Collider method)</a>
 </li>
       <li><a href="index.html#pecrs.collider.Collider.rect_rect">rect_rect() (pecrs.collider.Collider method)</a>
+</li>
+      <li><a href="index.html#pecrs.controller.Controller.remake_space">remake_space() (pecrs.controller.Controller method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -558,15 +549,13 @@
 </li>
       <li><a href="index.html#pecrs.controller.Controller.space">space (pecrs.controller.Controller attribute)</a>
 </li>
-      <li><a href="index.html#pecrs.spatialhash.SpatialHash">SpatialHash (class in pecrs.spatialhash)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#pecrs.spatialhash.SpatialHash">SpatialHash (class in pecrs.spatialhash)</a>
+</li>
       <li><a href="index.html#pecrs.body.AbsBody.speed">speed (pecrs.body.AbsBody attribute)</a>
 </li>
       <li><a href="index.html#pecrs.controller.Controller.start">start() (pecrs.controller.Controller method)</a>
-</li>
-      <li><a href="index.html#pecrs.body.AbsBody.state">state (pecrs.body.AbsBody attribute)</a>
 </li>
       <li><a href="index.html#pecrs.body.StaticBody">StaticBody (class in pecrs.body)</a>
 </li>

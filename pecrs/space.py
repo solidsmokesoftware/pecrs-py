@@ -82,7 +82,7 @@ class Space:
       """
       return self.grid.has(body, body.area)
 
-   def get(self, position, shape):
+   def colliding_at(self, position, shape):
       """
       :param position: Position to search
       :param shape: Shape to use for collision detection
@@ -101,7 +101,7 @@ class Space:
             collisions.append(body)
       return collisions
 
-   def get_body(self, body):
+   def colliding_with(self, body):
       """
       :param body: Body to find collisions for
       :type body: AbsBody

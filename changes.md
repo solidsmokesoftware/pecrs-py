@@ -1,5 +1,24 @@
 
 #######
+0.02 - 3/7/2020
+#######
+
+Controller now defaults Space to 256, previous no default.
+Expand documentation for controller.
+New method Controller.resize_space changes the size of the Space and replace.
+New method Controller.add_space adds a body to the space.
+Remove Controller.factory - This is confusing and not needed for most games, while easy to implement for those that do need it.
+Remove Controller.make_key()
+Remove Body.key
+Remove Body.state - Unused in the base system, easy to implment for users that want it.
+Changed method signature Controller.make() now takes a shape allowing it to work with generic bodies instead of subclassed bodies.
+Rename method Space.get_body() is now Space.colliding_with()
+Rename method Space.get() is now Space.colliding_at()
+quickstart.py completely rewritten.
+example.py updated to work with changes
+test.py updated to work with changes
+
+#######
 0.012 - 3/6/2020
 #######
 

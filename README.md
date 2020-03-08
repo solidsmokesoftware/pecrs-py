@@ -12,40 +12,37 @@ Focused use-case makes pecrs simple to learn and use.
 
 Via pip
 
-`python -m pip install pecrs`
+`python3 -m pip install pecrs`
 
 # Quickstart
 ```python
 
 from pecrs import *
 
+controller = Controller()
+shape = Rect(32, 32)
+bodyA = controller.make(Body, 0, 0, shape)
+bodyB = controller.make(Body, 10, 0, shape)
 
-id = 0
-position = Vector(100, 500)
-shape = Rect(10, 10)
-body = Body(id, position, shape)
+collision = controller.space.check(bodyA)
+print(f"Is something colliding with bodyA? {collision}")
 
-id = 1
-position_other = Vector(100, 495)
-other = Body(id, position_other, shape)
+collisions = controller.space.colliding_with(bodyB)
+print(f"Who is colliding with bodyB? {collisions}")
 
-spatial_hash_size = 128
-space = Space(spatial_hash_size)
+controller.place(bodyB, 100, 0)
 
-space.add(body)
-space.add(other)
-
-collision = space.check(body)
-print(f"Are 0 and 1 colliding? {collision}")
+collision = controller.space.check_two(bodyA, bodyB)
+print(f"Are bodyA and bodyB colliding? {collision}")
 ```
 
 # Structual Overview
 
-The base functionality of pecrs is provided by Vector, Shape, SpatialHash, and Index. Vector and Shape are datatypes for describing a Body. SpatialHash keeps track of a collection of objects based on position, while Index keeps track of indentification numbers for Bodies.
+The core functionality of pecrs is provided by Vector, Shape, SpatialHash, and Index. Vector and Shape are datatypes for describing a Body. SpatialHash keeps track of a collection of objects based on position, while Index keeps track of indentification numbers for Bodies.
 
-At the core level of operations are Bodies and the Collider. A Body consists of a Shape, a position(Vector), and an id(Provided by Index) and is the key unit of simulation. The Collider works with Shapes and Vectors to detect intersections.
+At the intermediate level of organization are Bodies and the Collider. A Body consists of a Shape, a position(Vector), and an id(Provided by Index) and is the cornerstone unit of simulation. The Collider works with Shapes and Vectors to detect intersections.
 
-Above that exists the Space. The Space manages Bodies in a SpatialHash and detects collisions within via the Collider.
+Above that exists the Space. The Space manages Bodies in a SpatialHash and can detects collisions within via the Collider.
 
 At the highest level exists the Controller. The Controller creates Bodies in a Space and handles their interactions, as well as the physics simulation itself. The Controller is follows Object-Oriented design principles and provides callbacks into all of its functionality that can be easily extended. 
 
@@ -58,8 +55,7 @@ from pecrs.shape import Rect
 
 
 class Player(Body):
-   def __init__(self, id, position):
-      shape = Rect(32, 32)
+   def __init__(self, id, position, shape):
       super().__init__(id, position, shape)
       self.name = "player"
       self.speed = 100
@@ -67,9 +63,8 @@ class Player(Body):
 
 
 class Objects(Controller):
-   def __init__(self, collision_area_size):
-      super().__init__(collision_area_size)
-      self.factory["player"] = Player
+   def __init__(self):
+      super().__init__()
       
    def on_make(self, body):
       print(f"Objects made {body.name} {body.id} at {body.position.x}:{body.position.y}")
@@ -80,10 +75,11 @@ class Objects(Controller):
    def on_collision(self, body, collisions):
       print(f"{body.name} is colliding with {len(collisions)} others")
 
-objects = Objects(64)
+objects = Objects()
 
-playerA = objects.make(Player, 0, 0) # Bodies can be made with thier class
-playerB = objects.make_key("player", 10, 0) # Or with a key that can be communicated easily over networks
+shape = Rect(32, 32)
+playerA = objects.make(Player, 0, 0, shape) # Bodies can be made with thier class
+playerB = objects.make(Player, 10, 0, shape)
 
 collision = objects.space.check_two(playerA, playerB)
 if collision:
@@ -102,12 +98,12 @@ if collision:
 objects.delete(playerA)
 objects.delete(playerB)
 
-playerC = objects.make(Player, 0, 0, dx=1)
-playerD = objects.make(Player, 0, 0, dx=-1)
-playerE = objects.make(Player, 0, 0, dy =1)
-playerF = objects.make(Player, 0, 0, dy =-1)
+playerC = objects.make(Player, 0, 0, shape, dx=1)
+playerD = objects.make(Player, 0, 0, shape, dx=-1)
+playerE = objects.make(Player, 0, 0, shape, dy =1)
+playerF = objects.make(Player, 0, 0, shape, dy =-1)
 
-collisions = objects.space.get_body(playerC)
+collisions = objects.space.colliding_with(playerC)
 if collisions:
    print(f"Body C is colliding with {len(collisions)} others")
 
@@ -121,6 +117,8 @@ for i in range(10):
 https://solidsmokesoftware.github.io/pecrs/
 
 # Demonstration
+
+(Currently broken)
 
 https://github.com/solidsmokesoftware/solconomy
 
