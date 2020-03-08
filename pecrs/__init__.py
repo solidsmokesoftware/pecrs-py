@@ -13,8 +13,7 @@ from .index import Index
 from .spatialhash import SpatialHash
 from .collider import Collider
 from .space import Space
-from .vector import Vector
 from .controller import Controller
 
-__all__ = ["Shape", "Rect", "Circle", "Clock", "SyncClock", "AbsBody", "Body", "StaticBody", "Index", "SpatialHash", "Collider", "Space", "Vector", "Controller"]
-version = 0.02
+__all__ = ["Shape", "Rect", "Circle", "Clock", "SyncClock", "AbsBody", "Body", "StaticBody", "Index", "SpatialHash", "Collider", "Space", "Controller"]
+version = 0.03

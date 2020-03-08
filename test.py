@@ -5,37 +5,35 @@ from pecrs import *
 def test_body():
   passing = True
 
-  vectorA = Vector(0, 0)
-  vectorB = Vector(0, 0)
-  expected = Vector(0, 0)
-  rect = Rect(32, 32)
-  circle = Circle(64)
+  rectA = Rect(0, 0, 32, 32)
+  rectB = Rect(0, 0, 32, 32)
+  circle = Circle(0, 0, 64)
 
-  absbody = AbsBody(0, vectorA, circle)
-  body = Body(1, vectorA, rect)
-  body.direction.x = 1
+  absbody = AbsBody(0, circle)
+  body = Body(1, rectA)
+  body.direction = (1, 0)
   body.speed = 100
-  staticbody = StaticBody(2, vectorA, rect)
+
+  staticbody = StaticBody(2, rectB)
 
   body.move(10)
-  print(f"Body test: move({10}) expecting 1000:0, actual {str(body.position)}")
-  expected.x = 1000
-  if body.position != expected:
+  expected = (1000, 0)
+  print(f"Body test: move({10}) expecting {expected}, actual {str(body.shape.position)}")
+  if body.shape.position != expected:
     print("Fail")
     passing = False
 
   body.move_to(-1, 0, 5)
-  print(f"Body test: move_to(-1, 0, 5) expecting 500:0, actual {str(body.position)}")
-  expected.x = 500
-  if body.position != expected:
+  expected = (500, 0)
+  print(f"Body test: move_to(-1, 0, 5) expecting {expected}, actual {str(body.shape.position)}")
+  if body.shape.position != expected:
     print("Fail")
     passing = False
 
   staticbody.place(0, 250)
-  print(f"Body test: place(0, 250) expecting 0:250, actual {str(body.position)}")
-  expected.x = 0
-  expected.y = 250
-  if body.position != expected:
+  expected = (0, 250)
+  print(f"Body test: place(0, 250) expecting {expected}, actual {str(staticbody.shape.position)}")
+  if staticbody.shape.position != expected:
     print("Fail")
     passing = False
 
@@ -112,161 +110,131 @@ def test_collider():
   passing = True
 
   collider = Collider()
-  rectA = Rect(10, 10)
-  rectB = Rect(10, 10)
-  circleA = Circle(10)
-  circleB = Circle(10)
-  positionA = Vector(0, 0)
-  positionB = Vector(0, 0)
+  rectA = Rect(0, 0, 10, 10)
+  rectB = Rect(0, 0, 10, 10)
+  circleA = Circle(0, 0, 10)
+  circleB = Circle(0, 0, 10)
 
-  collider.check(rectA, positionA, rectB, positionB)
+  collider.check_shapes(rectA, rectB)
   print(f"Collider test: check(Rect, Rect)")
 
-  collider.check(rectA, positionA, circleA, positionB)
+  collider.check_shapes(rectA, circleA)
   print(f"Collider test: check(Rect, Circle)")
 
-  collider.check(circleB, positionA, rectB, positionB)
+  collider.check_shapes(circleB, rectB)
   print(f"Collider test: check(Circle, Rect)")
 
-  collider.check(circleA, positionA, circleB, positionB)
+  collider.check_shapes(circleA, circleB)
   print(f"Collider test: check(Circle, Circle)")
 
-  positionA.x = 0
-  positionA.y = 0
-  positionB.x = 0
-  positionB.y = 9
-  value = collider.rect_rect(rectA, positionA, rectB, positionB)
-  print(f"Collision test: rect_rect({str(positionA)}, {str(positionB)}) expecting True, actual {value}")
+  rectA.position = 0, 0
+  rectB.position = 0, 9
+  value = collider.check_rects(rectA, rectB)
+  print(f"Collision test: check_rect({str(rectA.position)}, {str(rectB.position)}) expecting True, actual {value}")
   if value != True:
     print("Fail")
     passing = False
 
-  positionA.x = 0
-  positionA.y = 0
-  positionB.x = 5
-  positionB.y = -5
-  value = collider.rect_rect(rectA, positionA, rectB, positionB)
-  print(f"Collision test: rect_rect({str(positionA)}, {str(positionB)}) expecting True, actual {value}")
+  rectA.position = 0, 0
+  rectB.position = 5, -5
+  value = collider.rect_rect(rectA.width, rectA.height, rectA.position[0], rectA.position[1], rectB.width, rectB.height, rectB.position[0], rectB.position[1])
+  print(f"Collision test: rect_rect(...) expecting True, actual {value}")
   if value != True:
     print("Fail")
     passing = False
 
-  positionA.x = 0
-  positionA.y = 0
-  positionB.x = 9
-  positionB.y = 9
-  value = collider.rect_rect(rectA, positionA, rectB, positionB)
-  print(f"Collision test: rect_rect({str(positionA)}, {str(positionB)}) expecting True, actual {value}")
+  rectA.position = 0, 0
+  rectB.position = 9, 9
+  value = collider.check_rects(rectA, rectB)
+  print(f"Collision test: checks_rect({str(rectA.position)}, {str(rectB.position)}) expecting True, actual {value}")
   if value != True:
     print("Fail")
     passing = False
 
-  positionA.x = 0
-  positionA.y = 0
-  positionB.x = 0
-  positionB.y = 10
-  value = collider.rect_rect(rectA, positionA, rectB, positionB)
-  print(f"Collision test: rect_rect({str(positionA)}, {str(positionB)}) expecting False, actual {value}")
+  rectA.position = 0,0
+  rectB.position = 0, 10
+  value = collider.rect_rect(rectA.width, rectA.height, rectA.position[0], rectA.position[1], rectB.width, rectB.height, rectB.position[0], rectB.position[1])
+  print(f"Collision test: rect_rect(...) expecting False, actual {value}")
   if value != False:
     print("Fail")
     passing = False
 
-  positionA.x = 0
-  positionA.y = 0
-  positionB.x = 10
-  positionB.y = 0
-  value = collider.rect_rect(rectA, positionA, rectB, positionB)
-  print(f"Collision test: rect_rect({str(positionA)}, {str(positionB)}) expecting False, actual {value}")
+  rectA.position = 0,0
+  rectB.position = 10, 0
+  value = collider.check_rects(rectA, rectB)
+  print(f"Collision test: check_rects({str(rectA.position)}, {str(rectB.position)}) expecting False, actual {value}")
   if value != False:
     print("Fail")
     passing = False
 
-  positionA.x = 0
-  positionA.y = 0
-  positionB.x = 10
-  positionB.y = 0
-  value = collider.rect_circle(rectA, positionA, circleB, positionB)
-  print(f"Collision test: rect_circle({str(positionA)}, {str(positionB)}) expecting True, actual {value}")
+  rectA.position = 0,0
+  circleB.position = 10, 0
+  value = collider.rect_circle(rectA.width, rectA.height, rectA.position[0], rectA.position[1], circleB.radius, circleB.position[0], circleB.position[1])
+  print(f"Collision test: rect_circle({str(rectA.position)}, {str(circleB.position)}) expecting True, actual {value}")
   if value != True:
     print("Fail")
     passing = False
   
-  positionA.x = 0
-  positionA.y = 0
-  positionB.x = 20
-  positionB.y = 0
-  value = collider.rect_circle(rectA, positionA, circleB, positionB)
-  print(f"Collision test: rect_circle({str(positionA)}, {str(positionB)}) expecting False, actual {value}")
+  rectA.position = 0,0
+  circleB.position = 20, 0
+  value = collider.rect_circle(rectA.width, rectA.height, rectA.position[0], rectA.position[1], circleB.radius, circleB.position[0], circleB.position[1])
+  print(f"Collision test: rect_circle({str(rectA.position)}, {str(circleB.position)}) expecting True, actual {value}")
   if value != False:
     print("Fail")
     passing = False
 
-  positionA.x = 0
-  positionA.y = 0
-  positionB.x = -5
-  positionB.y = 0
-  value = collider.circle_rect(circleA, positionA, rectB, positionB)
-  print(f"Collision test: circle_rect({str(positionA)}, {str(positionB)}) expecting True, actual {value}")
+  circleA.position = 0, 0
+  rectB.position = -5, 0
+  value = collider.circle_rect(circleA.radius, circleA.position[0], circleA.position[1], rectB.width, rectB.height, rectB.position[0], rectB.position[1])
+  print(f"Collision test: circle_rect({str(circleA.position)}, {str(rectB.position)}) expecting True, actual {value}")
   if value != True:
     print("Fail")
     passing = False
   
-  positionA.x = 0
-  positionA.y = 0
-  positionB.x = 19
-  positionB.y = 2 
-  value = collider.circle_rect(circleA, positionA, rectB, positionB)
-  print(f"Collision test: circle_rect({str(positionA)}, {str(positionB)}) expecting False, actual {value}")
+  circleA.position = 0, 0
+  rectB.position = 19, 2
+  value = collider.circle_rect(circleA.radius, circleA.position[0], circleA.position[1], rectB.width, rectB.height, rectB.position[0], rectB.position[1])
+  print(f"Collision test: circle_rect({str(circleA.position)}, {str(rectB.position)}) expecting False, actual {value}")
   if value != False:
     print("Fail")
     passing = False
 
-  positionA.x = 0
-  positionA.y = 0
-  positionB.x = -5
-  positionB.y = 0  
-  value = collider.circle_circle(circleA, positionA, circleB, positionB)
-  print(f"Collision test: circle_circle({str(positionA)}, {str(positionB)}) expecting True, actual {value}")
+  circleA.position = 0, 0
+  circleB.position = -5, 0  
+  value = collider.check_circles(circleA, circleB)
+  print(f"Collision test: check_circles(circleA, circleB) expecting True, actual {value}")
   if value != True:
     print("Fail")
     passing = False
 
-  positionA.x = 0
-  positionA.y = 0
-  positionB.x = 19
-  positionB.y = 0  
-  value = collider.circle_circle(circleA, positionA, circleB, positionB)
-  print(f"Collision test: circle_circle({str(positionA)}, {str(positionB)}) expecting True, actual {value}")
+  circleA.position = 0, 0
+  circleB.position = 19, 0
+  value = collider.circle_circle(circleA.radius, circleA.position[0], circleA.position[1], circleB.radius, circleB.position[0], circleB.position[1])
+  print(f"Collision test: circle_circle(...) expecting True, actual {value}")
   if value != True:
     print("Fail")
     passing = False
 
-  positionA.x = 0
-  positionA.y = 0
-  positionB.x = 20
-  positionB.y = 0  
-  value = collider.circle_circle(circleA, positionA, circleB, positionB)
-  print(f"Collision test: circle_circle({str(positionA)}, {str(positionB)}) expecting False, actual {value}")
+  circleA.position = 0, 0
+  circleB.position = 20, 0
+  value = collider.circle_circle(circleA.radius, circleA.position[0], circleA.position[1], circleB.radius, circleB.position[0], circleB.position[1])
+  print(f"Collision test: circle_circle(...) expecting False, actual {value}")
   if value != False:
     print("Fail")
     passing = False
 
-  positionA.x = 0
-  positionA.y = 0
-  positionB.x = 14
-  positionB.y = 14  
-  value = collider.circle_circle(circleA, positionA, circleB, positionB)
-  print(f"Collision test: circle_circle({str(positionA)}, {str(positionB)}) expecting True, actual {value}")
+  circleA.position = 0, 0
+  circleB.position = 14, 14  
+  value = collider.check_circles(circleA, circleB)
+  print(f"Collision test: check_circles(circleA, circleB) expecting True, actual {value}")
   if value != True:
     print("Fail")
     passing = False
 
-  positionA.x = 0
-  positionA.y = 0
-  positionB.x = 15
-  positionB.y = 15  
-  value = collider.circle_circle(circleA, positionA, circleB, positionB)
-  print(f"Collision test: circle_circle({str(positionA)}, {str(positionB)}) expecting False, actual {value}")
+  circleA.position = 0, 0
+  circleB.position = 15, 15
+  value = collider.circle_circle(circleA.radius, circleA.position[0], circleA.position[1], circleB.radius, circleB.position[0], circleB.position[1])
+  print(f"Collision test: circle_circle(...) expecting False, actual {value}")
   if value != False:
     print("Fail")
     passing = False
@@ -405,15 +373,14 @@ def test_space():
 
   space = Space(128)
 
-  rect = Rect(32, 32)
-  positionA = Vector(0, 0)
-  positionB = Vector(0, 0)
-  positionC = Vector(0, 64)
-  positionD = Vector(0, 256)
-  bodyA = Body(0, positionA, rect)
-  bodyB = Body(1, positionB, rect)
-  bodyC = Body(2, positionC, rect)
-  bodyD = Body(3, positionD, rect)
+  rectA = Rect(0, 0, 32, 32)
+  rectB = Rect(0, 0, 32, 32)
+  rectC = Rect(0, 64, 32, 32)
+  rectD = Rect(0, 256, 32, 32)
+  bodyA = Body(0, rectA)
+  bodyB = Body(1, rectB)
+  bodyC = Body(2, rectC)
+  bodyD = Body(3, rectD)
 
 
   value = space.has(bodyA)
@@ -443,8 +410,8 @@ def test_space():
     print("Fail")
     passing = False
 
-  value = space.colliding_at(positionA, rect)
-  print(f"Space test: colliding_at(positionA, rect) expecting [{repr(bodyA)}, {repr(bodyB)}], actual {value}")
+  value = space.collisions_at(0, 0, 32, 32)
+  print(f"Space test: collisions_at(0, 0, 32, 32) expecting [...], actual [...]")
   for v in value:
     if v.id == bodyA.id or v.id == bodyB.id:
       pass
@@ -452,46 +419,46 @@ def test_space():
       print(f"Fail {v.id}")
       passing = False
 
-  value = space.colliding_at(positionC, rect)
-  print(f"Space test: colliding_at(positionC, rect) expecting [{repr(bodyC)}], actual {value}")
+  value = space.collisions_at(0, 64)
+  print(f"Space test: colliding_at(0, 64) expecting [...], actual [...]")
   for v in value:
     if v.id != bodyC.id:
       print("Fail")
       passing = False
 
-  value = space.colliding_with(bodyA)
-  print(f"Space test: colliding_with(bodyA) expecting [{repr(bodyB)}], actual {value}")
+  value = space.collisions_with(bodyA)
+  print(f"Space test: collisions_with(bodyA) expecting [...], actual [...]")
   for v in value:
     if v.id != bodyB.id:
       print("Fail")
       passing = False
 
-  value = space.colliding_with(bodyD)
-  print(f"Space test: colliding_with(bodyD) expecting [], actual {value}")
+  value = space.collisions_with(bodyD)
+  print(f"Space test: collisions_with(bodyD) expecting [...], actual [...]")
   if value != []:
     print("Fail")
     passing = False
 
-  value = space.check_two(bodyA, bodyB)
-  print(f"Space test: check_two(bodyA, bodyB) expecting True, actual {value}")
+  value = space.check_bodies(bodyA, bodyB)
+  print(f"Space test: check_bodies(bodyA, bodyB) expecting True, actual {value}")
   if value != True:
     print("Fail")
     passing = False
 
-  value = space.check_two(bodyC, bodyD)
-  print(f"Space test: check_two(bodyC, bodyD) expecting False, actual {value}")
+  value = space.check_bodies(bodyC, bodyD)
+  print(f"Space test: check_bodies(bodyC, bodyD) expecting False, actual {value}")
   if value != False:
     print("Fail")
     passing = False
 
-  value = space.check(bodyA)
-  print(f"Space test: check(bodyA) expecting True, actual {value}")
+  value = space.check_body(bodyA)
+  print(f"Space test: check_body(bodyA) expecting True, actual {value}")
   if value != True:
     print("Fail")
     passing = False
 
-  value = space.check(bodyC)
-  print(f"Space test: check(bodyC) expecting False, actual {value}")
+  value = space.check_body(bodyC)
+  print(f"Space test: check_body(bodyC) expecting False, actual {value}")
   if value != False:
     print("Fail")
     passing = False
@@ -500,8 +467,8 @@ def test_space():
   space.place(bodyD, (0, 0))
   print("Space test: place(bodyD, (0, 0))")
 
-  value = space.colliding_with(bodyA)
-  print(f"Space test: colliding_with(bodyA) expecting [{repr(bodyB)}, {repr(bodyD)}], actual {value}")
+  value = space.collisions_with(bodyA)
+  print(f"Space test: collisions_with(bodyA) expecting [...], actual [...]")
   for v in value:
     if v.id == bodyB.id or v.id == bodyD.id:
       pass
@@ -512,8 +479,8 @@ def test_space():
   space.delete(bodyA)
   print("Space test: delete(bodyA)")
 
-  value = space.colliding_with(bodyB)
-  print(f"Space test: colliding_with(bodyB) expecting [{repr(bodyD)}], actual {value}")
+  value = space.collisions_with(bodyB)
+  print(f"Space test: collisions_with(bodyB) expecting [...], actual [...]")
   for v in value:
     if v.id != bodyD.id:
       print("Fail")
@@ -532,8 +499,8 @@ def test_controller():
   #TODO test controller.remake_space()
 
   class Entity(Body):
-    def __init__(self, id, position, shape):
-      super().__init__(id, position, shape)
+    def __init__(self, id, shape):
+      super().__init__(id, shape)
 
   class Objects(Controller):
     def __init__(self):
@@ -560,7 +527,7 @@ def test_controller():
       print(f"on_place callback {body.id} moved from {start}")
 
     def on_motion(self, body):
-      print(f"body {body.id} at {str(body.position)}")
+      print(f"body {body.id} at {str(body.shape.position)}")
 
     def on_turn(self, body):
       print(f"on_turn callback {body.id} to {str(body.direction)}")
@@ -581,28 +548,27 @@ def test_controller():
       print("on_step_end callback")
 
   objects = Objects()
-  shape = Rect(32, 32)
 
-  bodyA = objects.make(Entity, 0, 0, shape)
-  print(f"Controller test: make(Entity, 0, 0, shape) expecting id 0, actual {bodyA.id}")
+  bodyA = objects.make(Entity, 0, 0, 32, 32)
+  print(f"Controller test: make(Entity, 0, 0, 32, 32) expecting id 0, actual {bodyA.id}")
   if bodyA.id != 0:
     print("Fail")
     passing = False
 
-  bodyB = objects.make(Entity, 0, 0, shape, dx=1)
-  print(f"Controller test: make(Entity, 0, 0, shape, dx=1) expecting id 1, actual {bodyB.id}")
+  bodyB = objects.make(Entity, 0, 0, 32, 32, dx=1)
+  print(f"Controller test: make(Entity, 0, 0, 32, 32, dx=1) expecting id 1, actual {bodyB.id}")
   if bodyB.id != 1:
     print("Fail")
     passing = False
 
-  bodyC = objects.make(Entity, 0, 0, shape, dy=1)
-  print(f"Controller test: make(Entity, 0, 0, shape, dy=1) expecting id 2, actual {bodyC.id}")
+  bodyC = objects.make(Entity, 0, 0, 32, 32, dy=1)
+  print(f"Controller test: make(Entity, 0, 0, 32, 32 dy=1) expecting id 2, actual {bodyC.id}")
   if bodyC.id != 2:
     print("Fail")
     passing = False
 
-  bodyD = objects.make(Entity, 0, 0, shape)
-  print(f"Controller test: make(Entity, 0, 0, shape) expecting id 3, actual {bodyD.id}")
+  bodyD = objects.make(Entity, 0, 0, 32, 32)
+  print(f"Controller test: make(Entity, 0, 0, 32, 32) expecting id 3, actual {bodyD.id}")
   if bodyD.id != 3:
     print("Fail")
     passing = False

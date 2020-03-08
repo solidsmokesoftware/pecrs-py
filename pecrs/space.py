@@ -5,7 +5,7 @@ from pecrs.collider import Collider
 
 class Space:
    """
-   :param size: Size pf the collision areas
+   :param size: Size of the collision areas
    :type size: int
 
    Space handles the interactions between the SpatialHash and the Collider.
@@ -30,7 +30,7 @@ class Space:
          x_area = area[0]
          y_area = area[1]
       else:
-         body.area = self.grid.scale(body.position.x, body.position.y)
+         body.area = self.grid.scale(body.shape.position[0], body.shape.position[1])
          x_area = body.area[0]
          y_area = body.area[1]
 
@@ -82,28 +82,32 @@ class Space:
       """
       return self.grid.has(body, body.area)
 
-   def colliding_at(self, position, shape):
+   def collisions_at(self, x, y, width=1, height=1):
       """
-      :param position: Position to search
-      :param shape: Shape to use for collision detection
-      :type position: Vector
-      :type shape: Shape
+      :param x: Posistion to search for on the x-axis
+      :param y: Posistion to search for on the y-axis
+      :param width: Width of the search area
+      :param height: Height of the search area
+      :type x: Int
+      :type y: Int
+      :type width: Int
+      :type height: Int
       :return: List of bodies colliding at the position
       :rtype: list(AbsBody)
 
-      Gets a list of all bodies colliding with shape at position
+      Gets a list of all bodies colliding at x, y
       """
-      area = self.grid.scale(position.x, position.y)
+      area = self.grid.scale(x, y)
       collisions = []
       bucket = self.grid.get(area)
       for body in bucket:
-         if self.collider.check(shape, position, body.shape, body.position):
+         if self.collider.rect_rect(width, height, x, y, body.shape.width, body.shape.height, body.shape.position[0], body.shape.position[1]):
             collisions.append(body)
       return collisions
 
-   def colliding_with(self, body):
+   def collisions_with(self, body):
       """
-      :param body: Body to find collisions for
+      :param body: Body to find collisions with
       :type body: AbsBody
       :return: List of bodies colliding at the position
       :rtype: list(AbsBody)
@@ -113,31 +117,32 @@ class Space:
       collisions = []
       for other in self.grid.get(body.area):
          if body.id != other.id:
-            if self.check_two(body, other):
+            if self.collider.check_bodies(body, other):
                collisions.append(other)
       return collisions
       
-   def check_two(self, body, other):
+   def check_at(self, x, y, width=1, height=1):
       """
-      :param body: First body to check for collision
-      :param other: Second body to check for a collision
-      :type body: AbsBody
-      :type other: AbsBody
-      :return: True if the two bodies are colliding, False if not
+      :param x: Posistion to search for on the x-axis
+      :param y: Posistion to search for on the y-axis
+      :param width: Width of the search area
+      :param height: Height of the search area
+      :type x: Int
+      :type y: Int
+      :type width: Int
+      :type height: Int
+      :return: True if there is a collision at x, y, False if not
       :rtype: bool
 
-      Check to see if two bodies are colliding with each other in abstract. Does not use the space.
+      Check to see if there is a collision at x, y in space.
       """
-
-      if body.id != other.id:
-         if self.collider.check(body.shape, body.position, other.shape, other.position):
+      area = self.grid.scale(x, y)
+      for body in self.grid.get(area):
+         if self.collider.rect_rect(width, height, x, y, body.width, body.height, body.position[0], body.position[1]):
             return True
-         else:
-            return False
-      else:
-         return False
-   
-   def check(self, body):
+      return False
+      
+   def check_body(self, body):
       """
       :param body: Body to check for collisions
       :type body: AbsBody
@@ -147,9 +152,13 @@ class Space:
       Check to see if something is colliding with body in the space.
       """
       for other in self.grid.get(body.area):
-         if self.check_two(body, other):
-            return True
+         if body.id != other.id:
+            if self.collider.check_bodies(body, other):
+               return True
       return False
+
+   def check_bodies(self, body, other):
+      return self.collider.check_bodies(body, other)
 
    def move(self, body, dir):
       """

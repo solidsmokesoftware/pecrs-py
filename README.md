@@ -8,6 +8,8 @@ Pure Python makes pecrs portable and easy to modify to suit your own needs.
 
 Focused use-case makes pecrs simple to learn and use.
 
+Seamless integration with Pyglet
+
 # Installation
 
 Via pip
@@ -20,29 +22,28 @@ Via pip
 from pecrs import *
 
 controller = Controller()
-shape = Rect(32, 32)
-bodyA = controller.make(Body, 0, 0, shape)
-bodyB = controller.make(Body, 10, 0, shape)
+bodyA = controller.make(Body, 0, 0, 32, 32)
+bodyB = controller.make(Body, 10, 0, 32, 32)
 
-collision = controller.space.check(bodyA)
+collision = controller.space.check_body(bodyA)
 print(f"Is something colliding with bodyA? {collision}")
 
-collisions = controller.space.colliding_with(bodyB)
+collisions = controller.space.collisions_with(bodyB)
 print(f"Who is colliding with bodyB? {collisions}")
 
 controller.place(bodyB, 100, 0)
 
-collision = controller.space.check_two(bodyA, bodyB)
+collision = controller.space.check_bodies(bodyA, bodyB)
 print(f"Are bodyA and bodyB colliding? {collision}")
 ```
 
 # Structual Overview
 
-The core functionality of pecrs is provided by Vector, Shape, SpatialHash, and Index. Vector and Shape are datatypes for describing a Body. SpatialHash keeps track of a collection of objects based on position, while Index keeps track of indentification numbers for Bodies.
+The core functionality of pecrs is provided by Shapes. Shape are datatypes for describing the physical properties of a Body. 
 
-At the intermediate level of organization are Bodies and the Collider. A Body consists of a Shape, a position(Vector), and an id(Provided by Index) and is the cornerstone unit of simulation. The Collider works with Shapes and Vectors to detect intersections.
+At the intermediate level of organization are Bodies and the Collider. A Body consists of a Shape and an id(Provided by Index) and is the cornerstone unit of simulation. The Collider works with Shapes or Bodies to detect intersections.
 
-Above that exists the Space. The Space manages Bodies in a SpatialHash and can detects collisions within via the Collider.
+Above that exists the Space. The Space optimizes collision detection using a Spatialhash.
 
 At the highest level exists the Controller. The Controller creates Bodies in a Space and handles their interactions, as well as the physics simulation itself. The Controller is follows Object-Oriented design principles and provides callbacks into all of its functionality that can be easily extended. 
 
@@ -52,15 +53,13 @@ At the highest level exists the Controller. The Controller creates Bodies in a S
 
 ```python
 
-
 from pecrs import *
 import pyglet
 
 
-class VisableBody(Body):
-   def __init__(self, id, position, shape, sprite=None):
-      super().__init__(id, position, shape)
-      self.sprite = sprite
+class Dude(Body):
+   def __init__(self, id, sprite):
+      super().__init__(id, sprite)
       self.speed = 100
       self.moving = True
 
@@ -72,26 +71,22 @@ class Objects(Controller):
       self.blue_image = pyglet.resource.image("blue_rect.png")
       self.red_image = pyglet.resource.image("red_rect.png")
 
-   def on_make(self, body):
-      if isinstance(body, VisableBody):
-         body.sprite = pyglet.sprite.Sprite(self.blue_image, x=body.position.x, y=body.position.y, batch=self.batch)
-
-   def on_motion(self, body):
-      body.sprite.position = body.position.x, body.position.y
+   def make_dude(self, x, y, dx=0, dy=0):
+      sprite = pyglet.sprite.Sprite(self.blue_image, x=x, y=y, batch=self.batch)
+      self.make_with(Dude, sprite, dx=dx, dy=dy)
 
    def on_collision(self, body, collisions):
-      body.sprite.image = self.red_image
+      body.shape.image = self.red_image
       
 
 class Game:
    def __init__(self):
-      self.window = pyglet.window.Window(600, 400)
+      self.window = pyglet.window.Window(400, 300)
       self.batch = pyglet.graphics.Batch()
 
       self.objects = Objects(self.batch)
-      shape = Rect(48, 48)
-      self.objects.make(VisableBody, 0, 0, shape, dy=1)
-      self.objects.make(VisableBody, 0, 300, shape)
+      self.objects.make_dude(0, 150, dx=1)
+      self.objects.make_dude(300, 150)
 
       pyglet.clock.schedule_interval(self.run, 1.0/60)
       pyglet.app.run()

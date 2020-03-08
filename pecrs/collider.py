@@ -4,172 +4,181 @@ from pecrs.shape import *
 
 class Collider:
    """
-   Collider handles collisions between two shapes at two given positions. Positions are Vectors
-   Note that the collider is abstract and low-level, dealing with any set of shapes and positions rather than bodies in space.
+   Collider handles collisions between two objects with physical dimensions.
+   Note that the collider is abstract and low-level, dealing with any set of positions and dimensions.
    """
 
-   def dist(self, shape, pos, shape_other, pos_other):
+   def check_shapes(self, shape, other):
       """
-      :param shape: Shape of the first body
-      :param pos: Position of the first body
-      :param shape_other: Shape of the second body
-      :param pos_other: Position of the second body
+      :param shape: Shape of the first object
+      :param other: Shape of the second object
       :type shape: Shape
-      :type pos: Vector
-      :type shape_other: Shape
-      :type pos_other: Vector
-      :return: x and y distance
-      :rtype: Tuple(float, float)
-
-      Distance between two shapes from edge to edge IIRC.
-
-      TODO This might not be working correctly. Probably don't use it.
-      """
-      if type(shape) == Rect:
-         w = shape.w
-         h = shape.h
-
-      elif type(shape) == Circle:
-         w = shape.r
-         h = shape.r
-
-      if type(shape_other) == Rect:
-         wo = shape.w
-         ho = shape.h
-      
-      elif type(shape_other) == Circle:
-         wo = shape.r
-         ho = shape.r
-
-      if pos.x > pos_other.x:
-         xd = pos_other.x + wo - pos.x
-      else:
-         xd = pos.x + w - pos_other.x
-    
-      if pos.y > pos_other.y:
-         yd = pos_other.y + ho - pos.y
-      else:
-         yd = pos.y + h - pos_other.y
-    
-      return xd, yd
-
-   def check(self, shape, pos, shape_other, pos_other):
-      """
-      :param shape: Shape of the first body
-      :param pos: Position of the first body
-      :param shape_other: Shape of the second body
-      :param pos_other: Position of the second body
-      :type shape: Shape
-      :type pos: Vector
-      :type shape_other: Shape
-      :type pos_other: Vector
+      :type other: Shape
       :return: True if there is a collision, False is not
       :rtype: bool
 
-      Checks for a collision between any two shapes at two positions. 
+      Checks for a collision between any two shapes. Determines what the shapes are and sends them to the appropriate collision method.
+      If you already know the shape of your objects, use a more direct method.
       """
       if type(shape) == Rect:
-         if type(shape_other) == Rect:
-            return self.rect_rect(shape, pos, shape_other, pos_other)
-         elif type(shape_other) == Circle:
-            return self.rect_circle(shape, pos, shape_other, pos_other)
+         if type(other) == Rect:
+            return self.rect_rect(shape.width, shape.height, shape.position[0], shape.position[1], other.width, other.height, other.position[0], other.position[1])
+         elif type(other) == Circle:
+            return self.rect_circle(shape.width, shape.height, shape.position[0], shape.position[1], other.radius, other.position[0], other.position[1])
       elif type(shape) == Circle:
-         if type(shape_other) == Rect:
-            return self.circle_rect(shape, pos, shape_other, pos_other)
-         elif type(shape_other) == Circle:
-            return self.circle_circle(shape, pos, shape_other, pos_other)
+         if type(other) == Rect:
+            return self.circle_rect(shape.radius, shape.position[0], shape.position[1], other.width, other.height, other.position[0], other.position[1])
+         elif type(other) == Circle:
+            return self.circle_circle(shape.radius, shape.position[0], shape.position[1], other.radius, other.position[0], other.position[1])
 
-   def rect_rect(self, shape, pos, shape_other, pos_other):
+   def check_rects(self, shape, other):
       """
-      :param shape: Shape of the first body
-      :param pos: Position of the first body
-      :param shape_other: Shape of the second body
-      :param pos_other: Position of the second body
+      :param shape: Shape of the first Rect
+      :param other: Shape of the second Rect
       :type shape: Rect
-      :type pos: Vector
-      :type shape_other: Rect
-      :type pos_other: Vector
+      :type other: Rect
       :return: True if there is a collision, False is not
       :rtype: bool
 
-      Checks for a collision between two rects at two positions.
+      Checks for a collision between any two Rects. This is a higher level interface for Collider.rect_rect().
+      Note that Pyglet sprites are effectively Rects and can be used interchangably here.
       """
-      if pos.x < pos_other.x + shape_other.w and pos.x + shape.w > pos_other.x and pos.y < pos_other.y + shape_other.h and pos.y + shape.h > pos_other.y:
+      return self.rect_rect(shape.width, shape.height, shape.position[0], shape.position[1], other.width, other.height, other.position[0], other.position[1])
+
+   def check_circles(self, shape, other):
+      """
+      :param shape: Shape of the first Circle
+      :param other: Shape of the second Circle
+      :type shape: Circle
+      :type other: Circle
+      :return: True if there is a collision, False is not
+      :rtype: bool
+
+      Checks for a collision between any two Circles. This is a higher level interface for Collider.circle_circle().
+      """
+      return self.circle_circle(shape.radius, shape.position[0], shape.position[1], other.radius, other.position[0], other.position[1])
+
+   def check_bodies(self, body, other):
+      """
+      :param body: Body of the first object
+      :param other: Body of the second object
+      :type shape: AbsBody
+      :type other: AbsBody
+      :return: True if there is a collision, False is not
+      :rtype: bool
+
+      Checks for a collision between any two Bodies. This is a higher level interface for Collider.rect_rect().
+      """
+      return self.rect_rect(body.shape.width, body.shape.height, body.shape.position[0], body.shape.position[1], other.shape.width, other.shape.height, other.shape.position[0], other.shape.position[1])
+
+   def rect_rect(self, w, h, x, y, wo, ho, xo, yo):
+      """
+      :param w: Width of the first Rect
+      :param h: Height of the first Rect
+      :param x: x position of the first Rect
+      :param y: y position of the first Rect
+      :param wo: Width of the second Rect
+      :param ho: Height of the second Rect
+      :param xo: x position of the second Rect
+      :param yo: y position of the second Rect
+      :type w: Int
+      :type h: Int
+      :type x: Int
+      :type y: Int
+      :type wo: Int
+      :type ho: Int
+      :type xo: Int
+      :type yo: Int
+
+      Checks for a collision between two Rects in abstract.
+      """
+      if x < xo + wo and x + w > xo and y < yo + ho and y + h > yo:
          return True
       else:
          return False
 
-   def rect_circle(self, shape, pos, shape_other, pos_other):
+   def rect_circle(self, w, h, x, y, ro, xo, yo):
       """
-      :param shape: Shape of the first body
-      :param pos: Position of the first body
-      :param shape_other: Shape of the second body
-      :param pos_other: Position of the second body
-      :type shape: Rect
-      :type pos: Vector
-      :type shape_other: Circle
-      :type pos_other: Vector
-      :return: True if there is a collision, False is not
-      :rtype: bool
+      :param w: Width of the first Rect
+      :param h: Height of the first Rect
+      :param x: x position of the first Rect
+      :param y: y position of the first Rect
+      :param ro: Radius of the second Circle
+      :param xo: x position of the second Circle
+      :param yo: y position of the second Circle
+      :type w: Int
+      :type h: Int
+      :type x: Int
+      :type y: Int
+      :type ro: Int
+      :type xo: Int
+      :type yo: Int
 
-      Checks for a collision between a rect and a circle at two positions.
+      Checks for a collision between a Rect and a Circle in abstract.
       """
-      if pos_other.x < pos.x:
-         x = pos.x
-      elif pos_other.x > pos.x + shape.w:
-         x = pos.x + shape.w
+      if xo < x:
+         x = x
+      elif xo > x + w:
+         x = x + w
       else:
-         x = pos_other.x
+         x = xo
 
-      if pos_other.y < pos.y:
-         y = pos.y
-      elif pos_other.y > pos.y + shape.h:
-         y = pos.y + shape.h
+      if yo < y:
+         y = y
+      elif yo > y + h:
+         y = y + h
       else:
-         y = pos_other.y
+         y = yo
 
-      dx = x - pos_other.x
-      dy = y - pos_other.y
-      if dx * dx + dy * dy < shape_other.r * shape_other.r:
+      dx = x - xo
+      dy = y - yo
+      if dx * dx + dy * dy < ro * ro:
          return True
       else:
          return False
 
-   def circle_rect(self, shape, pos, shape_other, pos_other):
+   def circle_rect(self, r, x, y, wo, ho, xo, yo):
       """
-      :param shape: Shape of the first body
-      :param pos: Position of the first body
-      :param shape_other: Shape of the second body
-      :param pos_other: Position of the second body
-      :type shape: Circle
-      :type pos: Vector
-      :type shape_other: Rect
-      :type pos_other: Vector
-      :return: True if there is a collision, False is not
-      :rtype: bool
+      :param r: Radius of the first Circle
+      :param x: x position of the first Circle
+      :param y: y position of the first Circle
+      :param wo: Width of the second Rect
+      :param ho: Height of the second Rect
+      :param xo: x position of the second Rect
+      :param yo: y position of the second Rect
+      :type r: Int
+      :type x: Int
+      :type y: Int
+      :type wo: Int
+      :type ho: Int
+      :type xo: Int
+      :type yo: Int
 
-      Checks for a collision between a circle and a rect at two positions.
+      Checks for a collision between a Circle and a Rect in abstract. Interface for Collider.rect_circle
       """
-      return self.rect_circle(shape_other, pos_other, shape, pos)
+      return self.rect_circle(wo, ho, xo, yo, r, x, y)
 
-   def circle_circle(self, shape, pos, shape_other, pos_other):
+   def circle_circle(self, r, x, y, ro, xo, yo):
       """
-      :param shape: Shape of the first body
-      :param pos: Position of the first body
-      :param shape_other: Shape of the second body
-      :param pos_other: Position of the second body
-      :type shape: Circle
-      :type pos: Vector
-      :type shape_other: Circle
-      :type pos_other: Vector
-      :return: True if there is a collision, False is not
-      :rtype: bool
+      :param r: Radius of the first Circle
+      :param x: x position of the first Circle
+      :param y: y position of the first Circle
+      :param ro: Radius of the second Circle
+      :param xo: x position of the second Circle
+      :param yo: y position of the second Circle
+      :type r: Int
+      :type x: Int
+      :type y: Int
+      :type wo: Int
+      :type ho: Int
+      :type xo: Int
+      :type yo: Int
 
-      Checks for a collision between a two circles at two positions.
+      Checks for a collision between any two Circles abstract.
       """
-      dx = pos.x - pos_other.x
-      dy = pos.y - pos_other.y
-      rs = shape.r + shape_other.r
+      dx = x - xo
+      dy = y - yo
+      rs = r + ro
       if dx * dx + dy * dy < rs * rs:
          return True
       else:

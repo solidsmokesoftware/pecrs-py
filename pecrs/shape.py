@@ -2,36 +2,51 @@
 
 class Shape:
    """
+   :param x: Position of the shape in the x-axis
+   :param y: Position of the shape in the y-axis
+   :type x: Int
+   :type y: Int
+
    Abstract Base Shape that other shapes extend from. 
    Shapes are simple data structures that describe the physical properties of an body to a Collider.
-   Note that shapes do not have a position, thus all bodies with the same shape can use the same Shape instance
    """
-   pass
+   def __init__(self, x, y):
+      self.position = (x, y) #: Tuple(Int, Int), position of the shape
 
 
 class Rect(Shape):
    """
-   :param w: Width
-   :param h: Height
-   :type w: int
-   :type h: int
+   :param x: Position of the shape in the x-axis
+   :param y: Position of the shape in the y-axis
+   :param width: Width of the Rect
+   :param height: Height of the Rect
+   :type x: Int
+   :type y: Int
+   :type width: int
+   :type height: int
 
    A Rectangle
    Treated as Axis-Aligned Bounding Boxes by the Collider.
    """
-   def __init__(self, w, h):      
-      self.w = w #: int, Width, extending up
-      self.h = h #: int, Height, extending to the right
+   def __init__(self, x, y, width, height):
+      self.position = (x, y) #: Tuple(Int, Int), position of the shape
+      self.width = width #: Int, Width, extending up
+      self.height = height #: Int, Height, extending to the right
 
 
 class Circle(Shape):
    """
-   :param r: Radius
-   :type r: int
+   :param x: Position of the shape in the x-axis
+   :param y: Position of the shape in the y-axis
+   :param radius: Width of the Rect
+   :type x: Int
+   :type y: Int
+   :type radius: int
 
    A Circle
    """
-   def __init__(self, r):
-      self.r = r #: int, Radius, extending from the center.
+   def __init__(self, x, y, radius):
+      self.position = (x, y) #: Tuple(Int, Int), position of the shape
+      self.radius = radius #: Int, Radius, extending from the center.
 
 

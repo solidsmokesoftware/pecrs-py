@@ -1,3 +1,11 @@
+#######
+0.03 - 3/8/2020
+Major overhaul.
+Vectors are removed and Shapes have been redesigned to work seamlessly with pyglet sprites.
+Collider redesigned to work without Vector or Shape types, given better methods for working with Shapes and Bodies.
+Space reworked to compensate for the Collider redesign. Methods renamed to match.
+Controller reworked to function with the new Space.
+Remove constants.py
 
 #######
 0.02 - 3/7/2020

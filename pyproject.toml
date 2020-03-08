@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pecrs"
-version = "0.02"
+version = "0.03"
 description = "Pythonic Entity Collision Resolution System"
 readme = "README.md"
 homepage = "https://github.com/solidsmokesoftware/pecrs-py"

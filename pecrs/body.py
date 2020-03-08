@@ -1,24 +1,19 @@
 
-from pecrs.shape import Shape
-from pecrs.vector import Vector
-
+from pecrs.shape import Rect
 
 class AbsBody:
    """
    :param id: Identifer of the body, should be unique to an Index
-   :param position: Position in space
    :param shape: Shape of the body
-   :type id: int
-   :type position: Vector
    :type shape: Shape
 
    The abstract base class for all bodies. Bodies are physical entities that can interact with other bodies in space.
    """
-   def __init__(self, id, position, shape):
+   def __init__(self, id, shape):
       self.id = id #: Identifer of the body, should be unique
-      self.shape = shape #: Shape, Physical shape of the body. Note that bodies can share the same shape.
-      self.position = position #: Vector, holds the position in space a body occupies  
-      self.direction = Vector(0, 0) #: Vector, holds the direction the body moves in
+      self.shape = shape #: Shape of the body.
+
+      self.direction = (0, 0) #: Tuple(int, int), holds the direction the body moves in
       self.area = (0, 0) #: Tuple(int, int), the collision area the body is located in
       self.speed = 0 #: Number, how fast the body moves
       self.name = "absbody" #: string, used to communicate body type in a reader friendly way
@@ -39,10 +34,9 @@ class AbsBody:
       """
 
       step = self.speed * delta
-      xstep = int(self.direction.x * step)
-      ystep = int(self.direction.y * step)
-      self.position.x += xstep
-      self.position.y += ystep
+      xstep = int(self.direction[0] * step)
+      ystep = int(self.direction[1] * step)
+      self.shape.position = (self.shape.position[0]+xstep, self.shape.position[1]+ystep)
       return (xstep, ystep)
  
    def move_to(self, x, y, delta):
@@ -64,8 +58,7 @@ class AbsBody:
       step = self.speed * delta
       xstep = int(x * step)
       ystep = int(y * step)
-      self.position.x += xstep
-      self.position.y += ystep
+      self.shape.position = (self.shape.position[0]+xstep, self.shape.position[1]+ystep)
       return (xstep, ystep)
 
    def push(self, x, y):
@@ -80,8 +73,7 @@ class AbsBody:
       Using this directly only updates the body and not any associated space systems.
       It's reccomended to use Controller.push(body, x, y) instead to manage collision areas.
       """
-      self.position.x += x
-      self.position.y += y
+      self.shape.position = (self.shape.position[0]+x, self.shape.position[1]+y)
 
    def place(self, x, y):
       """
@@ -95,40 +87,32 @@ class AbsBody:
       Using this directly only updates the body and not any associated space systems.
       It's reccomended to use Controller.push(body, x, y) instead to manage collision areas.
       """
-      self.position.x = x
-      self.position.y = y
+      self.shape.position = (x, y)
 
 
 class Body(AbsBody):
    """
    :param id: Identifer of the body, should be unique
-   :param position: Position in space occupied by the body
    :param shape: Physical Shape of the body
    :type id: int
-   :type position: Vector
    :type shape: Shape
 
    An active body. Extend Body for entities that move or think.
    """
-   def __init__(self, id, position, shape):
-      super().__init__(id, position, shape)
+   def __init__(self, id, shape):
+      super().__init__(id, shape)
 
 
 class StaticBody(AbsBody):
    """
    :param id: Identifer of the body, should be unique
-   :param position: Position in space occupied by the body
    :param shape: Physical Shape of the body
    :type id: int
-   :type position: Vector
    :type shape: Shape
 
    A passive body. Extend StaticBody for entities that do not move or think.
    """
-   def __init__(self, id, position, shape):
-      super().__init__(id, position, shape)
+   def __init__(self, id, shape):
+      super().__init__(id, shape)
 
     
-
-
-

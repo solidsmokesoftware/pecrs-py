@@ -1,6 +1,11 @@
 
 import math
 
+###### DEPRECIATION ########
+# Vector is being depreciated in favor of using a tuple(int, int) like Pyglet's sprites.
+# Stop using Vector immediately and remove references to Vector as soon as possible
+#TODO remove Vector
+# WARNING
 
 class Vector:
    """

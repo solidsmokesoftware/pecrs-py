@@ -1,61 +1,49 @@
 
-from pecrs.controller import Controller
-from pecrs.body import Body
-from pecrs.shape import Rect
+from pecrs import *
+import pyglet
 
 
-class Player(Body):
-   def __init__(self, id, position, shape):
-      super().__init__(id, position, shape)
-      self.name = "player"
+class Dude(Body):
+   def __init__(self, id, sprite):
+      super().__init__(id, sprite)
       self.speed = 100
       self.moving = True
 
 
 class Objects(Controller):
-   def __init__(self):
+   def __init__(self, batch):
       super().__init__()
-      
-   def on_make(self, body):
-      print(f"Objects made {body.name} {body.id} at {body.position.x}:{body.position.y}")
-      
-   def on_motion(self, body):
-      print(f"{body.name} {body.id} is at {body.position.x}:{body.position.y}")
+      self.batch = batch
+      self.blue_image = pyglet.resource.image("blue_rect.png")
+      self.red_image = pyglet.resource.image("red_rect.png")
+
+   def make_dude(self, x, y, dx=0, dy=0):
+      sprite = pyglet.sprite.Sprite(self.blue_image, x=x, y=y, batch=self.batch)
+      self.make_with(Dude, sprite, dx=dx, dy=dy)
 
    def on_collision(self, body, collisions):
-      print(f"{body.name} is colliding with {len(collisions)} others")
+      body.shape.image = self.red_image
+      
 
-objects = Objects()
+class Game:
+   def __init__(self):
+      self.window = pyglet.window.Window(400, 300)
+      self.batch = pyglet.graphics.Batch()
 
-shape = Rect(32, 32)
-playerA = objects.make(Player, 0, 0, shape) # Bodies can be made with thier class
-playerB = objects.make(Player, 10, 0, shape)
+      self.objects = Objects(self.batch)
+      self.objects.make_dude(0, 150, dx=1)
+      self.objects.make_dude(300, 150)
 
-collision = objects.space.check_two(playerA, playerB)
-if collision:
-   print("Bodies A and B are colliding")
+      pyglet.clock.schedule_interval(self.run, 1.0/60)
+      pyglet.app.run()
 
-objects.place(playerA, 100, 0)
-objects.move_to(playerB, 1, 0, 1)
+   def run(self, delta):
+      self.objects.step(delta)
+      self.window.clear()
+      self.batch.draw()
 
-objects.turn(playerA, 0, 1)
-objects.move(playerA, 1)
+game = Game()
 
-collision = objects.space.check(playerA)
-if collision:
-   print("Body A is colliding with another body")
 
-objects.delete(playerA)
-objects.delete(playerB)
 
-playerC = objects.make(Player, 0, 0, shape, dx=1)
-playerD = objects.make(Player, 0, 0, shape, dx=-1)
-playerE = objects.make(Player, 0, 0, shape, dy =1)
-playerF = objects.make(Player, 0, 0, shape, dy =-1)
 
-collisions = objects.space.colliding_with(playerC)
-if collisions:
-   print(f"Body C is colliding with {len(collisions)} others")
-
-for i in range(10):
-   objects.step(0.1)
