@@ -8,7 +8,7 @@ Pure Python makes pecrs portable and easy to modify to suit your own needs.
 
 Focused use-case makes pecrs simple to learn and use.
 
-Seamless integration with Pyglet
+[Seamless integration](https://solidsmokesoftware.github.io/pecrs-py/pyglet.html) with [Pyglet](http://pyglet.org/)
 
 # Installation
 
