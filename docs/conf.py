@@ -28,12 +28,12 @@ InstanceAttributeDocumenter.add_directive_header = iad_add_directive_header
 
 # -- Project information -----------------------------------------------------
 
-project = 'pysics'
+project = 'pecrs'
 copyright = '2020, solid.smoke.software'
 author = 'solid.smoke.software'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1'
+release = '0.31'
 
 
 # -- General configuration ---------------------------------------------------

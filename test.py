@@ -2,48 +2,6 @@ import pecrs
 from pecrs import *
 
 
-def test_body():
-  passing = True
-
-  rectA = Rect(0, 0, 32, 32)
-  rectB = Rect(0, 0, 32, 32)
-  circle = Circle(0, 0, 64)
-
-  absbody = AbsBody(0, circle)
-  body = Body(1, rectA)
-  body.direction = (1, 0)
-  body.speed = 100
-
-  staticbody = StaticBody(2, rectB)
-
-  body.move(10)
-  expected = (1000, 0)
-  print(f"Body test: move({10}) expecting {expected}, actual {str(body.shape.position)}")
-  if body.shape.position != expected:
-    print("Fail")
-    passing = False
-
-  body.move_to(-1, 0, 5)
-  expected = (500, 0)
-  print(f"Body test: move_to(-1, 0, 5) expecting {expected}, actual {str(body.shape.position)}")
-  if body.shape.position != expected:
-    print("Fail")
-    passing = False
-
-  staticbody.place(0, 250)
-  expected = (0, 250)
-  print(f"Body test: place(0, 250) expecting {expected}, actual {str(staticbody.shape.position)}")
-  if staticbody.shape.position != expected:
-    print("Fail")
-    passing = False
-
-  if passing:
-    print("Body test: Complete, all tests passed")
-  else:
-    print("Body test: Incomplete, some tests failed")
-  return passing
-
-
 def test_index():
   passing = True
 
@@ -61,14 +19,14 @@ def test_index():
     print("Fail")
     passing = False
 
-  print(f"Index test: add({a}, {a})")
-  index.add(a, a)
+  print(f"Index test: add(Rect(), {a})")
+  index.add(Rect(0, 0, 32, 32), a)
 
-  print(f"Index test: add({b}, {b})")
-  index.add(b, b)
+  print(f"Index test: add(Rect(), {b})")
+  index.add(Rect(0, 0, 32, 32), b)
 
-  print(f"Index test: add({2})")
-  index.add(2)
+  print(f"Index test: add(Rect())")
+  index.add(Rect(0, 0, 32, 32))
 
   index.delete(a)
   print(f"Index test: delete({a})")
@@ -115,17 +73,17 @@ def test_collider():
   circleA = Circle(0, 0, 10)
   circleB = Circle(0, 0, 10)
 
-  collider.check_shapes(rectA, rectB)
-  print(f"Collider test: check(Rect, Rect)")
+  collider.check(rectA, rectB)
+  print(f"Collider test: check(rectA, rectB)")
 
-  collider.check_shapes(rectA, circleA)
-  print(f"Collider test: check(Rect, Circle)")
+  collider.check(rectA, circleA)
+  print(f"Collider test: check(rectA, circleA)")
 
-  collider.check_shapes(circleB, rectB)
-  print(f"Collider test: check(Circle, Rect)")
+  collider.check(circleB, rectB)
+  print(f"Collider test: check(circleB, rectB)")
 
-  collider.check_shapes(circleA, circleB)
-  print(f"Collider test: check(Circle, Circle)")
+  collider.check(circleA, circleB)
+  print(f"Collider test: check(circleA, circleA)")
 
   rectA.position = 0, 0
   rectB.position = 0, 9
@@ -377,35 +335,32 @@ def test_space():
   rectB = Rect(0, 0, 32, 32)
   rectC = Rect(0, 64, 32, 32)
   rectD = Rect(0, 256, 32, 32)
-  bodyA = Body(0, rectA)
-  bodyB = Body(1, rectB)
-  bodyC = Body(2, rectC)
-  bodyD = Body(3, rectD)
 
 
-  value = space.has(bodyA)
-  print(f"Space test: has(bodyA)) expecting False, actual {value}")
+  value = space.has(rectA)
+  print(f"Space test: has(rectA)) expecting False, actual {value}")
   if value != False:
     print("Fail")
     passing = False
 
-  space.add(bodyA)
-  print("Space test: add(BodyA)")
-  space.add(bodyB, (0, 0))
-  print("Space test: add(BodyB, (0, 0))")
-  space.add(bodyC)
-  print("Space test: add(BodyC)")
-  space.add(bodyD)
-  print("Space test: add(BodyD)")
+  space.add(rectA)
+  print("Space test: add(rectA)")
+  rectB.area = (0, 0)
+  space.add(rectB, False)
+  print("Space test: add(rectB, False)")
+  space.add(rectC)
+  print("Space test: add(rectC)")
+  space.add(rectD)
+  print("Space test: add(rectD)")
 
-  value = space.has(bodyA)
-  print(f"Space test: has(bodyA)) expecting True, actual {value}")
+  value = space.has(rectA)
+  print(f"Space test: has(rectA)) expecting True, actual {value}")
   if value != True:
     print("Fail")
     passing = False
 
-  value = space.has(bodyA)
-  print(f"Space test: has(bodyB)) expecting True, actual {value}")
+  value = space.has(rectA)
+  print(f"Space test: has(rectB)) expecting True, actual {value}")
   if value != True:
     print("Fail")
     passing = False
@@ -413,76 +368,75 @@ def test_space():
   value = space.collisions_at(0, 0, 32, 32)
   print(f"Space test: collisions_at(0, 0, 32, 32) expecting [...], actual [...]")
   for v in value:
-    if v.id == bodyA.id or v.id == bodyB.id:
+    if v == rectA or v == rectB:
       pass
     else:
-      print(f"Fail {v.id}")
+      print(f"Fail {v}")
       passing = False
 
   value = space.collisions_at(0, 64)
   print(f"Space test: colliding_at(0, 64) expecting [...], actual [...]")
   for v in value:
-    if v.id != bodyC.id:
+    if v != rectC:
       print("Fail")
       passing = False
 
-  value = space.collisions_with(bodyA)
-  print(f"Space test: collisions_with(bodyA) expecting [...], actual [...]")
+  value = space.collisions_with(rectA)
+  print(f"Space test: collisions_with(rectA) expecting [...], actual [...]")
   for v in value:
-    if v.id != bodyB.id:
+    if v != rectB:
       print("Fail")
       passing = False
 
-  value = space.collisions_with(bodyD)
-  print(f"Space test: collisions_with(bodyD) expecting [...], actual [...]")
+  value = space.collisions_with(rectD)
+  print(f"Space test: collisions_with(rectD) expecting [...], actual [...]")
   if value != []:
     print("Fail")
     passing = False
 
-  value = space.check_bodies(bodyA, bodyB)
-  print(f"Space test: check_bodies(bodyA, bodyB) expecting True, actual {value}")
+  value = space.check_two(rectA, rectB)
+  print(f"Space test: check_two(rectA, rectB) expecting True, actual {value}")
   if value != True:
     print("Fail")
     passing = False
 
-  value = space.check_bodies(bodyC, bodyD)
-  print(f"Space test: check_bodies(bodyC, bodyD) expecting False, actual {value}")
+  value = space.check_two(rectC, rectD)
+  print(f"Space test: check_bodies(rectC, rectD) expecting False, actual {value}")
   if value != False:
     print("Fail")
     passing = False
 
-  value = space.check_body(bodyA)
-  print(f"Space test: check_body(bodyA) expecting True, actual {value}")
+  value = space.check(rectA)
+  print(f"Space test: check(rectA) expecting True, actual {value}")
   if value != True:
     print("Fail")
     passing = False
 
-  value = space.check_body(bodyC)
-  print(f"Space test: check_body(bodyC) expecting False, actual {value}")
+  value = space.check(rectC)
+  print(f"Space test: check(rectC) expecting False, actual {value}")
   if value != False:
     print("Fail")
     passing = False
 
-  bodyD.place(0, 0)
-  space.place(bodyD, (0, 0))
-  print("Space test: place(bodyD, (0, 0))")
+  space.place(rectD, 0, 0)
+  print("Space test: place(rectD, 0, 0)")
 
-  value = space.collisions_with(bodyA)
-  print(f"Space test: collisions_with(bodyA) expecting [...], actual [...]")
+  value = space.collisions_with(rectA)
+  print(f"Space test: collisions_with(rectA) expecting [...], actual [...]")
   for v in value:
-    if v.id == bodyB.id or v.id == bodyD.id:
+    if v == rectB or v == rectD:
       pass
     else:
       print("Fail")
       passing = False
 
-  space.delete(bodyA)
-  print("Space test: delete(bodyA)")
+  space.delete(rectA)
+  print("Space test: delete(rectA)")
 
-  value = space.collisions_with(bodyB)
-  print(f"Space test: collisions_with(bodyB) expecting [...], actual [...]")
+  value = space.collisions_with(rectB)
+  print(f"Space test: collisions_with(rectB) expecting [...], actual [...]")
   for v in value:
-    if v.id != bodyD.id:
+    if v != rectD:
       print("Fail")
       passing = False
 
@@ -595,9 +549,6 @@ def test_controller():
 
 def test():
   passing = True
-  if not test_body():
-    passing = False
-  
   if not test_index():
     passing = False
 

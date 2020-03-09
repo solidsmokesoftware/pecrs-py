@@ -1,5 +1,18 @@
 #######
+0.031 - 3/8/2020
+#######
+
+Remove print statements from Index
+Changes to Index to makes it more flexible. Anything can be added now.
+Space rewritten to work with Shapes instead of Bodies
+Movement methods in the AbsBody moved to the Space
+Full set of Shape Collision methods added to Space
+Collider methods renamed to reflect that it works with Shapes or primiatives
+
+#######
 0.03 - 3/8/2020
+#######
+
 Major overhaul.
 Vectors are removed and Shapes have been redesigned to work seamlessly with pyglet sprites.
 Collider redesigned to work without Vector or Shape types, given better methods for working with Shapes and Bodies.

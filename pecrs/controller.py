@@ -17,8 +17,6 @@ class Controller:
       self.actives = [] #: list, stores Body for processing.
       self.space = Space(size) #: Space partionining system.
 
-
-
    def remake_space(self, size):
       """
       :param size: Size of the new Space
@@ -28,19 +26,9 @@ class Controller:
       """
       self.space = Space(size)
       for id in self.index.list:
-         self.add_space(self.index.list[id])
-      
-   def add_to_space(self, body):
-      """
-      :param body: Body to be added to the Space
-      :type body: AbsBody
+         self.space.add(self.index.list[id].shape)
 
-      Recalculates a body's area and add's it to the Space.
-      """
-      body.area = self.space.grid.scale(body.shape.position[0], body.shape.position[1])
-      self.space.add(body, body.area)
-
-   def make_with(self, kind, shape, id=None, dx=0, dy=0):
+   def make_from(self, kind, shape, id=None, dx=0, dy=0):
       """
       :param kind: Class to be created
       :param shape: Shape of the new body
@@ -55,7 +43,7 @@ class Controller:
       :return: Newly created body
       :rtype: kind
 
-      Produces a body of `kind` with `shape` and adds it to the system
+      Produces a body of `kind` from `shape` and adds it to the system
       Triggers `on_make(body)` and `on_add(body)` callbacks
       """
       if not id:
@@ -90,7 +78,7 @@ class Controller:
       Creates a Rect at position `x`, `y` with a `height` and `width`, then makes a body with it using `Controller.make_with()`
       """
       shape = Rect(x, y, width, height)
-      return self.make_with(kind, shape, id, dx, dy)
+      return self.make_from(kind, shape, id, dx, dy)
 
    def on_make(self, body):
       """
@@ -111,7 +99,7 @@ class Controller:
       Triggers on_add(body) callback
       """
       self.index.add(body, body.id)
-      self.add_to_space(body)
+      self.space.add(body.shape)
       if isinstance(body, Body): #TODO there might be a better way to do this?
          self.actives.append(body)
 
@@ -135,7 +123,7 @@ class Controller:
       Triggers on_delete(body) callback
       """
       self.index.delete(body.id)
-      self.space.delete(body, body.area)
+      self.space.delete(body.shape)
       if isinstance(body, Body):
          self.actives.remove(body)
       self.on_delete(body)
@@ -160,34 +148,6 @@ class Controller:
       """
       return
 
-   def update_area(self, body):
-      """
-      :param body: Body to have its area updated
-      :type body: AbsBody
-
-      Checks if a body has changed collision areas and if so, updates which collision area a body is in
-      Don't like the way this is handled, it shouldn't be tested here I think. Probably going to change
-      Triggers on_area(body, start) callback
-      """
-
-      area = self.space.grid.scale(body.shape.position[0], body.shape.position[1])
-      if area != body.area:
-         self.space.delete(body, body.area)
-         self.space.add(body, area)
-         body.area = area
-         self.on_area(body, area)
-
-   def on_area(self, body, start):
-      """
-      :param body: Body that had its area updated
-      :param start: Collision area the body was moved from
-      :type body: AbsBody
-      :type start: Tuple(int, int)
-
-      Callback when bodies change collision areas. Override this when extending your Controller
-      """
-      return
-
    def move(self, body, delta):
       """
       :param body: Body to be moved by the system
@@ -196,13 +156,9 @@ class Controller:
       :type delta: float
 
       Move a body by it's speed and direction for delta.
-      Use this instead of body.move(delta) to keep track of collision area
       Triggers the on_move(body, distance) and on_motion(body) callbacks
       """
-      distance = body.move(delta)
-      self.update_area(body)
-      self.on_move(body, distance)
-      self.on_motion(body)
+      return self.move_to(body, body.direction[0], body.direction[1], delta)
 
    def move_to(self, body, x, y, delta):
       """
@@ -216,13 +172,12 @@ class Controller:
       :type delta: float
 
       Move a body by it's speed in the direction of x, y for delta.
-      Use this instead of body.move(x, y, delta) to keep track of collision area
       Triggers the on_move(body, distance) and on_motion(body) callbacks
       """
-      distance = body.move_to(x, y, delta)
-      self.update_area(body)
+      distance = self.space.move(body.shape, x, y, body.speed*delta)
       self.on_move(body, distance)
       self.on_motion(body)
+      return distance
 
    def on_move(self, body, distance):
       """
@@ -246,9 +201,8 @@ class Controller:
 
       Pushes a body in the direction of x, y.
       Triggers callbacks for on_push(body, x, y) and on_motion(body)
-      Use this instead of body.push(x, y) to keep track of collision area
       """
-      body.push(x, y)
+      self.space.push(body.shape, x, y)
       self.on_push(body, x, y)
       self.on_motion(body)
 
@@ -279,8 +233,7 @@ class Controller:
       Use this instead of body.place(x, y) to keep track of collision area
       """
       start = body.shape.position
-      body.place(x, y)
-      self.update_area(body)
+      self.space.place(body, x, y)
       self.on_place(body, start)
       self.on_motion(body)
 
@@ -392,6 +345,41 @@ class Controller:
       """
       return self.space.collisions_at(x, y, width, height)
 
+   def collisions_with(self, body):
+      """
+      :param body: Body to check for collisions
+      :type body: AbsBody
+      :return: A list of bodies colliding with body
+      :rtype: List(AbsBody)
+
+      Finds all bodies colliding with body.
+      """
+      return self.space.collisions_with(body.shape)
+
+   def check(self, body):
+      """
+      :param body: Body to check for collisions with
+      :type body: AbsBody
+      :return: True if Collisions, False is not
+      :rtype: Bool
+
+      Check to see if any shapes are colliding with the Body in space
+      """
+      return self.space.check(body.shape)
+
+   def check_two(self, body, other):
+      """
+      :param body: First Body to check for collision
+      :param other: Second Body to check for collision 
+      :type body: AbsBody
+      :type other: AbsBody
+      :return: True if the two bodies are colliding, False is not
+      :rtype: Bool
+
+      Check to see if the two bodies are colliding.
+      """
+      return self.space.check_two(body.shape, other.shape)
+
    def step(self, delta):
       """
       :param delta: Units of time to advance the simulation
@@ -408,7 +396,7 @@ class Controller:
 
       #TODO This is very unoptimized
       for body in self.actives:
-         collisions = self.space.collisions_with(body)
+         collisions = self.space.collisions_with(body.shape)
          if collisions:
             self.on_collision(body, collisions)
       self.on_step_end(delta)

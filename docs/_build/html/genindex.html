@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; pysics 0.1 documentation</title>
+  <title>Index &mdash; pecrs 0.31 documentation</title>
   
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> pysics
+            <a href="index.html" class="icon icon-home"> pecrs
           
 
           
@@ -79,8 +79,13 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyglet.html">Integrating with Pyglet</a></li>
+</ul>
+
             
           
         </div>
@@ -93,7 +98,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">pysics</a>
+          <a href="index.html">pecrs</a>
         
       </nav>
 
@@ -162,15 +167,12 @@
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
- | <a href="#V"><strong>V</strong></a>
  | <a href="#W"><strong>W</strong></a>
  
 </div>
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#pecrs.vector.Vector.abs">abs() (pecrs.vector.Vector method)</a>
-</li>
       <li><a href="index.html#pecrs.body.AbsBody">AbsBody (class in pecrs.body)</a>
 </li>
       <li><a href="index.html#pecrs.controller.Controller.actives">actives (pecrs.controller.Controller attribute)</a>
@@ -186,16 +188,6 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="index.html#pecrs.spatialhash.SpatialHash.add_pos">add_pos() (pecrs.spatialhash.SpatialHash method)</a>
-</li>
-      <li><a href="index.html#pecrs.controller.Controller.add_to_space">add_to_space() (pecrs.controller.Controller method)</a>
-</li>
-      <li><a href="index.html#pecrs.vector.Vector.angle">angle() (pecrs.vector.Vector method)</a>
-</li>
-      <li><a href="index.html#pecrs.vector.Vector.angle_point">angle_point() (pecrs.vector.Vector method)</a>
-</li>
-      <li><a href="index.html#pecrs.vector.Vector.angle_rads">angle_rads() (pecrs.vector.Vector method)</a>
-</li>
-      <li><a href="index.html#pecrs.vector.Vector.angle_self">angle_self() (pecrs.vector.Vector method)</a>
 </li>
       <li><a href="index.html#pecrs.body.AbsBody.area">area (pecrs.body.AbsBody attribute)</a>
 </li>
@@ -213,27 +205,33 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#pecrs.collider.Collider.check">check() (pecrs.collider.Collider method)</a>
+
+      <ul>
+        <li><a href="index.html#pecrs.controller.Controller.check">(pecrs.controller.Controller method)</a>
+</li>
+        <li><a href="index.html#pecrs.space.Space.check">(pecrs.space.Space method)</a>
+</li>
+      </ul></li>
       <li><a href="index.html#pecrs.space.Space.check_at">check_at() (pecrs.space.Space method)</a>
-</li>
-      <li><a href="index.html#pecrs.collider.Collider.check_bodies">check_bodies() (pecrs.collider.Collider method)</a>
-</li>
-      <li><a href="index.html#pecrs.space.Space.check_body">check_body() (pecrs.space.Space method)</a>
 </li>
       <li><a href="index.html#pecrs.collider.Collider.check_circles">check_circles() (pecrs.collider.Collider method)</a>
 </li>
       <li><a href="index.html#pecrs.collider.Collider.check_rects">check_rects() (pecrs.collider.Collider method)</a>
 </li>
-      <li><a href="index.html#pecrs.collider.Collider.check_shapes">check_shapes() (pecrs.collider.Collider method)</a>
+      <li><a href="index.html#pecrs.controller.Controller.check_two">check_two() (pecrs.controller.Controller method)</a>
+
+      <ul>
+        <li><a href="index.html#pecrs.space.Space.check_two">(pecrs.space.Space method)</a>
 </li>
+      </ul></li>
       <li><a href="index.html#pecrs.shape.Circle">Circle (class in pecrs.shape)</a>
 </li>
       <li><a href="index.html#pecrs.collider.Collider.circle_circle">circle_circle() (pecrs.collider.Collider method)</a>
 </li>
-      <li><a href="index.html#pecrs.collider.Collider.circle_rect">circle_rect() (pecrs.collider.Collider method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#pecrs.vector.Vector.clamp">clamp() (pecrs.vector.Vector method)</a>
+      <li><a href="index.html#pecrs.collider.Collider.circle_rect">circle_rect() (pecrs.collider.Collider method)</a>
 </li>
       <li><a href="index.html#pecrs.clock.Clock">Clock (class in pecrs.clock)</a>
 </li>
@@ -247,13 +245,15 @@
         <li><a href="index.html#pecrs.space.Space.collisions_at">(pecrs.space.Space method)</a>
 </li>
       </ul></li>
-      <li><a href="index.html#pecrs.space.Space.collisions_with">collisions_with() (pecrs.space.Space method)</a>
+      <li><a href="index.html#pecrs.controller.Controller.collisions_with">collisions_with() (pecrs.controller.Controller method)</a>
+
+      <ul>
+        <li><a href="index.html#pecrs.space.Space.collisions_with">(pecrs.space.Space method)</a>
 </li>
+      </ul></li>
       <li><a href="index.html#pecrs.controller.Controller">Controller (class in pecrs.controller)</a>
 </li>
       <li><a href="index.html#pecrs.index.Index.count">count (pecrs.index.Index attribute)</a>
-</li>
-      <li><a href="index.html#pecrs.vector.Vector.cross">cross() (pecrs.vector.Vector method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -271,19 +271,13 @@
         <li><a href="index.html#pecrs.spatialhash.SpatialHash.delete">(pecrs.spatialhash.SpatialHash method)</a>
 </li>
       </ul></li>
-      <li><a href="index.html#pecrs.controller.Controller.delete_id">delete_id() (pecrs.controller.Controller method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#pecrs.controller.Controller.delete_id">delete_id() (pecrs.controller.Controller method)</a>
+</li>
       <li><a href="index.html#pecrs.spatialhash.SpatialHash.delete_pos">delete_pos() (pecrs.spatialhash.SpatialHash method)</a>
 </li>
       <li><a href="index.html#pecrs.body.AbsBody.direction">direction (pecrs.body.AbsBody attribute)</a>
-</li>
-      <li><a href="index.html#pecrs.vector.Vector.dist">dist() (pecrs.vector.Vector method)</a>
-</li>
-      <li><a href="index.html#pecrs.vector.Vector.dist_square">dist_square() (pecrs.vector.Vector method)</a>
-</li>
-      <li><a href="index.html#pecrs.vector.Vector.dot">dot() (pecrs.vector.Vector method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -369,40 +363,20 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#pecrs.vector.Vector.mag">mag() (pecrs.vector.Vector method)</a>
-</li>
-      <li><a href="index.html#pecrs.vector.Vector.mag_square">mag_square() (pecrs.vector.Vector method)</a>
-</li>
       <li><a href="index.html#pecrs.controller.Controller.make">make() (pecrs.controller.Controller method)</a>
 </li>
-      <li><a href="index.html#pecrs.controller.Controller.make_with">make_with() (pecrs.controller.Controller method)</a>
+      <li><a href="index.html#pecrs.controller.Controller.make_from">make_from() (pecrs.controller.Controller method)</a>
 </li>
-      <li><a href="index.html#pecrs.body.AbsBody.move">move() (pecrs.body.AbsBody method)</a>
+      <li><a href="index.html#pecrs.controller.Controller.move">move() (pecrs.controller.Controller method)</a>
 
       <ul>
-        <li><a href="index.html#pecrs.body.Body.move">(pecrs.body.Body method)</a>
-</li>
-        <li><a href="index.html#pecrs.body.StaticBody.move">(pecrs.body.StaticBody method)</a>
-</li>
-        <li><a href="index.html#pecrs.controller.Controller.move">(pecrs.controller.Controller method)</a>
-</li>
         <li><a href="index.html#pecrs.space.Space.move">(pecrs.space.Space method)</a>
-</li>
-        <li><a href="index.html#pecrs.vector.Vector.move">(pecrs.vector.Vector method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#pecrs.body.AbsBody.move_to">move_to() (pecrs.body.AbsBody method)</a>
-
-      <ul>
-        <li><a href="index.html#pecrs.body.Body.move_to">(pecrs.body.Body method)</a>
+      <li><a href="index.html#pecrs.controller.Controller.move_to">move_to() (pecrs.controller.Controller method)</a>
 </li>
-        <li><a href="index.html#pecrs.body.StaticBody.move_to">(pecrs.body.StaticBody method)</a>
-</li>
-        <li><a href="index.html#pecrs.controller.Controller.move_to">(pecrs.controller.Controller method)</a>
-</li>
-      </ul></li>
       <li><a href="index.html#pecrs.body.AbsBody.moving">moving (pecrs.body.AbsBody attribute)</a>
 </li>
   </ul></td>
@@ -417,8 +391,6 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="index.html#pecrs.index.Index.next">next() (pecrs.index.Index method)</a>
 </li>
-      <li><a href="index.html#pecrs.vector.Vector.normal">normal() (pecrs.vector.Vector method)</a>
-</li>
   </ul></td>
 </tr></table>
 
@@ -426,8 +398,6 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="index.html#pecrs.controller.Controller.on_add">on_add() (pecrs.controller.Controller method)</a>
-</li>
-      <li><a href="index.html#pecrs.controller.Controller.on_area">on_area() (pecrs.controller.Controller method)</a>
 </li>
       <li><a href="index.html#pecrs.controller.Controller.on_collision">on_collision() (pecrs.controller.Controller method)</a>
 </li>
@@ -439,10 +409,10 @@
 </li>
       <li><a href="index.html#pecrs.controller.Controller.on_move">on_move() (pecrs.controller.Controller method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="index.html#pecrs.controller.Controller.on_place">on_place() (pecrs.controller.Controller method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="index.html#pecrs.controller.Controller.on_push">on_push() (pecrs.controller.Controller method)</a>
 </li>
       <li><a href="index.html#pecrs.controller.Controller.on_start">on_start() (pecrs.controller.Controller method)</a>
@@ -477,24 +447,16 @@
 </li>
       <li><a href="index.html#module-pecrs.space">pecrs.space (module)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="index.html#module-pecrs.spatialhash">pecrs.spatialhash (module)</a>
 </li>
-      <li><a href="index.html#module-pecrs.vector">pecrs.vector (module)</a>
-</li>
-      <li><a href="index.html#pecrs.body.AbsBody.place">place() (pecrs.body.AbsBody method)</a>
+      <li><a href="index.html#pecrs.controller.Controller.place">place() (pecrs.controller.Controller method)</a>
 
       <ul>
-        <li><a href="index.html#pecrs.body.Body.place">(pecrs.body.Body method)</a>
-</li>
-        <li><a href="index.html#pecrs.body.StaticBody.place">(pecrs.body.StaticBody method)</a>
-</li>
-        <li><a href="index.html#pecrs.controller.Controller.place">(pecrs.controller.Controller method)</a>
-</li>
         <li><a href="index.html#pecrs.space.Space.place">(pecrs.space.Space method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="index.html#pecrs.shape.Circle.position">position (pecrs.shape.Circle attribute)</a>
 
       <ul>
@@ -503,16 +465,10 @@
         <li><a href="index.html#pecrs.shape.Shape.position">(pecrs.shape.Shape attribute)</a>
 </li>
       </ul></li>
-      <li><a href="index.html#pecrs.vector.Vector.project">project() (pecrs.vector.Vector method)</a>
-</li>
-      <li><a href="index.html#pecrs.body.AbsBody.push">push() (pecrs.body.AbsBody method)</a>
+      <li><a href="index.html#pecrs.controller.Controller.push">push() (pecrs.controller.Controller method)</a>
 
       <ul>
-        <li><a href="index.html#pecrs.body.Body.push">(pecrs.body.Body method)</a>
-</li>
-        <li><a href="index.html#pecrs.body.StaticBody.push">(pecrs.body.StaticBody method)</a>
-</li>
-        <li><a href="index.html#pecrs.controller.Controller.push">(pecrs.controller.Controller method)</a>
+        <li><a href="index.html#pecrs.space.Space.push">(pecrs.space.Space method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -593,15 +549,7 @@
 <h2 id="U">U</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#pecrs.controller.Controller.update_area">update_area() (pecrs.controller.Controller method)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="V">V</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#pecrs.vector.Vector">Vector (class in pecrs.vector)</a>
+      <li><a href="index.html#pecrs.space.Space.update_area">update_area() (pecrs.space.Space method)</a>
 </li>
   </ul></td>
 </tr></table>

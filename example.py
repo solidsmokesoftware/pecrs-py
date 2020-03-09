@@ -19,7 +19,7 @@ class Objects(Controller):
 
    def make_dude(self, x, y, dx=0, dy=0):
       sprite = pyglet.sprite.Sprite(self.blue_image, x=x, y=y, batch=self.batch)
-      self.make_with(Dude, sprite, dx=dx, dy=dy)
+      self.make_from(Dude, sprite, dx=dx, dy=dy)
 
    def on_collision(self, body, collisions):
       body.shape.image = self.red_image

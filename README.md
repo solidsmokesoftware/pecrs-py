@@ -19,33 +19,31 @@ Via pip
 # Quickstart
 ```python
 
-from pecrs import *
-
 controller = Controller()
 bodyA = controller.make(Body, 0, 0, 32, 32)
 bodyB = controller.make(Body, 10, 0, 32, 32)
 
-collision = controller.space.check_body(bodyA)
+collision = controller.check(bodyA)
 print(f"Is something colliding with bodyA? {collision}")
 
-collisions = controller.space.collisions_with(bodyB)
+collisions = controller.collisions_with(bodyB)
 print(f"Who is colliding with bodyB? {collisions}")
 
 controller.place(bodyB, 100, 0)
 
-collision = controller.space.check_bodies(bodyA, bodyB)
+collision = controller.check_two(bodyA, bodyB)
 print(f"Are bodyA and bodyB colliding? {collision}")
 ```
 
 # Structual Overview
 
-The core functionality of pecrs is provided by Shapes. Shape are datatypes for describing the physical properties of a Body. 
+Base type of the system are Shapes. Shapes have a position and dimensions which describe its physical properties.
 
-At the intermediate level of organization are Bodies and the Collider. A Body consists of a Shape and an id(Provided by Index) and is the cornerstone unit of simulation. The Collider works with Shapes or Bodies to detect intersections.
+Core functionality is providied by the Collider, which detects collisions between Shapes in abstract.
 
-Above that exists the Space. The Space optimizes collision detection using a Spatialhash.
+The Space handles positioning of Shapes and optimizes collision handling.
 
-At the highest level exists the Controller. The Controller creates Bodies in a Space and handles their interactions, as well as the physics simulation itself. The Controller is follows Object-Oriented design principles and provides callbacks into all of its functionality that can be easily extended. 
+The Controller provides high-level object oriented control over Bodies in a Space.
 
 # Real-world Usage
 
@@ -73,7 +71,7 @@ class Objects(Controller):
 
    def make_dude(self, x, y, dx=0, dy=0):
       sprite = pyglet.sprite.Sprite(self.blue_image, x=x, y=y, batch=self.batch)
-      self.make_with(Dude, sprite, dx=dx, dy=dy)
+      self.make_from(Dude, sprite, dx=dx, dy=dy)
 
    def on_collision(self, body, collisions):
       body.shape.image = self.red_image

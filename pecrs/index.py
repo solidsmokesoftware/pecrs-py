@@ -25,15 +25,12 @@ class Index:
          self.count += 1
          return self.count
       else:
-         value = self.free[-1]
-         self.free.pop()
-         return value
+         return self.free.pop()
 
    def add(self, item, id=None):
-      print(id)
       if id == None:
-         print("ID is none inc")
          id = self.next()
+      item.id = id
       self.list[id] = item
 
    def get(self, id):

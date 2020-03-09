@@ -3,6 +3,11 @@
    :maxdepth: 2
    :caption: Contents:
 
+   install
+   overview
+   pyglet
+   
+
 
 Controller
 ===================
@@ -25,12 +30,6 @@ Space
 Shape
 ===================
 .. automodule:: pecrs.shape
-   :members:
-
-
-Vector
-===================
-.. automodule:: pecrs.vector
    :members:
 
 

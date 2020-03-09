@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Controller &mdash; pysics 0.1 documentation</title>
+  <title>Controller &mdash; pecrs 0.31 documentation</title>
   
 
   
@@ -34,7 +34,8 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="install.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -48,7 +49,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> pysics
+            <a href="#" class="icon icon-home"> pecrs
           
 
           
@@ -78,20 +79,13 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Controller</a></li>
-<li><a class="reference internal" href="#module-pecrs.body">Body</a></li>
-<li><a class="reference internal" href="#module-pecrs.space">Space</a></li>
-<li><a class="reference internal" href="#module-pecrs.shape">Shape</a></li>
-<li><a class="reference internal" href="#module-pecrs.vector">Vector</a></li>
-<li><a class="reference internal" href="#module-pecrs.collider">Collider</a></li>
-<li><a class="reference internal" href="#module-pecrs.spatialhash">Spatialhash</a></li>
-<li><a class="reference internal" href="#module-pecrs.index">Index</a></li>
-<li><a class="reference internal" href="#module-pecrs.clock">Clock</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyglet.html">Integrating with Pyglet</a></li>
 </ul>
-</div>
+
             
           
         </div>
@@ -104,7 +98,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">pysics</a>
+          <a href="#">pecrs</a>
         
       </nav>
 
@@ -155,6 +149,12 @@
            <div itemprop="articleBody">
             
   <div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyglet.html">Integrating with Pyglet</a></li>
+</ul>
 </div>
 <div class="section" id="module-pecrs.controller">
 <span id="controller"></span><h1>Controller<a class="headerlink" href="#module-pecrs.controller" title="Permalink to this headline">¶</a></h1>
@@ -197,19 +197,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="pecrs.controller.Controller.add_to_space">
-<code class="sig-name descname">add_to_space</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.add_to_space" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody"><em>AbsBody</em></a>) – Body to be added to the Space</p>
-</dd>
-</dl>
-<p>Recalculates a body’s area and add’s it to the Space.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.controller.Controller.make_with">
-<code class="sig-name descname">make_with</code><span class="sig-paren">(</span><em class="sig-param">kind</em>, <em class="sig-param">shape</em>, <em class="sig-param">id=None</em>, <em class="sig-param">dx=0</em>, <em class="sig-param">dy=0</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.make_with" title="Permalink to this definition">¶</a></dt>
+<dt id="pecrs.controller.Controller.make_from">
+<code class="sig-name descname">make_from</code><span class="sig-paren">(</span><em class="sig-param">kind</em>, <em class="sig-param">shape</em>, <em class="sig-param">id=None</em>, <em class="sig-param">dx=0</em>, <em class="sig-param">dy=0</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.make_from" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -227,7 +216,7 @@
 <dd class="field-odd"><p>kind</p>
 </dd>
 </dl>
-<p>Produces a body of <cite>kind</cite> with <cite>shape</cite> and adds it to the system
+<p>Produces a body of <cite>kind</cite> from <cite>shape</cite> and adds it to the system
 Triggers <cite>on_make(body)</cite> and <cite>on_add(body)</cite> callbacks</p>
 </dd></dl>
 
@@ -327,33 +316,6 @@ Triggers on_delete(body) callback</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pecrs.controller.Controller.update_area">
-<code class="sig-name descname">update_area</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.update_area" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody"><em>AbsBody</em></a>) – Body to have its area updated</p>
-</dd>
-</dl>
-<p>Checks if a body has changed collision areas and if so, updates which collision area a body is in
-Don’t like the way this is handled, it shouldn’t be tested here I think. Probably going to change
-Triggers on_area(body, start) callback</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.controller.Controller.on_area">
-<code class="sig-name descname">on_area</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">start</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.on_area" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>body</strong> (<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody"><em>AbsBody</em></a>) – Body that had its area updated</p></li>
-<li><p><strong>start</strong> (<em>Tuple</em><em>(</em><em>int</em><em>, </em><em>int</em><em>)</em>) – Collision area the body was moved from</p></li>
-</ul>
-</dd>
-</dl>
-<p>Callback when bodies change collision areas. Override this when extending your Controller</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="pecrs.controller.Controller.move">
 <code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.move" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
@@ -365,7 +327,6 @@ Triggers on_area(body, start) callback</p>
 </dd>
 </dl>
 <p>Move a body by it’s speed and direction for delta.
-Use this instead of body.move(delta) to keep track of collision area
 Triggers the on_move(body, distance) and on_motion(body) callbacks</p>
 </dd></dl>
 
@@ -383,7 +344,6 @@ Triggers the on_move(body, distance) and on_motion(body) callbacks</p>
 </dd>
 </dl>
 <p>Move a body by it’s speed in the direction of x, y for delta.
-Use this instead of body.move(x, y, delta) to keep track of collision area
 Triggers the on_move(body, distance) and on_motion(body) callbacks</p>
 </dd></dl>
 
@@ -414,8 +374,7 @@ Triggers the on_move(body, distance) and on_motion(body) callbacks</p>
 </dd>
 </dl>
 <p>Pushes a body in the direction of x, y.
-Triggers callbacks for on_push(body, x, y) and on_motion(body)
-Use this instead of body.push(x, y) to keep track of collision area</p>
+Triggers callbacks for on_push(body, x, y) and on_motion(body)</p>
 </dd></dl>
 
 <dl class="method">
@@ -583,6 +542,60 @@ Use this instead of body.place(x, y) to keep track of collision area</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="pecrs.controller.Controller.collisions_with">
+<code class="sig-name descname">collisions_with</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.collisions_with" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody"><em>AbsBody</em></a>) – Body to check for collisions</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of bodies colliding with body</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List(<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody">AbsBody</a>)</p>
+</dd>
+</dl>
+<p>Finds all bodies colliding with body.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pecrs.controller.Controller.check">
+<code class="sig-name descname">check</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.check" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody"><em>AbsBody</em></a>) – Body to check for collisions with</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if Collisions, False is not</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Bool</p>
+</dd>
+</dl>
+<p>Check to see if any shapes are colliding with the Body in space</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pecrs.controller.Controller.check_two">
+<code class="sig-name descname">check_two</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.check_two" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody"><em>AbsBody</em></a>) – First Body to check for collision</p></li>
+<li><p><strong>other</strong> (<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody"><em>AbsBody</em></a>) – Second Body to check for collision</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the two bodies are colliding, False is not</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Bool</p>
+</dd>
+</dl>
+<p>Check to see if the two bodies are colliding.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="pecrs.controller.Controller.step">
 <code class="sig-name descname">step</code><span class="sig-paren">(</span><em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.step" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
@@ -703,80 +716,6 @@ Triggers the on_step_start(delta), on_step(body, delta), on_collision(body, coll
 <dd><p>bool, If the body should be moved during processing</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="pecrs.body.AbsBody.move">
-<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.body.AbsBody.move" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>delta</strong> (<em>float</em>) – Amount of time to move for</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Distance moved</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tuple(int, int)</p>
-</dd>
-</dl>
-<p>Advances a body by its speed in its directions for delta units of time</p>
-<p>Using this directly only updates the body and not any associated space systems.
-It’s reccomended to use Controller.move(body, delta) instead to manage collision areas.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.body.AbsBody.move_to">
-<code class="sig-name descname">move_to</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.body.AbsBody.move_to" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>int</em>) – Direction to move in on horizontal plane</p></li>
-<li><p><strong>y</strong> (<em>iny</em>) – Direction to move in on the vertical plane</p></li>
-<li><p><strong>delta</strong> (<em>float</em>) – Amount of time to move for</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Distance moved</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tuple(int, int)</p>
-</dd>
-</dl>
-<p>Advances a body by its speed in the direction x, y of delta units of time</p>
-<p>Using this directly only updates the body and not any associated space systems.
-It’s reccomended to use Controller.move_to(body, x, y) instead to manage collision areas.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.body.AbsBody.push">
-<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.body.AbsBody.push" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>int</em>) – Direction on the horizontal plane to push the body</p></li>
-<li><p><strong>y</strong> (<em>int</em>) – Direction on the vertical plane to push the body</p></li>
-</ul>
-</dd>
-</dl>
-<p>Pushes a body in the direction of x, y</p>
-<p>Using this directly only updates the body and not any associated space systems.
-It’s reccomended to use Controller.push(body, x, y) instead to manage collision areas.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.body.AbsBody.place">
-<code class="sig-name descname">place</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.body.AbsBody.place" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>int</em>) – The position in space to place the body on the horizontal plane</p></li>
-<li><p><strong>y</strong> (<em>int</em>) – The position in space to place the body on the vertical plane</p></li>
-</ul>
-</dd>
-</dl>
-<p>Directly places a body at x, y</p>
-<p>Using this directly only updates the body and not any associated space systems.
-It’s reccomended to use Controller.push(body, x, y) instead to manage collision areas.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -791,80 +730,6 @@ It’s reccomended to use Controller.push(body, x, y) instead to manage collisio
 </dd>
 </dl>
 <p>An active body. Extend Body for entities that move or think.</p>
-<dl class="method">
-<dt id="pecrs.body.Body.move">
-<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.body.Body.move" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>delta</strong> (<em>float</em>) – Amount of time to move for</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Distance moved</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tuple(int, int)</p>
-</dd>
-</dl>
-<p>Advances a body by its speed in its directions for delta units of time</p>
-<p>Using this directly only updates the body and not any associated space systems.
-It’s reccomended to use Controller.move(body, delta) instead to manage collision areas.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.body.Body.move_to">
-<code class="sig-name descname">move_to</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.body.Body.move_to" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>int</em>) – Direction to move in on horizontal plane</p></li>
-<li><p><strong>y</strong> (<em>iny</em>) – Direction to move in on the vertical plane</p></li>
-<li><p><strong>delta</strong> (<em>float</em>) – Amount of time to move for</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Distance moved</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tuple(int, int)</p>
-</dd>
-</dl>
-<p>Advances a body by its speed in the direction x, y of delta units of time</p>
-<p>Using this directly only updates the body and not any associated space systems.
-It’s reccomended to use Controller.move_to(body, x, y) instead to manage collision areas.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.body.Body.place">
-<code class="sig-name descname">place</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.body.Body.place" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>int</em>) – The position in space to place the body on the horizontal plane</p></li>
-<li><p><strong>y</strong> (<em>int</em>) – The position in space to place the body on the vertical plane</p></li>
-</ul>
-</dd>
-</dl>
-<p>Directly places a body at x, y</p>
-<p>Using this directly only updates the body and not any associated space systems.
-It’s reccomended to use Controller.push(body, x, y) instead to manage collision areas.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.body.Body.push">
-<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.body.Body.push" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>int</em>) – Direction on the horizontal plane to push the body</p></li>
-<li><p><strong>y</strong> (<em>int</em>) – Direction on the vertical plane to push the body</p></li>
-</ul>
-</dd>
-</dl>
-<p>Pushes a body in the direction of x, y</p>
-<p>Using this directly only updates the body and not any associated space systems.
-It’s reccomended to use Controller.push(body, x, y) instead to manage collision areas.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -879,80 +744,6 @@ It’s reccomended to use Controller.push(body, x, y) instead to manage collisio
 </dd>
 </dl>
 <p>A passive body. Extend StaticBody for entities that do not move or think.</p>
-<dl class="method">
-<dt id="pecrs.body.StaticBody.move">
-<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.body.StaticBody.move" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>delta</strong> (<em>float</em>) – Amount of time to move for</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Distance moved</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tuple(int, int)</p>
-</dd>
-</dl>
-<p>Advances a body by its speed in its directions for delta units of time</p>
-<p>Using this directly only updates the body and not any associated space systems.
-It’s reccomended to use Controller.move(body, delta) instead to manage collision areas.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.body.StaticBody.move_to">
-<code class="sig-name descname">move_to</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.body.StaticBody.move_to" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>int</em>) – Direction to move in on horizontal plane</p></li>
-<li><p><strong>y</strong> (<em>iny</em>) – Direction to move in on the vertical plane</p></li>
-<li><p><strong>delta</strong> (<em>float</em>) – Amount of time to move for</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Distance moved</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tuple(int, int)</p>
-</dd>
-</dl>
-<p>Advances a body by its speed in the direction x, y of delta units of time</p>
-<p>Using this directly only updates the body and not any associated space systems.
-It’s reccomended to use Controller.move_to(body, x, y) instead to manage collision areas.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.body.StaticBody.place">
-<code class="sig-name descname">place</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.body.StaticBody.place" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>int</em>) – The position in space to place the body on the horizontal plane</p></li>
-<li><p><strong>y</strong> (<em>int</em>) – The position in space to place the body on the vertical plane</p></li>
-</ul>
-</dd>
-</dl>
-<p>Directly places a body at x, y</p>
-<p>Using this directly only updates the body and not any associated space systems.
-It’s reccomended to use Controller.push(body, x, y) instead to manage collision areas.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.body.StaticBody.push">
-<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.body.StaticBody.push" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>int</em>) – Direction on the horizontal plane to push the body</p></li>
-<li><p><strong>y</strong> (<em>int</em>) – Direction on the vertical plane to push the body</p></li>
-</ul>
-</dd>
-</dl>
-<p>Pushes a body in the direction of x, y</p>
-<p>Using this directly only updates the body and not any associated space systems.
-It’s reccomended to use Controller.push(body, x, y) instead to manage collision areas.</p>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -960,13 +751,13 @@ It’s reccomended to use Controller.push(body, x, y) instead to manage collisio
 <span id="space"></span><h1>Space<a class="headerlink" href="#module-pecrs.space" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="pecrs.space.Space">
-<em class="property">class </em><code class="sig-prename descclassname">pecrs.space.</code><code class="sig-name descname">Space</code><span class="sig-paren">(</span><em class="sig-param">size</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">pecrs.space.</code><code class="sig-name descname">Space</code><span class="sig-paren">(</span><em class="sig-param">size=256</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>size</strong> (<em>int</em>) – Size of the collision areas</p>
 </dd>
 </dl>
-<p>Space handles the interactions between the SpatialHash and the Collider.
+<p>Space handles the movement and collision detection between shapes.
 You can change the values here to work with different spatial partioning system and collision systems.</p>
 <dl class="attribute">
 <dt id="pecrs.space.Space.grid">
@@ -982,49 +773,43 @@ You can change the values here to work with different spatial partioning system 
 
 <dl class="method">
 <dt id="pecrs.space.Space.add">
-<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">area=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.add" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">shape</em>, <em class="sig-param">update_area=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.add" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>body</strong> (<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody"><em>AbsBody</em></a>) – Body to add to the space</p></li>
-<li><p><strong>area</strong> (<em>tuple</em><em>(</em><em>int</em><em>, </em><em>int</em><em>) or </em><em>None</em>) – Area of the space to add the body to. Calculate from body.position if None</p></li>
-</ul>
+<dd class="field-odd"><p><strong>shape</strong> (<a class="reference internal" href="#pecrs.shape.Shape" title="pecrs.shape.Shape"><em>Shape</em></a>) – Shape to add to the space</p>
 </dd>
 </dl>
-<p>Adds a body to the space.
+<p>Adds a shape to the space.
 Bodies are added to their collision area as well as the 8 nearest neighboring cells to handle overlap and fast moving obejcts.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="pecrs.space.Space.delete">
-<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">area=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.delete" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param">shape</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.delete" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>body</strong> (<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody"><em>AbsBody</em></a>) – Body to removed from the space</p></li>
-<li><p><strong>area</strong> (<em>tuple</em><em>(</em><em>int</em><em>, </em><em>int</em><em>) or </em><em>None</em>) – Area of the space to remove the body from. Calculate from body.position if None</p></li>
-</ul>
+<dd class="field-odd"><p><strong>shape</strong> (<a class="reference internal" href="#pecrs.shape.Shape" title="pecrs.shape.Shape"><em>Shape</em></a>) – Shape to removed from the space</p>
 </dd>
 </dl>
-<p>Removes a body from the space.</p>
+<p>Removes a shape from the space.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="pecrs.space.Space.has">
-<code class="sig-name descname">has</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.has" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">has</code><span class="sig-paren">(</span><em class="sig-param">shape</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.has" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody"><em>AbsBody</em></a>) – Body to check for</p>
+<dd class="field-odd"><p><strong>shape</strong> (<a class="reference internal" href="#pecrs.shape.Shape" title="pecrs.shape.Shape"><em>Shape</em></a>) – Shape to check for</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>True if the space contains the body, False if not</p>
+<dd class="field-even"><p>True if the space contains the shape, False if not</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
-<p>Checks if a space has a body in that body’s area
-Note that the body’s must be set correctly or errors can occur</p>
+<p>Checks if a space has a shape in that shape’s area
+Note that the shape’s must be set correctly or errors can occur</p>
 </dd></dl>
 
 <dl class="method">
@@ -1040,30 +825,30 @@ Note that the body’s must be set correctly or errors can occur</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>List of bodies colliding at the position</p>
+<dd class="field-even"><p>List of shapes colliding at the position</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list(<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody">AbsBody</a>)</p>
+<dd class="field-odd"><p>list(Shapes)</p>
 </dd>
 </dl>
-<p>Gets a list of all bodies colliding at x, y</p>
+<p>Gets a list of all shapes colliding at x, y</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="pecrs.space.Space.collisions_with">
-<code class="sig-name descname">collisions_with</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.collisions_with" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">collisions_with</code><span class="sig-paren">(</span><em class="sig-param">shape</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.collisions_with" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody"><em>AbsBody</em></a>) – Body to find collisions with</p>
+<dd class="field-odd"><p><strong>shape</strong> (<a class="reference internal" href="#pecrs.shape.Shape" title="pecrs.shape.Shape"><em>Shape</em></a>) – Shape to find collisions with</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>List of bodies colliding at the position</p>
+<dd class="field-even"><p>List of shapes colliding at the position</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list(<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody">AbsBody</a>)</p>
+<dd class="field-odd"><p>list(<a class="reference internal" href="#pecrs.shape.Shape" title="pecrs.shape.Shape">Shape</a>)</p>
 </dd>
 </dl>
-<p>Get a list of all bodies colliding with body</p>
+<p>Get a list of all shapes colliding with shape</p>
 </dd></dl>
 
 <dl class="method">
@@ -1089,49 +874,105 @@ Note that the body’s must be set correctly or errors can occur</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pecrs.space.Space.check_body">
-<code class="sig-name descname">check_body</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.check_body" title="Permalink to this definition">¶</a></dt>
+<dt id="pecrs.space.Space.check">
+<code class="sig-name descname">check</code><span class="sig-paren">(</span><em class="sig-param">shape</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.check" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody"><em>AbsBody</em></a>) – Body to check for collisions</p>
+<dd class="field-odd"><p><strong>shape</strong> (<a class="reference internal" href="#pecrs.shape.Shape" title="pecrs.shape.Shape"><em>Shape</em></a>) – Shape to check for collisions</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>True if the body is colliding with anything in space, False if not</p>
+<dd class="field-even"><p>True if the shape is colliding with anything in space, False if not</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
-<p>Check to see if something is colliding with body in the space.</p>
+<p>Check to see if something is colliding with shape in the space.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pecrs.space.Space.check_two">
+<code class="sig-name descname">check_two</code><span class="sig-paren">(</span><em class="sig-param">shape</em>, <em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.check_two" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape</strong> (<a class="reference internal" href="#pecrs.shape.Shape" title="pecrs.shape.Shape"><em>Shape</em></a>) – First Shape to check for collision</p></li>
+<li><p><strong>other</strong> (<a class="reference internal" href="#pecrs.shape.Shape" title="pecrs.shape.Shape"><em>Shape</em></a>) – Second Shape to check for collision</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the two shapes are colliding, False if not</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Bool</p>
+</dd>
+</dl>
+<p>Check to see if two shapes are colliding</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pecrs.space.Space.update_area">
+<code class="sig-name descname">update_area</code><span class="sig-paren">(</span><em class="sig-param">shape</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.update_area" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape</strong> (<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody"><em>AbsBody</em></a>) – Body to be moved from the space</p></li>
+<li><p><strong>area</strong> (<em>tuple</em><em>(</em><em>int</em><em>, </em><em>int</em><em>)</em>) – Area of the space to move the shape to</p></li>
+</ul>
+</dd>
+</dl>
+<p>Moves a shape from one collision area to another</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="pecrs.space.Space.move">
-<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">dir</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.move" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">shape</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.move" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>body</strong> (<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody"><em>AbsBody</em></a>) – Body to add to the space</p></li>
-<li><p><strong>dir</strong> (<a class="reference internal" href="#pecrs.vector.Vector" title="pecrs.vector.Vector"><em>Vector</em></a>) – Direction to move the body in</p></li>
+<li><p><strong>shape</strong> (<a class="reference internal" href="#pecrs.shape.Shape" title="pecrs.shape.Shape"><em>Shape</em></a>) – Shape to move</p></li>
+<li><p><strong>x</strong> (<em>int</em>) – Direction to move in on horizontal plane</p></li>
+<li><p><strong>y</strong> (<em>iny</em>) – Direction to move in on the vertical plane</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – Amount of time to move for</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Distance moved</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple(int, int)</p>
+</dd>
+</dl>
+<p>Advances a shape in the direction x, y for delta units of time</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pecrs.space.Space.push">
+<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param">shape</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.push" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape</strong> (<a class="reference internal" href="#pecrs.shape.Shape" title="pecrs.shape.Shape"><em>Shape</em></a>) – Shape to push</p></li>
+<li><p><strong>x</strong> (<em>int</em>) – Direction on the horizontal plane to push the shape</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Direction on the vertical plane to push the shape</p></li>
 </ul>
 </dd>
 </dl>
-<p>Moves a body. This will be more efficent than place
-TODO Not implemented yet. Use place(body, area) instead</p>
+<p>Pushes a shape in the direction of x, y in space</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="pecrs.space.Space.place">
-<code class="sig-name descname">place</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">area</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.place" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">place</code><span class="sig-paren">(</span><em class="sig-param">shape</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.place" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>body</strong> (<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody"><em>AbsBody</em></a>) – Body to be moved from the space</p></li>
-<li><p><strong>area</strong> (<em>tuple</em><em>(</em><em>int</em><em>, </em><em>int</em><em>)</em>) – Area of the space to move the body to</p></li>
+<li><p><strong>x</strong> (<em>int</em>) – The position in space to place the shape on the horizontal plane</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – The position in space to place the shape on the vertical plane</p></li>
 </ul>
 </dd>
 </dl>
-<p>Moves a body from one collision area to another</p>
+<p>Directly places a shape at x, y in space</p>
 </dd></dl>
 
 </dd></dl>
@@ -1223,263 +1064,6 @@ Treated as Axis-Aligned Bounding Boxes by the Collider.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-pecrs.vector">
-<span id="vector"></span><h1>Vector<a class="headerlink" href="#module-pecrs.vector" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="pecrs.vector.Vector">
-<em class="property">class </em><code class="sig-prename descclassname">pecrs.vector.</code><code class="sig-name descname">Vector</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.vector.Vector" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>int</em>) – A position in space on the horizontal plane</p></li>
-<li><p><strong>y</strong> (<em>int</em>) – A position in space on the vertical plane</p></li>
-</ul>
-</dd>
-</dl>
-<p>A typical Vector datatype</p>
-<dl class="method">
-<dt id="pecrs.vector.Vector.dot">
-<code class="sig-name descname">dot</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.vector.Vector.dot" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>other</strong> – A second vector</p></li>
-<li><p><strong>type</strong> – Vector()</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dot product of two vectors</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-<p>Dot product of two vectors.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.vector.Vector.cross">
-<code class="sig-name descname">cross</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.vector.Vector.cross" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>other</strong> – A second vector</p></li>
-<li><p><strong>type</strong> – Vector()</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Cross product of two vectors</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-<p>Cross product of two vectors.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.vector.Vector.mag_square">
-<code class="sig-name descname">mag_square</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.vector.Vector.mag_square" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Square magnitude of the vector.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-<p>Square magnitude of the vector.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.vector.Vector.mag">
-<code class="sig-name descname">mag</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.vector.Vector.mag" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Magnitude of the vector.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-<p>Magnitude of the vector.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.vector.Vector.angle_self">
-<code class="sig-name descname">angle_self</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.vector.Vector.angle_self" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Angle of the vector.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-<p>Angle of the vector.
-returns a number.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.vector.Vector.normal">
-<code class="sig-name descname">normal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.vector.Vector.normal" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Normal of the vector.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-<p>Normal of the vector.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.vector.Vector.dist_square">
-<code class="sig-name descname">dist_square</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.vector.Vector.dist_square" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>int</em>) – A position in space</p></li>
-<li><p><strong>y</strong> (<em>int</em>) – A position in space</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Distance squared from x, y.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-<p>Distance squared from x, y. Faster than dist() for relative distance comparisons</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.vector.Vector.dist">
-<code class="sig-name descname">dist</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.vector.Vector.dist" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>int</em>) – A position in space</p></li>
-<li><p><strong>y</strong> (<em>int</em>) – A position in space</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Distance squared from x, y.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-<p>Distance from x, y</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.vector.Vector.angle_rads">
-<code class="sig-name descname">angle_rads</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.vector.Vector.angle_rads" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#pecrs.vector.Vector" title="pecrs.vector.Vector"><em>Vector</em></a><em>(</em><em>)</em>) – Second vector to find the angle to</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Angle to the second vector in radians</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-<p>Angle to a vector in radians</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.vector.Vector.angle">
-<code class="sig-name descname">angle</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.vector.Vector.angle" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#pecrs.vector.Vector" title="pecrs.vector.Vector"><em>Vector</em></a><em>(</em><em>)</em>) – Second vector to find the angle to</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Angle to the second vector in degrees</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-<p>Angle to a vector in degrees</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.vector.Vector.angle_point">
-<code class="sig-name descname">angle_point</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.vector.Vector.angle_point" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#pecrs.vector.Vector" title="pecrs.vector.Vector"><em>Vector</em></a><em>(</em><em>)</em>) – Second vector to find the angle to</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Angle point to the second vector</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-<p>Angle point to a vector</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.vector.Vector.abs">
-<code class="sig-name descname">abs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.vector.Vector.abs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Absolute value.
-Sets x and y to positive values.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.vector.Vector.project">
-<code class="sig-name descname">project</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.vector.Vector.project" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#pecrs.vector.Vector" title="pecrs.vector.Vector"><em>Vector</em></a><em>(</em><em>)</em>) – Second vector to project from</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Value of the projection</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-<p>Projection from another vector</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.vector.Vector.clamp">
-<code class="sig-name descname">clamp</code><span class="sig-paren">(</span><em class="sig-param">min</em>, <em class="sig-param">max</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.vector.Vector.clamp" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>min</strong> (<em>int</em>) – Minimum value of x and y</p></li>
-<li><p><strong>max</strong> (<em>int</em>) – Maximum values of x and y</p></li>
-</ul>
-</dd>
-</dl>
-<p>Sets the vector to a minimum and maximum value</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.vector.Vector.move">
-<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.vector.Vector.move" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>other</strong> (<a class="reference internal" href="#pecrs.vector.Vector" title="pecrs.vector.Vector"><em>Vector</em></a><em>(</em><em>)</em>) – Direction to move in</p></li>
-<li><p><strong>delta</strong> (<em>float</em>) – Units of time to move in</p></li>
-</ul>
-</dd>
-</dl>
-<p>Move in the direction of other by delta units</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
 <div class="section" id="module-pecrs.collider">
 <span id="collider"></span><h1>Collider<a class="headerlink" href="#module-pecrs.collider" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
@@ -1488,8 +1072,8 @@ Sets x and y to positive values.</p>
 <dd><p>Collider handles collisions between two objects with physical dimensions.
 Note that the collider is abstract and low-level, dealing with any set of positions and dimensions.</p>
 <dl class="method">
-<dt id="pecrs.collider.Collider.check_shapes">
-<code class="sig-name descname">check_shapes</code><span class="sig-paren">(</span><em class="sig-param">shape</em>, <em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.collider.Collider.check_shapes" title="Permalink to this definition">¶</a></dt>
+<dt id="pecrs.collider.Collider.check">
+<code class="sig-name descname">check</code><span class="sig-paren">(</span><em class="sig-param">shape</em>, <em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.collider.Collider.check" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1547,26 +1131,6 @@ Note that Pyglet sprites are effectively Rects and can be used interchangably he
 </dd>
 </dl>
 <p>Checks for a collision between any two Circles. This is a higher level interface for Collider.circle_circle().</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.collider.Collider.check_bodies">
-<code class="sig-name descname">check_bodies</code><span class="sig-paren">(</span><em class="sig-param">body</em>, <em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.collider.Collider.check_bodies" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>body</strong> – Body of the first object</p></li>
-<li><p><strong>other</strong> (<a class="reference internal" href="#pecrs.body.AbsBody" title="pecrs.body.AbsBody"><em>AbsBody</em></a>) – Body of the second object</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>True if there is a collision, False is not</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-<p>Checks for a collision between any two Bodies. This is a higher level interface for Collider.rect_rect().</p>
 </dd></dl>
 
 <dl class="method">
@@ -1978,6 +1542,13 @@ Always returns the time.</p>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="install.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
   
 
   <hr/>

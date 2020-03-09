@@ -8,7 +8,7 @@ class Collider:
    Note that the collider is abstract and low-level, dealing with any set of positions and dimensions.
    """
 
-   def check_shapes(self, shape, other):
+   def check(self, shape, other):
       """
       :param shape: Shape of the first object
       :param other: Shape of the second object
@@ -57,19 +57,6 @@ class Collider:
       Checks for a collision between any two Circles. This is a higher level interface for Collider.circle_circle().
       """
       return self.circle_circle(shape.radius, shape.position[0], shape.position[1], other.radius, other.position[0], other.position[1])
-
-   def check_bodies(self, body, other):
-      """
-      :param body: Body of the first object
-      :param other: Body of the second object
-      :type shape: AbsBody
-      :type other: AbsBody
-      :return: True if there is a collision, False is not
-      :rtype: bool
-
-      Checks for a collision between any two Bodies. This is a higher level interface for Collider.rect_rect().
-      """
-      return self.rect_rect(body.shape.width, body.shape.height, body.shape.position[0], body.shape.position[1], other.shape.width, other.shape.height, other.shape.position[0], other.shape.position[1])
 
    def rect_rect(self, w, h, x, y, wo, ho, xo, yo):
       """
