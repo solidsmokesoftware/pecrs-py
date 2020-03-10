@@ -453,8 +453,8 @@ def test_controller():
   #TODO test controller.remake_space()
 
   class Entity(Body):
-    def __init__(self, id, shape):
-      super().__init__(id, shape)
+    def __init__(self, id, x, y, width, height):
+      super().__init__(id, x, y, width, height)
 
   class Objects(Controller):
     def __init__(self):
@@ -481,7 +481,7 @@ def test_controller():
       print(f"on_place callback {body.id} moved from {start}")
 
     def on_motion(self, body):
-      print(f"body {body.id} at {str(body.shape.position)}")
+      print(f"body {body.id} at {str(body.position)}")
 
     def on_turn(self, body):
       print(f"on_turn callback {body.id} to {str(body.direction)}")

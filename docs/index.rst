@@ -5,26 +5,12 @@
 
    install
    overview
+   shape
+   collider
+   space
+   body
+   controller
    pyglet
-   
-
-
-Controller
-===================
-.. automodule:: pecrs.controller
-   :members:   
-
-
-Body
-===================
-.. automodule:: pecrs.body
-   :members:
-   :inherited-members:
-
-Space
-===================
-.. automodule:: pecrs.space
-   :members:
 
 
 Shape
@@ -37,6 +23,25 @@ Collider
 ===================
 .. automodule:: pecrs.collider
    :members:
+
+
+Space
+===================
+.. automodule:: pecrs.space
+   :members:
+
+
+Body
+===================
+.. automodule:: pecrs.body
+   :members:
+   :inherited-members:
+
+
+Controller
+===================
+.. automodule:: pecrs.controller
+   :members:   
 
 
 Spatialhash

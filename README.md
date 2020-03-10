@@ -19,27 +19,33 @@ Via pip
 # Quickstart
 ```python
 
-controller = Controller()
-bodyA = controller.make(Body, 0, 0, 32, 32)
-bodyB = controller.make(Body, 10, 0, 32, 32)
+from pecrs import *
 
-collision = controller.check(bodyA)
-print(f"Is something colliding with bodyA? {collision}")
+space = Space()
+rectA = Rect(0, 0, 32, 32)
+rectB = Rect(10, 0, 32, 32)
+space.add(rectA)
+space.add(rectB)
 
-collisions = controller.collisions_with(bodyB)
-print(f"Who is colliding with bodyB? {collisions}")
+collision = space.check(rectA)
+print(f"Is something colliding with rectA? {collision}")
 
-controller.place(bodyB, 100, 0)
+collisions = space.collisions_with(rectB)
+print(f"Who is colliding with rectB? {collisions}")
 
-collision = controller.check_two(bodyA, bodyB)
-print(f"Are bodyA and bodyB colliding? {collision}")
+space.place(rectB, 100, 0)
+
+collision = space.check_two(rectA, rectB)
+print(f"Are rectA and rectB colliding? {collision}")
 ```
 
 # Structual Overview
 
-Base type of the system are Shapes. Shapes have a position and dimensions which describe its physical properties.
+Base types of the system are Shapes and Bodies. 
+Shapes have a position and dimensions which describe its physical properties.
+Bodies are Shapes with an id, direction, speed, and movement state.
 
-Core functionality is providied by the Collider, which detects collisions between Shapes in abstract.
+Core functionality is providied by the Collider, which detects collisions between Shapes or Shape-like Objects.
 
 The Space handles positioning of Shapes and optimizes collision handling.
 
@@ -55,11 +61,14 @@ from pecrs import *
 import pyglet
 
 
-class Dude(Body):
-   def __init__(self, id, sprite):
-      super().__init__(id, sprite)
+class Dude(pyglet.sprite.Sprite):
+   def __init__(self, *args, **kwargs):
+      super().__init__(*args, **kwargs)
+      self.id = None
       self.speed = 100
       self.moving = True
+      self.direction = None
+      self.area = None
 
 
 class Objects(Controller):
@@ -70,11 +79,12 @@ class Objects(Controller):
       self.red_image = pyglet.resource.image("red_rect.png")
 
    def make_dude(self, x, y, dx=0, dy=0):
-      sprite = pyglet.sprite.Sprite(self.blue_image, x=x, y=y, batch=self.batch)
-      self.make_from(Dude, sprite, dx=dx, dy=dy)
+      body = Dude(self.blue_image, x=x, y=y, batch=self.batch)
+      body.direction = (dx, dy)
+      self.add(body)
 
    def on_collision(self, body, collisions):
-      body.shape.image = self.red_image
+      body.image = self.red_image
       
 
 class Game:

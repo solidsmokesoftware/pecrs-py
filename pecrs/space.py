@@ -166,15 +166,21 @@ class Space:
       :param shape: Body to be moved from the space
       :param area: Area of the space to move the shape to
       :type shape: AbsBody
-      :type area: tuple(int, int)
+      :type area: Tuple(Int, Int)
+      :return: Original area if updating, None if not
+      :rtype: Tuple(Int, Int) or None
 
       Moves a shape from one collision area to another
       """
       area = self.grid.scale(shape.position[0], shape.position[1])
       if shape.area != area:
          self.delete(shape)
+         start = shape.area
          shape.area = area
          self.add(shape, False)
+         return start
+      else:
+         return None
       
    def move(self, shape, x, y, delta):
       """
@@ -194,7 +200,6 @@ class Space:
       xstep = int(x * delta)
       ystep = int(y * delta)
       shape.position = (shape.position[0]+xstep, shape.position[1]+ystep)
-      self.update_area(shape)
       return (xstep, ystep)
 
    def push(self, shape, x, y):
@@ -209,7 +214,6 @@ class Space:
       Pushes a shape in the direction of x, y in space
       """
       shape.position = (shape.position[0]+x, shape.position[1]+y)
-      self.update_area(shape)
 
    def place(self, shape, x, y):
       """
@@ -221,5 +225,4 @@ class Space:
       Directly places a shape at x, y in space
       """
       shape.position = (x, y)
-      self.update_area(shape)
       

@@ -12,6 +12,7 @@ class Shape:
    """
    def __init__(self, x, y):
       self.position = (x, y) #: Tuple(Int, Int), position of the shape
+      self.area = None #: Tuple(Int, Int) or None, collision area of the shape
 
 
 class Rect(Shape):

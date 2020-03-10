@@ -3,11 +3,14 @@ from pecrs import *
 import pyglet
 
 
-class Dude(Body):
-   def __init__(self, id, sprite):
-      super().__init__(id, sprite)
+class Dude(pyglet.sprite.Sprite):
+   def __init__(self, *args, **kwargs):
+      super().__init__(*args, **kwargs)
+      self.id = None
       self.speed = 100
       self.moving = True
+      self.direction = None
+      self.area = None
 
 
 class Objects(Controller):
@@ -18,11 +21,12 @@ class Objects(Controller):
       self.red_image = pyglet.resource.image("red_rect.png")
 
    def make_dude(self, x, y, dx=0, dy=0):
-      sprite = pyglet.sprite.Sprite(self.blue_image, x=x, y=y, batch=self.batch)
-      self.make_from(Dude, sprite, dx=dx, dy=dy)
+      body = Dude(self.blue_image, x=x, y=y, batch=self.batch)
+      body.direction = (dx, dy)
+      self.add(body)
 
    def on_collision(self, body, collisions):
-      body.shape.image = self.red_image
+      body.image = self.red_image
       
 
 class Game:

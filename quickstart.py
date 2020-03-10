@@ -1,16 +1,19 @@
 from pecrs import *
 
-controller = Controller()
-bodyA = controller.make(Body, 0, 0, 32, 32)
-bodyB = controller.make(Body, 10, 0, 32, 32)
+space = Space()
+rectA = Rect(0, 0, 32, 32)
+rectB = Rect(10, 0, 32, 32)
 
-collision = controller.check(bodyA)
-print(f"Is something colliding with bodyA? {collision}")
+space.add(rectA)
+space.add(rectB)
 
-collisions = controller.collisions_with(bodyB)
-print(f"Who is colliding with bodyB? {collisions}")
+collision = space.check(rectA)
+print(f"Is something colliding with rectA? {collision}")
 
-controller.place(bodyB, 100, 0)
+collisions = space.collisions_with(rectB)
+print(f"Who is colliding with rectB? {collisions}")
 
-collision = controller.check_two(bodyA, bodyB)
-print(f"Are bodyA and bodyB colliding? {collision}")
+space.place(rectB, 100, 0)
+
+collision = space.check_two(rectA, rectB)
+print(f"Are rectA and rectB colliding? {collision}")

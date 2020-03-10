@@ -1,4 +1,17 @@
 #######
+0.032 - 3/10/2020
+#######
+
+Body have been rewritten to extend from Shape instead of having a Shape, in line with the move to make integration with Pyglet seamless.
+Space movement methods no longer call Space.update_area(). Instead Controller movement methods call it in order to provide callbacks for collision area changes
+StaticBody and AbsBody removed. StaticBody optimization handled by Controller.make() now. Controller.delete() modified to accomidate.
+Remove method Controller.make_from()
+Change method signature Controller.add() now takes id and static to make working with Pyglet sprites easier.
+Remove method Controller.on_add(), doesn't need to be seperate from Controller.on_make() callback
+Big documentation expansion
+
+
+#######
 0.031 - 3/8/2020
 #######
 

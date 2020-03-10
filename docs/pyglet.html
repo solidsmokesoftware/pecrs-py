@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Integrating with Pyglet &mdash; pecrs 0.31 documentation</title>
+  <title>Integrating with Pyglet &mdash; pecrs 0.32 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Overview" href="overview.html" /> 
+    <link rel="prev" title="Controller" href="controller.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -83,6 +83,11 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shape.html">Shape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collider.html">Collider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="space.html">Space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="body.html">Body</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller.html">Controller</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Integrating with Pyglet</a></li>
 </ul>
 
@@ -150,10 +155,38 @@
             
   <div class="section" id="integrating-with-pyglet">
 <h1>Integrating with Pyglet<a class="headerlink" href="#integrating-with-pyglet" title="Permalink to this headline">¶</a></h1>
-<p>In order to work seamlessly with Pyglet, pecrs.Rect() was modeled after pyglet.sprite.Sprite(). Through the power of ducktyping, this allows Pyglet Sprites to work interchangly in any place you could use a pecrs Rect.
+<p>In order to work seamlessly with Pyglet, Shapes in pecrs were modeled after pyglet.sprite.Sprite().
+Through the power of ducktyping, this allows Pyglet Sprites to work interchangly in any place you could use a pecrs Rect().
 Specifically, Collider.check_rects(), Collider.rect_rect(), and all methods in Space(). When using a Sprite as a Rect, placement is handled by Sprite.position, and dimensions are covered by Sprite.width and Sprite.height.
-As the Sprite is added to a Space, it will be given an .area made up Tuple(Int, Int) representing the collision area in space the shape occupies. At the highest level of abstraction, pecrs uses Bodies which have a Shape. Again Pyglet Sprites can be used interchangly with Rects.</p>
+As the Sprite is added to a Space, it will be given an .area made up Tuple(Int, Int) representing the collision area in space the shape occupies.</p>
+<p>At the highest level of abstraction, pecrs uses Bodies which extend from Shapes.
+Subclassing pyglet.sprite.Sprite instead of Rect allows a Sprite to function as a Body with the Controller.</p>
 <p>Caveat: Collider.check() will not work with Sprites as Shapes. It uses typing to determine the appropriate collider methods to use, which will not recognize the Sprites.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyglet</span>
+<span class="kn">from</span> <span class="nn">pecrs</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">space</span> <span class="o">=</span> <span class="n">Space</span><span class="p">()</span>
+<span class="n">collider</span> <span class="o">=</span> <span class="n">Collider</span><span class="p">()</span>
+
+<span class="n">shape</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">pyglet</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="n">sprite</span> <span class="o">=</span> <span class="n">pyglet</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">Sprite</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">collider</span><span class="o">.</span><span class="n">check_rects</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">sprite</span><span class="p">)</span> <span class="c1">#True, they&#39;re colliding</span>
+<span class="n">collider</span><span class="o">.</span><span class="n">collisions_at</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">#[shape, sprite] List of all Shapes colliding at 0, 0</span>
+<span class="n">collider</span><span class="o">.</span><span class="n">collisions_with</span><span class="p">(</span><span class="n">sprite</span><span class="p">)</span> <span class="c1">#[shape] List of all Shapes colliding with sprite</span>
+
+<span class="n">space</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">space</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">sprite</span><span class="p">)</span>
+
+<span class="n">space</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">sprite</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">space</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">sprite</span><span class="p">)</span> <span class="c1">#False, no collisions</span>
+<span class="n">space</span><span class="o">.</span><span class="n">collisions_with</span><span class="p">(</span><span class="n">sprite</span><span class="p">)</span> <span class="c1">#[] no collisions</span>
+<span class="n">space</span><span class="o">.</span><span class="n">collisions_at</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="c1">#[sprite] colliding with sprite at 100, 100</span>
+</pre></div>
+</div>
 </div>
 
 
@@ -165,7 +198,7 @@ As the Sprite is added to a Space, it will be given an .area made up Tuple(Int, 
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="overview.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="controller.html" class="btn btn-neutral float-left" title="Controller" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
