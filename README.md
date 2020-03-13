@@ -113,8 +113,6 @@ https://solidsmokesoftware.github.io/pecrs-py/
 
 # Demonstration
 
-(Currently broken)
-
 https://github.com/solidsmokesoftware/solconomy
 
 ![solconomy](https://camo.githubusercontent.com/de20b3b2014d20a8746f7346e777e323586d5a35/68747470733a2f2f692e696d6775722e636f6d2f566277677664372e706e67)
