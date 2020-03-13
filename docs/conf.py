@@ -33,7 +33,7 @@ copyright = '2020, solid.smoke.software'
 author = 'solid.smoke.software'
 
 # The full version, including alpha/beta/rc tags
-release = '0.32'
+release = '0.33'
 
 
 # -- General configuration ---------------------------------------------------

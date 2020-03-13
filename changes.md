@@ -1,4 +1,14 @@
 #######
+0.033 - 3/12/2020
+#######
+
+Controller.start() renamed to Controller.start_moving()
+Controller.stop() renamed to Controller.stop_moving()
+Controller.on_start() renamed to Controller.on_start_moving()
+Controller.on_stop() renamed to Controller.on_stop_moving()
+
+
+#######
 0.032 - 3/10/2020
 #######
 

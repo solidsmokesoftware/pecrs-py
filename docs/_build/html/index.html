@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Shape &mdash; pecrs 0.32 documentation</title>
+  <title>Shape &mdash; pecrs 0.33 documentation</title>
   
 
   
@@ -591,14 +591,14 @@ Note that the shape’s must be set correctly or errors can occur</p>
 
 <dl class="method">
 <dt id="pecrs.space.Space.move">
-<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">shape</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">delta</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.move" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param">shape</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">distance</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.space.Space.move" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>shape</strong> (<a class="reference internal" href="#pecrs.shape.Shape" title="pecrs.shape.Shape"><em>Shape</em></a>) – Shape to move</p></li>
 <li><p><strong>x</strong> (<em>int</em>) – Direction to move in on horizontal plane</p></li>
 <li><p><strong>y</strong> (<em>iny</em>) – Direction to move in on the vertical plane</p></li>
-<li><p><strong>delta</strong> (<em>float</em>) – Amount of time to move for</p></li>
+<li><p><strong>distance</strong> (<em>float</em>) – Distance to move for</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -608,7 +608,7 @@ Note that the shape’s must be set correctly or errors can occur</p>
 <dd class="field-odd"><p>tuple(int, int)</p>
 </dd>
 </dl>
-<p>Advances a shape in the direction x, y for delta units of time</p>
+<p>Advances a shape in the direction x, y for distance units.</p>
 </dd></dl>
 
 <dl class="method">
@@ -720,17 +720,6 @@ Note that the shape’s must be set correctly or errors can occur</p>
 <dt id="pecrs.controller.Controller.space">
 <code class="sig-name descname">space</code><a class="headerlink" href="#pecrs.controller.Controller.space" title="Permalink to this definition">¶</a></dt>
 <dd><p>Space partionining system.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pecrs.controller.Controller.remake_space">
-<code class="sig-name descname">remake_space</code><span class="sig-paren">(</span><em class="sig-param">size</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.remake_space" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>size</strong> (<em>int</em>) – Size of the new Space</p>
-</dd>
-</dl>
-<p>Makes a new Space and fills it with all the bodies in the Index.</p>
 </dd></dl>
 
 <dl class="method">
@@ -980,8 +969,8 @@ Use this instead of body.place(x, y) to keep track of collision area</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pecrs.controller.Controller.start">
-<code class="sig-name descname">start</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.start" title="Permalink to this definition">¶</a></dt>
+<dt id="pecrs.controller.Controller.start_moving">
+<code class="sig-name descname">start_moving</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.start_moving" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#pecrs.body.Body" title="pecrs.body.Body"><em>Body</em></a><em>(</em><em>)</em>) – Body to active for movement during processing by the system</p>
@@ -991,8 +980,8 @@ Use this instead of body.place(x, y) to keep track of collision area</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pecrs.controller.Controller.on_start">
-<code class="sig-name descname">on_start</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.on_start" title="Permalink to this definition">¶</a></dt>
+<dt id="pecrs.controller.Controller.on_start_moving">
+<code class="sig-name descname">on_start_moving</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.on_start_moving" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#pecrs.body.Body" title="pecrs.body.Body"><em>Body</em></a><em>(</em><em>)</em>) – Body that was actived for movement</p>
@@ -1002,8 +991,8 @@ Use this instead of body.place(x, y) to keep track of collision area</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pecrs.controller.Controller.stop">
-<code class="sig-name descname">stop</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.stop" title="Permalink to this definition">¶</a></dt>
+<dt id="pecrs.controller.Controller.stop_moving">
+<code class="sig-name descname">stop_moving</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.stop_moving" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#pecrs.body.Body" title="pecrs.body.Body"><em>Body</em></a><em>(</em><em>)</em>) – Body to deactived system movement processing for</p>
@@ -1013,8 +1002,8 @@ Use this instead of body.place(x, y) to keep track of collision area</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pecrs.controller.Controller.on_stop">
-<code class="sig-name descname">on_stop</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.on_stop" title="Permalink to this definition">¶</a></dt>
+<dt id="pecrs.controller.Controller.on_stop_moving">
+<code class="sig-name descname">on_stop_moving</code><span class="sig-paren">(</span><em class="sig-param">body</em><span class="sig-paren">)</span><a class="headerlink" href="#pecrs.controller.Controller.on_stop_moving" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#pecrs.body.Body" title="pecrs.body.Body"><em>Body</em></a><em>(</em><em>)</em>) – Body that was deactived for movement</p>

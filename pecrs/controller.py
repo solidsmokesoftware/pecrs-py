@@ -17,17 +17,6 @@ class Controller:
       self.actives = [] #: list, stores Body for processing.
       self.space = Space(size) #: Space partionining system.
 
-   def remake_space(self, size):
-      """
-      :param size: Size of the new Space
-      :type size: int
-
-      Makes a new Space and fills it with all the bodies in the Index.
-      """
-      self.space = Space(size)
-      for id in self.index.list:
-         self.space.add(self.index.list[id])
-
    def make(self, kind, x, y, width, height, id=None, dx=0, dy=0, static=False):
       """
       :param kind: Class to be created
@@ -64,7 +53,6 @@ class Controller:
       
       Callback when bodies are made by the system. Override this when extending your Controller.
       """
-
 
    def add(self, body, id=None, static=False):
       """
@@ -269,7 +257,7 @@ class Controller:
       """
       return
 
-   def start(self, body):
+   def start_moving(self, body):
       """
       :param body: Body to active for movement during processing by the system
       :type body: Body()
@@ -277,9 +265,9 @@ class Controller:
       Tells a body to move when the system is processed.
       """
       body.moving = True
-      self.on_start(body)
+      self.on_start_moving(body)
 
-   def on_start(self, body):
+   def on_start_moving(self, body):
       """
       :param body: Body that was actived for movement
       :type body: Body()
@@ -288,7 +276,7 @@ class Controller:
       """
       return
 
-   def stop(self, body):
+   def stop_moving(self, body):
       """
       :param body: Body to deactived system movement processing for
       :type body: Body()
@@ -296,9 +284,9 @@ class Controller:
       Tells a body to not move when the system is proccessed.
       """
       body.moving = False
-      self.on_stop(body)
+      self.on_stop_moving(body)
 
-   def on_stop(self, body):
+   def on_stop_moving(self, body):
       """
       :param body: Body that was deactived for movement
       :type body: Body()

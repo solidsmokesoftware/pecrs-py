@@ -182,23 +182,23 @@ class Space:
       else:
          return None
       
-   def move(self, shape, x, y, delta):
+   def move(self, shape, x, y, distance):
       """
       :param shape: Shape to move
       :param x: Direction to move in on horizontal plane
       :param y: Direction to move in on the vertical plane
-      :param delta: Amount of time to move for
+      :param distance: Distance to move for
       :type shape: Shape
       :type x: int
       :type y: iny
-      :type delta: float
+      :type distance: float
       :return: Distance moved
       :rtype: tuple(int, int)
       
-      Advances a shape in the direction x, y for delta units of time
+      Advances a shape in the direction x, y for distance units.
       """
-      xstep = int(x * delta)
-      ystep = int(y * delta)
+      xstep = int(x * distance)
+      ystep = int(y * distance)
       shape.position = (shape.position[0]+xstep, shape.position[1]+ystep)
       return (xstep, ystep)
 
