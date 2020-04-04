@@ -1,4 +1,15 @@
 #######
+0.034 - 4/4/2020
+#######
+
+Major rewrite - Documentation is not up to date
+Removed Controller.py, funtionality rolled into Space
+Removed Body.py, funtionality moved to Shape
+Space now contains most of the relevant data for Shapes to allow Pyglet Sprites to work seamlessly
+
+
+
+#######
 0.033 - 3/12/2020
 #######
 

@@ -16,4 +16,4 @@ print(f"Who is colliding with rectB? {collisions}")
 space.place(rectB, 100, 0)
 
 collision = space.check_two(rectA, rectB)
-print(f"Are rectA and rectB colliding? {collision}")
+print(f"Are rectA and rectB still colliding? {collision}")

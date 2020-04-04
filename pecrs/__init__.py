@@ -13,4 +13,4 @@ from .space import Space
 from .controller import Controller
 
 __all__ = ["Shape", "Rect", "Circle", "Clock", "SyncClock", "Body", "Index", "SpatialHash", "Collider", "Space", "Controller"]
-version = 0.033
+version = 0.034

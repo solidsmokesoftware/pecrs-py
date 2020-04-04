@@ -86,7 +86,6 @@ class SpatialHash:
       self.grid[area] = []
     return self.grid[area]
 
-
   def get_pos(self, x, y):
     """
     :param x: Area position
