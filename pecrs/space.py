@@ -23,8 +23,9 @@ class Space:
       self.directions = {}
       self.actives = []
       self.groups = {}
+      self.collidable = {}
 
-   def add(self, shape, id=-1, active=True, group=None):
+   def add(self, shape, id=-1, collidable=True, active=True, moving=False, group=None):
       """
       :param shape: Shape to add to the space
       :type shape: Shape
@@ -35,10 +36,11 @@ class Space:
          id = self.index.next()
       self.ids[shape] = id
       self.shapes[id] = shape
-      self.moving[shape] = False
+      self.moving[shape] = moving
       area = self.grid.scale(shape.position[0], shape.position[1])   
       self.areas[shape] = area
       self.add_to_grid(shape, area)
+      self.collidable[shape] = collidable
       
       if active:
          self.actives.append(shape)
@@ -112,8 +114,9 @@ class Space:
       """
       collisions = []
       for other in self.grid.get(self.grid.scale(x, y)):
-         if self.collider.rect_rect(width, height, x, y, other.width, other.height, other.position[0], other.position[1]):
-            collisions.append(other)
+         if self.collidable[shape]:
+            if self.collider.rect_rect(width, height, x, y, other.width, other.height, other.position[0], other.position[1]):
+               collisions.append(other)
       return collisions
 
    def collisions_with(self, shape):
@@ -128,22 +131,24 @@ class Space:
       collisions = []
       id = self.ids[shape]
       for other in self.grid.get(self.areas[shape]):
-         if id != self.ids[other]:
-            if self.collider.rect_rect(shape.width, shape.height, shape.position[0], shape.position[1], other.width, other.height, other.position[0], other.position[1]):
-               collisions.append(other)
+         if self.collidable[shape]:
+            if id != self.ids[other]:
+               if self.collider.rect_rect(shape.width, shape.height, shape.position[0], shape.position[1], other.width, other.height, other.position[0], other.position[1]):
+                  collisions.append(other)
       return collisions
 
    def collisions_with_group(self, group):
       collisions = []
       group = self.groups[group]
       for shape in group:
-         id = self.ids[shape]
-         for other in self.grid.get(self.areas[shape]):
-            other_id = self.ids[other]
-            if id != self.ids[other]:
-               if other not in group:
-                  if self.collider.rect_rect(shape.width, shape.height, shape.position[0], shape.position[1], other.width, other.height, other.position[0], other.position[1]):
-                     collisions.append(other)
+         if self.collidable[shape]:
+            id = self.ids[shape]
+            for other in self.grid.get(self.areas[shape]):
+               if self.collidable[shape]:
+                  if id != self.ids[other]:
+                     if other not in group:
+                        if self.collider.rect_rect(shape.width, shape.height, shape.position[0], shape.position[1], other.width, other.height, other.position[0], other.position[1]):
+                           collisions.append(other)
       return collisions
 
    def check_at(self, x, y, width=1, height=1):
@@ -162,8 +167,9 @@ class Space:
       Check to see if there is a collision at x, y in space.
       """
       for other in self.grid.get(self.grid.scale(x, y)):
-         if self.collider.rect_rect(width, height, x, y, other.width, other.height, other.position[0], other.position[1]):
-            return True
+         if self.collidable[other]:
+            if self.collider.rect_rect(width, height, x, y, other.width, other.height, other.position[0], other.position[1]):
+               return True
       return False
       
    def check(self, shape):
@@ -177,20 +183,23 @@ class Space:
       """
       id = self.ids[shape]
       for other in self.grid.get(self.areas[shape]):
-         if id != self.ids[other]:
-            if self.collider.rect_rect(shape.width, shape.height, shape.position[0], shape.position[1], other.width, other.height, other.position[0], other.position[1]):
-               return True
+         if self.collidable[other]:
+            if id != self.ids[other]:
+               if self.collider.rect_rect(shape.width, shape.height, shape.position[0], shape.position[1], other.width, other.height, other.position[0], other.position[1]):
+                  return True
       return False
 
    def check_group(self, group):
       group = self.groups[group]
       for shape in group:
-         id = self.ids[shape]
-         for other in self.grid.get(self.areas[shape]):
-            if id != self.ids[other]:
-               if other not in group:
-                  if self.collider.rect_rect(shape.width, shape.height, shape.position[0], shape.position[1], other.width, other.height, other.position[0], other.position[1]):
-                     return True
+         if self.collidable[shape]:
+            id = self.ids[shape]
+            for other in self.grid.get(self.areas[shape]):
+               if self.collidable[other]:
+                  if id != self.ids[other]:
+                     if other not in group:
+                        if self.collider.rect_rect(shape.width, shape.height, shape.position[0], shape.position[1], other.width, other.height, other.position[0], other.position[1]):
+                           return True
       return False
 
 
@@ -268,6 +277,7 @@ class Space:
       return (xstep, ystep)
 
    def move_group(self, group, distance):
+      #TODO this could be optimized in some/most cases by uniform group movement to not recalc the direction a shape moves for every shape.
       for shape in self.groups[group]:
          self.move(shape, distance)
 
@@ -305,19 +315,19 @@ class Space:
       for shape in self.groups[group]:
          self.place(shape, x, y)
 
-   def start_moving(self, shape):
-      self.moving[shape] = True
+   def set_moving(self, shape, value):
+      self.moving[shape] = value
 
-   def start_group(self, group):
+   def set_moving_group(self, group, value):
       for shape in self.groups[group]:
-         self.moving[shape] = True
-         
-   def stop_moving(self, shape):
-      self.moving[shape] = False
+         self.moving[shape] = value
 
-   def stop_group(self, group):
+   def set_collidable(self, shape, value):
+      self.collidable[shape] = value
+
+   def set_collidable_group(self, group, value):
       for shape in self.groups[group]:
-         self.moving[shape] = False
+         self.collidable[shape]= value
          
    def turn(self, shape, direction):
       self.directions[shape] = direction
